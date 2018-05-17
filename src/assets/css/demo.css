@@ -137,11 +137,6 @@
     color: #ddd !important;
 }
 
-.footer {
-    background-attachment: fixed;
-    position: relative;
-    line-height: 20px;
-}
 
 .footer nav>ul {
     list-style: none;
@@ -164,9 +159,7 @@
     margin-bottom: 3px;
 }
 
-.footer nav>ul a:not(.btn):hover, .footer nav>ul a:not(.btn):focus {
-    color: #E3E3E3;
-}
+
 
 .footer .copyright {
     color: #777777;
