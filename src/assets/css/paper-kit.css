@@ -2034,7 +2034,7 @@ textarea.form-control {
   transition: all 0.4s;
   -webkit-transition: all 0.4s;
   padding: 0;
-  background: #FFFFFF;
+  background: rgb(0, 0, 0);
   box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
 }
 .navbar .navbar-brand {
@@ -2042,7 +2042,7 @@ textarea.form-control {
   margin: 5px 0px;
   padding: 20px 15px;
   font-size: 14px;
-  color: #66615B;
+  color: rgb(255, 255, 255);
   text-transform: uppercase;
 }
 .navbar .nav-link i {
@@ -2056,7 +2056,7 @@ textarea.form-control {
 }
 .navbar .nav-link p {
   margin: 0px 0px;
-  color: #9A9A9A !important;
+  color: rgb(255, 255, 255) !important;
   text-transform: uppercase;
   font-weight: 600;
   font-size: 12px;
@@ -2064,7 +2064,7 @@ textarea.form-control {
   padding: 15px 0;
 }
 .navbar .nav-link p:hover {
-  color: #403D39 !important;
+  color: #f17376 !important;
 }
 .navbar .navbar-nav .nav-item .nav-link {
   line-height: 1.6;
@@ -2074,7 +2074,7 @@ textarea.form-control {
   font-size: 12px;
   text-transform: uppercase;
   font-weight: 600;
-  color: #66615B;
+  color: #f17376;
 }
 .navbar .navbar-nav .nav-item .nav-link.btn {
   margin: 15px 3px;
@@ -2168,7 +2168,7 @@ textarea.form-control {
   background-color: transparent;
   opacity: 1;
   filter: alpha(opacity=100);
-  color: #FFFFFF;
+  color: #f17376;
 }
 .navbar-transparent .navbar-nav .nav-item .nav-link:not(.btn), [class*="bg"] .navbar-nav .nav-item .nav-link:not(.btn) {
   color: #FFFFFF;
@@ -2184,7 +2184,7 @@ textarea.form-control {
 [class*="bg"] .navbar-nav .nav-item .nav-link:hover,
 [class*="bg"] .navbar-nav .nav-item .nav-link:focus {
   background-color: transparent;
-  color: #FFFFFF;
+  color: #f17376;
   opacity: 1;
   filter: alpha(opacity=100);
 }
@@ -2759,7 +2759,7 @@ textarea.form-control {
 }
 
 .footer {
-  background-color: #FFFFFF;
+  background-color: rgb(0, 0, 0);
   line-height: 36px;
 }
 .footer.footer-black h4 {

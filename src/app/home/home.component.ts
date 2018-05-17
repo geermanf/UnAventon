@@ -6,11 +6,6 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class HomeComponent implements OnInit {
-    model = {
-        left: true,
-        middle: false,
-        right: false
-    };
     constructor() { }
 
     ngOnInit() {}
