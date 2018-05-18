@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { RegistrarseComponent } from './registrarse/registrarse.component';
+import { IniciarSesionModalComponent } from './iniciarSesionModal/iniciarSesionModal.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { RegistrarseComponent } from './registrarse/registrarse.component';
     NavbarComponent,
     FooterComponent,
     RegistrarseComponent,
+    IniciarSesionModalComponent,
   ],
+  entryComponents: [IniciarSesionModalComponent],
   imports: [
     BrowserModule,
     NgbModule.forRoot(),
