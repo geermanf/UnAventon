@@ -8,8 +8,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using unAventonApi.Data;
+using unAventonApi.Models;
+using Microsoft.EntityFrameworkCore;
+using unAventonApi.Services;
 
-namespace api
+namespace unAventonApi
 {
     public class Startup
     {
@@ -20,10 +24,24 @@ namespace api
 
         public IConfiguration Configuration { get; }
 
+        private void SetRepositories(IServiceCollection services)
+        {
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IFirstService, FirstService>();
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<UnAventonDbContext>(options =>
+                    options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+            // services.AddDbContext<CodingBlastDbContext>(options =>
+            //         options.UseInMemoryDatabase("prueba"));
+            SetRepositories(services);
             services.AddMvc();
+            
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

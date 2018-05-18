@@ -4,16 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace api.Controllers
+namespace unAventonApi.Controllers
 {
     [Route("api/[controller]")]
-    public class VehiculoController : Controller
+    public class ValuesController : Controller
     {
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "auto1", "auto2" };
+            return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
