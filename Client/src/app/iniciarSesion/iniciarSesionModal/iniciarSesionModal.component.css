@@ -31,3 +31,10 @@
 .btn.rosa {
   color: #f17376;
 }
+
+@media (max-width: 767px) {
+  body {
+    position: initial !important;
+    font-size: 12px;
+}
+}
