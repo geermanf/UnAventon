@@ -1,22 +1,24 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {IniciarSesionModalComponent} from '../../iniciarSesionModal/iniciarSesionModal.component'
+import { NgxSmartModalService } from 'ngx-smart-modal';
 
 @Component({
     selector: 'app-navbar',
-    templateUrl: './navbar.component.html'
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(public location: Location, private element: ElementRef, private modalService: NgbModal) {
+    constructor(public location: Location, private element: ElementRef,
+                private modalService: NgbModal, public ngxSmartModalService: NgxSmartModalService) {
         this.sidebarVisible = false;
     }
 
     open() {
-        this.modalService.open(IniciarSesionModalComponent);
+        this.ngxSmartModalService.getModal('regModal').open()
     }
     ngOnInit() {
         const navbar: HTMLElement = this.element.nativeElement;
@@ -26,7 +28,7 @@ export class NavbarComponent implements OnInit {
         const toggleButton = this.toggleButton;
         const html = document.getElementsByTagName('html')[0];
 
-        setTimeout(function(){
+        setTimeout(function() {
             toggleButton.classList.add('toggled');
         }, 500);
         html.classList.add('nav-open');
