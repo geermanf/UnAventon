@@ -10,7 +10,7 @@
          font-size: $font-size-small;
     }
     h6{
-        font-size: 1em;
+        font-size: 1vw;
     }
     .navbar .container{
          left: 0;
@@ -44,7 +44,7 @@
         margin-bottom: -35px;
     }
     .presentation-title{
-        font-size: 5em;
+        font-size: 5vw;
     }
     .presentation-subtitle{
         margin-top: 40px;
@@ -352,7 +352,7 @@
     .section-nucleo-icons{
         [class*='col-lg']{
             text-align: center!important;
-            margin-bottom: 2em;
+            margin-bottom: 2vw;
         }
     }
 }

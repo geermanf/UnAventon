@@ -962,7 +962,7 @@
     font-size: 62.5%;
 }
 .demo-icons body {
-    font-size: 1.6rem;
+    font-size: 1.6rvw;
     font-family: sans-serif;
     color: #333333;
     background: white;
@@ -976,11 +976,11 @@
     padding: 100px 0 0;
 }
 .demo-icons header h1 {
-    font-size: 2.8rem;
+    font-size: 2.8rvw;
 }
 .demo-icons header p {
-    font-size: 1.4rem;
-    margin-top: 1em;
+    font-size: 1.4rvw;
+    margin-top: 1vw;
 }
 .demo-icons header a:hover {
     text-decoration: underline;
@@ -995,8 +995,8 @@
 }
 .demo-icons section h2 {
     border-bottom: 1px solid #e2e2e2;
-    padding: 0 0 1em .2em;
-    margin-bottom: 1em;
+    padding: 0 0 1em .2vw;
+    margin-bottom: 1vw;
 }
 .demo-icons ul::after {
     clear: both;
@@ -1008,7 +1008,7 @@
     float: left;
     padding: 16px 0;
     text-align: center;
-    border-radius: .25em;
+    border-radius: .25vw;
     -webkit-transition: background 0.2s;
     -moz-transition: background 0.2s;
     transition: background 0.2s;
@@ -1023,7 +1023,7 @@
 }
 .demo-icons ul p, .demo-icons ul em, .demo-icons ul input {
     display: inline-block;
-    font-size: 1rem;
+    font-size: 1rvw;
     color: #999999;
     -webkit-user-select: auto;
     -moz-user-select: auto;

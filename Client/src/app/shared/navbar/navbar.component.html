@@ -1,8 +1,8 @@
-<app-regmodal></app-regmodal>
 <nav class="navbar navbar-expand-lg fixed-top navbar-transparent" color-on-scroll="500">
     <div class="container">
         <div class="navbar-translate" style="flex-basis: 100%;">
-            <a href="/home"><img src="assets/img/logo.png" alt="" style="width:40px;" /> </a>
+            <a href="/home">
+                <img src="assets/img/logo.png" alt style="width:40px;" /> </a>
             <a class="navbar-brand" href="/home">Un Aventon</a>
             <button class="navbar-toggler navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02"
                 aria-expanded="false" aria-label="Toggle navigation" (click)="sidebarToggle()">
@@ -28,7 +28,22 @@
                         Iniciar Sesion
                     </a>
                 </li>
+                <li class="nav-item ">
+                    <div class="dropdown" ngbDropdown>
+                        <a aria-haspopup="true" class="nav-link dropdown-toggle" id="userDropdown" ngbDropdownToggle aria-expanded="false">
+                            <i aria-hidden="true" class="nc-icon nc-single-02"></i>
+                        </a>
+                        <div aria-labelledby="userDropdown" class="dropdown-rosa dropdown-menu" ngbDropdownMenu>
+                            <a class="dropdown-item">Ver perfil</a>
+                            <a class="dropdown-item">Editar perfil</a>
+                            <a class="dropdown-item">Something else is here</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item">Cerrar sesion</a>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
+    <app-regmodal></app-regmodal>

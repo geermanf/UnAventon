@@ -60,7 +60,7 @@
         border-radius: $border-radius-large;
         font-size: $font-size-base;
         color: $danger-color;
-        font-size: .8rem;
+        font-size: .8rvw;
         position: absolute;
         top: 100%;
         padding-left: $padding-label-horizontal;
@@ -174,7 +174,7 @@ textarea.form-control{
 #inputs {
 
     .input-group{
-        margin-bottom: 1rem;
+        margin-bottom: 1rvw;
     }
 }
 

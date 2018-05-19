@@ -28,21 +28,21 @@ License - nucleoapp.com/license/
   change icon size
 -------------------------*/
 .nc-icon.lg {
-  font-size: 1.33333333em;
+  font-size: 1.33333333vw;
   vertical-align: -16%;
 }
 .nc-icon.x2 {
-  font-size: 2em;
+  font-size: 2vw;
 }
 .nc-icon.x3 {
-  font-size: 3em;
+  font-size: 3vw;
 }
 /*----------------------------------
   add a square/circle background
 -----------------------------------*/
 .nc-icon.square,
 .nc-icon.circle {
-  padding: 0.33333333em;
+  padding: 0.33333333vw;
   vertical-align: -16%;
   background-color: #eee;
 }
@@ -54,7 +54,7 @@ License - nucleoapp.com/license/
 -------------------------*/
 .nc-icon-ul {
   padding-left: 0;
-  margin-left: 2.14285714em;
+  margin-left: 2.14285714vw;
   list-style-type: none;
 }
 .nc-icon-ul > li {
@@ -62,18 +62,18 @@ License - nucleoapp.com/license/
 }
 .nc-icon-ul > li > .nc-icon {
   position: absolute;
-  left: -1.57142857em;
-  top: 0.14285714em;
+  left: -1.57142857vw;
+  top: 0.14285714vw;
   text-align: center;
 }
 .nc-icon-ul > li > .nc-icon.lg {
   top: 0;
-  left: -1.35714286em;
+  left: -1.35714286vw;
 }
 .nc-icon-ul > li > .nc-icon.circle,
 .nc-icon-ul > li > .nc-icon.square {
-  top: -0.19047619em;
-  left: -1.9047619em;
+  top: -0.19047619vw;
+  left: -1.9047619vw;
 }
 /*------------------------
   spinning icons

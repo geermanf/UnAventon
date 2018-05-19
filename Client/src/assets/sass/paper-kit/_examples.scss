@@ -181,7 +181,7 @@
 }
 
 .presentation-title{
-    font-size: 8em;
+    font-size: 8vw;
     font-weight: 700;
     margin: 0;
     color: #FFFFFF;
@@ -196,7 +196,7 @@
     -webkit-text-fill-color: transparent;
 }
 .presentation-subtitle{
-    font-size: 1.7em;
+    font-size: 1.7vw;
     color: #FFFFFF;
 }
 
@@ -253,8 +253,8 @@
     z-index: 1;
     bottom: 0;
     left: 0;
-    width: 250.625em;
-    height: 43.75em;
+    width: 250.625vw;
+    height: 43.75vw;
     -webkit-animation: cloudLoop 80s linear infinite;
     animation: cloudLoop 80s linear infinite;
 }
@@ -287,6 +287,6 @@
 
 @media (max-width: 500px){
     .presentation-title{
-        font-size: 5em;
+        font-size: 5vw;
     }
 }

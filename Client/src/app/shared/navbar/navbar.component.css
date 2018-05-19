@@ -1,3 +1,21 @@
 .nsm-dialog.no-padding {
     padding: 0;
 }
+
+.navbar {
+    background: rgb(0, 0, 0);
+}
+
+.navbar .navbar-nav .nav-item .nav-link, .navbar .navbar-brand {
+    color: #ffffff;
+    cursor:pointer;
+}
+
+.navbar .navbar-nav .nav-item .nav-link:hover, .navbar .navbar-brand:hover {
+    color: #f17376;
+    cursor:pointer;
+}
+.dropdown-rosa .dropdown-item:hover, .dropdown-rosa .dropdown-menu .dropdown-item:focus {
+    background-color: #f17376;
+    cursor:pointer;
+}

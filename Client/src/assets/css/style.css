@@ -216,7 +216,7 @@ hr {
 }
 
 .fa-base {
-  font-size: 1.25em !important;
+  font-size: 1.25 !important;
 }
 
 a:focus, a:active,
@@ -342,7 +342,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
   border-width: 2px;
   font-size: 12px;
   font-weight: 600;
-  padding: 0.5rem 18px;
+  padding: 0.5r 18px;
   line-height: 1.75;
   cursor: pointer;
   text-transform: uppercase;
@@ -1363,7 +1363,7 @@ textarea.form-control {
 
 /*           Labels & Progress-bar              */
 .label {
-  padding: 0.2em 0.6vw;
+  padding: 0.2 0.6vw;
   border-radius: 10px;
   color: #FFFFFF;
   font-weight: 500;
@@ -2105,7 +2105,7 @@ textarea.form-control {
 }
 .navbar .notification-bubble {
   right: 72px;
-  padding: 0.2em 0.6vw;
+  padding: 0.2 0.6vw;
   position: absolute;
   top: 15px;
 }
@@ -3433,7 +3433,7 @@ textarea.form-control {
   }
 }
 #navbar .dropdown-menu .dropdown-item {
-  padding: 3px 1.5rem !important;
+  padding: 3px 1.5r !important;
 }
 
 .dropdown-sharing li {
