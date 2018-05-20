@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthenticationService } from '../services/authentication.service';
 import { UserService } from '../services/user.service';
+import { AuthGuard } from '../guards/auth.guard';
 
 @Component({
     selector: 'app-registrarse',
@@ -16,7 +17,13 @@ export class RegistrarseComponent {
 
     constructor(
         private router: Router,
-        private userService: UserService) { }
+        private userService: UserService,
+        private authenticationService: AuthenticationService,
+        public authGuard: AuthGuard) { }
+
+        ngOnInit(){
+            console.log(this.authGuard.isLogued());
+        }
 
     register() {
         this.userService.create(this.model)

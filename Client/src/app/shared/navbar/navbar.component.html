@@ -18,17 +18,17 @@
                         Home
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="!authGuard.isLogued();">
                     <a class="nav-link" href="/registrarse">
                         Registrarse
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="!authGuard.isLogued();">
                     <a class="nav-link" (click)="open()">
                         Iniciar Sesion
                     </a>
                 </li>
-                <li class="nav-item ">
+                <li class="nav-item " *ngIf="authGuard.isLogued();">
                     <div class="dropdown" ngbDropdown>
                         <a aria-haspopup="true" class="nav-link dropdown-toggle" id="userDropdown" ngbDropdownToggle aria-expanded="false">
                             <i aria-hidden="true" class="nc-icon nc-single-02"></i>
@@ -38,7 +38,7 @@
                             <a class="dropdown-item">Editar perfil</a>
                             <a class="dropdown-item">Something else is here</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item">Cerrar sesion</a>
+                            <a class="dropdown-item" (click)="logout()">Cerrar sesion</a>
                         </div>
                     </div>
                 </li>

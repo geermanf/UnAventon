@@ -11,8 +11,8 @@
 
                         <form class="register-form" name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
                             <div class="col-lg-8 col-sm-8 mr-auto ml-auto">
-                                <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !nombre.valid }">
-                                    <label for="nombre">Nombre</label>
+                                <div class="form-group" >
+                                    <label for="nombre" [ngClass]="{ 'has-error': f.submitted && !nombre.valid }">Nombre</label>
                                     <input type="text" class="form-control" name="nombre" [(ngModel)]="model.nombre" #nombre="ngModel" required />
                                     <div *ngIf="f.submitted && !nombre.valid" class="help-block">ingrese un nombre</div>
                                 </div>

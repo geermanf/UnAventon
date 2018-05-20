@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AuthGuard } from '../guards/auth.guard';
 
 @Component({
     selector: 'app-home',
@@ -9,4 +9,11 @@ import { Component, OnInit } from '@angular/core';
 
 export class HomeComponent {
 
+    constructor(
+        public authGuard: AuthGuard) { }
+
+    ngOnInit(){
+        console.log(this.authGuard.isLogued());
+    }
+    
 }

@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { NgxSmartModalService } from 'ngx-smart-modal';
+import { AuthGuard } from '../../guards/auth.guard';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
     selector: 'app-navbar',
@@ -11,9 +13,12 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
 export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
+    public logueado: any;
 
     constructor(public location: Location, private element: ElementRef,
-                private modalService: NgbModal, public ngxSmartModalService: NgxSmartModalService) {
+                private modalService: NgbModal, public ngxSmartModalService: NgxSmartModalService,
+                public authGuard: AuthGuard,
+                private authenticationService: AuthenticationService) {
         this.sidebarVisible = false;
     }
 
@@ -48,4 +53,8 @@ export class NavbarComponent implements OnInit {
             this.sidebarClose();
         }
     };
+
+    logout() {
+        this.authenticationService.logout();
+    }
 }
