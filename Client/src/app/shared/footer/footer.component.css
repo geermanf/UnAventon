@@ -16,5 +16,8 @@
 }
 
 .footer nav>ul a:not(.btn):hover, .footer nav>ul a:not(.btn):focus {
-    color: #f17376;
+  color: #f17376;
+}
+.nav-link p{
+ color: white;
 }
