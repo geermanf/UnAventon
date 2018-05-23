@@ -20,10 +20,9 @@ export class IniciarSesionModalComponent implements OnInit {
         public ngxSmartModalService: NgxSmartModalService) { }
 
     ngOnInit() {
-        // reset login status
-        this.authenticationService.logout();
-        // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        // // 
+        // // get return url from route parameters or default to '/'
+        // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
     login() {
