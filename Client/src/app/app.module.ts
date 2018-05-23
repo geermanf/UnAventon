@@ -17,7 +17,8 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { RegistrarseComponent } from './registrarse/registrarse.component';
 import { IniciarSesionModalComponent } from './iniciarSesion/iniciarSesionModal/iniciarSesionModal.component';
-
+import { ContenedorViajeComponent } from './viaje/contenedorViaje.component';
+import { BuscadorComponent } from './buscador/buscador.component';
 // Import Services
 import { UserService } from './services/user.service';
 import { AuthGuard } from './guards/auth.guard';
@@ -43,7 +44,13 @@ import { fakeBackendProvider } from './iniciarSesion/login/helpers/fake-backend'
     NavbarComponent,
     FooterComponent,
     RegistrarseComponent,
-    IniciarSesionModalComponent
+    IniciarSesionModalComponent,
+    ContenedorViajeComponent,
+    BuscadorComponent
+  ],
+  exports: [
+    ContenedorViajeComponent,
+    BuscadorComponent
   ],
   providers: [
     AuthGuard,
