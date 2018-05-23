@@ -11,7 +11,9 @@ using Microsoft.Extensions.Options;
 using unAventonApi.Data;
 using unAventonApi.Models;
 using Microsoft.EntityFrameworkCore;
-using unAventonApi.Services;
+using unAventonApi.Services.Base;
+using unAventonApi.Services.Interfaces;
+using unAventonApi.Data.Repositories;
 
 namespace unAventonApi
 {
@@ -26,9 +28,13 @@ namespace unAventonApi
 
         private void SetRepositories(IServiceCollection services)
         {
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            // Repos
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IFirstService, FirstService>();
+            services.AddScoped<IVehiculoRepository, VehiculoRepository>();
+            services.AddScoped<ITarjetaRepository, TarjetaRepository>();
+
+            // Services
+            services.AddScoped<IAuthentificateService, AuthentificateService>();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
