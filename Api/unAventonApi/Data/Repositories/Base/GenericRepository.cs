@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace unAventonApi.Data
+namespace unAventonApi.Data.Repositories.Base
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity>
         where TEntity : class, IEntity
