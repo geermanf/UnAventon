@@ -12,8 +12,12 @@ namespace unAventonApi.Data
 
         Task Create(TEntity entity);
 
-        Task Update(int id, TEntity entity);
+        Task UpdateAsync(int id, TEntity entity);
 
-        Task Delete(int id);
+        void Update(int id, TEntity entity);
+
+        Task DeleteAsync(int id);
+
+        void Delete(int id);
     }
 }

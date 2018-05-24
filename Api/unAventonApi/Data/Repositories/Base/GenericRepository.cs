@@ -33,17 +33,30 @@ namespace unAventonApi.Data.Repositories.Base
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task Update(int id, TEntity entity)
+        public async Task UpdateAsync(int id, TEntity entity)
         {
             _dbContext.Set<TEntity>().Update(entity);
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public void Update(int id, TEntity entity)
+        {
+            _dbContext.Update<TEntity>(entity);
+            _dbContext.SaveChanges();
+        }
+
+        public async Task DeleteAsync(int id)
         {
             var entity = await _dbContext.Set<TEntity>().FindAsync(id);
             _dbContext.Set<TEntity>().Remove(entity);
             await _dbContext.SaveChangesAsync();
+        }
+
+        public void Delete(int id)
+        {
+            var entity = _dbContext.Find<TEntity>(id);
+            _dbContext.Remove<TEntity>(entity);
+            _dbContext.SaveChanges();
         }
     }
 }
