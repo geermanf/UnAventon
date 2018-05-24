@@ -27,7 +27,8 @@ import { AuthenticationService } from './services/authentication.service';
 import { fakeBackendProvider } from './iniciarSesion/login/helpers/fake-backend';
 import { PerfilComponent } from './perfil/perfil.component';
 import { EditarperfilComponent } from './editarperfil/editarperfil.component';
-import { CambiarContraseñaComponent } from './cambiarContraseña/cambiarContraseña.component';
+import { CambiarcontraComponent } from './cambiarcontra/cambiarcontra.component';
+
 
 
 
@@ -51,11 +52,9 @@ import { CambiarContraseñaComponent } from './cambiarContraseña/cambiarContras
     IniciarSesionModalComponent,
     ContenedorViajeComponent,
     BuscadorComponent,
-    PerfilComponent
-,
+    PerfilComponent,
     EditarperfilComponent,
-  ,
-    CambiarContraseñaComponent
+    CambiarcontraComponent,
 ],
   exports: [
     ContenedorViajeComponent,
