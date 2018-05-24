@@ -26,6 +26,9 @@ import { JwtInterceptor } from './iniciarSesion/login/helpers/jwt.interceptor';
 import { AuthenticationService } from './services/authentication.service';
 import { fakeBackendProvider } from './iniciarSesion/login/helpers/fake-backend';
 import { PerfilComponent } from './perfil/perfil.component';
+import { EditarperfilComponent } from './editarperfil/editarperfil.component';
+import { CambiarContraseñaComponent } from './cambiarContraseña/cambiarContraseña.component';
+
 
 
 @NgModule({
@@ -49,6 +52,10 @@ import { PerfilComponent } from './perfil/perfil.component';
     ContenedorViajeComponent,
     BuscadorComponent,
     PerfilComponent
+,
+    EditarperfilComponent,
+  ,
+    CambiarContraseñaComponent
 ],
   exports: [
     ContenedorViajeComponent,
