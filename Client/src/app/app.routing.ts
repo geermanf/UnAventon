@@ -7,11 +7,13 @@ import { HomeComponent } from './home/home.component';
 import { RegistrarseComponent } from './registrarse/registrarse.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PerfilComponent } from './perfil/perfil.component';
+import { EditarperfilComponent } from './editarperfil/editarperfil.component';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent},
     { path: 'registrarse', component: RegistrarseComponent},
     { path: 'perfil', component: PerfilComponent},
+    { path: 'editarperfil', component: EditarperfilComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full'},
 
     // otherwise redirect to home
