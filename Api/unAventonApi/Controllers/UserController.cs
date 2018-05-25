@@ -15,7 +15,6 @@ using Microsoft.AspNetCore.Cors;
 namespace unAventonApi.Controllers
 {
     [Route("api/[controller]")]
-    [EnableCors("AllowSpecificOrigin")]
     public class UserController : Controller
     {
         private readonly IUserRepository userRepo;

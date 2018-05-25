@@ -42,7 +42,15 @@ namespace unAventonApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder
+                .AllowAnyOrigin() 
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials();
+            }));
 
             services.AddDbContext<UnAventonDbContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
@@ -51,23 +59,21 @@ namespace unAventonApi
             SetRepositories(services);
             services.AddMvc();
 
-            services.Configure<MvcOptions>(options =>
-{
-    options.Filters.Add(new CorsAuthorizationFilterFactory("AllowSpecificOrigin"));
-});
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            // Shows UseCors with named policy.
+            app.UseCors("MyPolicy");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
             app.UseMvc();
+
+
         }
     }
 }
