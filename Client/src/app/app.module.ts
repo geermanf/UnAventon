@@ -25,6 +25,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { JwtInterceptor } from './iniciarSesion/login/helpers/jwt.interceptor';
 import { AuthenticationService } from './services/authentication.service';
 import { fakeBackendProvider } from './iniciarSesion/login/helpers/fake-backend';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 @NgModule({
@@ -46,8 +47,9 @@ import { fakeBackendProvider } from './iniciarSesion/login/helpers/fake-backend'
     RegistrarseComponent,
     IniciarSesionModalComponent,
     ContenedorViajeComponent,
-    BuscadorComponent
-  ],
+    BuscadorComponent,
+    PerfilComponent
+],
   exports: [
     ContenedorViajeComponent,
     BuscadorComponent
