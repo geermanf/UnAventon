@@ -1,0 +1,20 @@
+.btn-pink{
+    background-color: white;
+    border-color: #f17376;
+    color: #f17376;
+}
+.btn-pink:hover{
+    background-color: #f17376;
+    border-color: #f17376;
+    color: white;
+}
+.btn-rellenopink{
+    background-color: #f17376;
+    color: white;
+    border-color: white;
+}
+.btn-rellenopink:hover{
+    background-color: white;
+    color: #f17376;
+    border-color: white;
+}

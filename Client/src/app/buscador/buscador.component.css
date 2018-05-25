@@ -7,3 +7,8 @@
     float: none;
     width: 65%;
 }
+.btn-pink{
+    background-color: #f17376;
+    border-color: #f17376;
+    color: white;
+}

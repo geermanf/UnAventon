@@ -9,6 +9,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { PerfilComponent } from './perfil/perfil.component';
 import { EditarperfilComponent } from './editarperfil/editarperfil.component';
 import { CambiarcontraComponent } from './cambiarcontra/cambiarcontra.component';
+import { RegistrarvehiculoComponent } from './registrarvehiculo/registrarvehiculo.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
     { path: 'perfil', component: PerfilComponent},
     { path: 'editarperfil', component: EditarperfilComponent},
     { path: 'cambiarcontra', component: CambiarcontraComponent},
+    { path: 'registrarvehiculo', component: RegistrarvehiculoComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full'},
 
     // otherwise redirect to home
