@@ -4,4 +4,5 @@
     password: string;
     nombre: string;
     apellido: string;
+    fechaDeNacimiento: Date;
 }

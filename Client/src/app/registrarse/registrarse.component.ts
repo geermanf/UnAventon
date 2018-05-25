@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { UserService } from '../services/user.service';
 import { AuthGuard } from '../guards/auth.guard';
+import { User } from '../models/User';
+import { calcularEdad } from './calcularEdad';
 
 @Component({
     selector: 'app-registrarse',
@@ -12,7 +14,7 @@ import { AuthGuard } from '../guards/auth.guard';
 })
 
 export class RegistrarseComponent {
-    model: any = {};
+    usuario: any = {};
     passwordRepeat: any;
 
     constructor(
@@ -21,12 +23,20 @@ export class RegistrarseComponent {
         private authenticationService: AuthenticationService,
         public authGuard: AuthGuard) { }
 
-        ngOnInit(){
-            console.log(this.authGuard.isLogued());
-        }
+    ngOnInit() {
+    }
+
+    contraseniasValidas() {
+        return (this.usuario.password == this.passwordRepeat);
+    }
+
+    esMayorDeEdad() {
+        let años = calcularEdad(this.usuario.fechaDeNacimiento);
+        return (años >= 18);
+    }
 
     register() {
-        this.userService.create(this.model)
+        this.userService.create(this.usuario)
             .subscribe(
                 data => {
                     // alert ok

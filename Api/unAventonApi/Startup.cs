@@ -14,6 +14,8 @@ using Microsoft.EntityFrameworkCore;
 using unAventonApi.Services.Base;
 using unAventonApi.Services.Interfaces;
 using unAventonApi.Data.Repositories;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using Microsoft.AspNetCore.Mvc;
 
 namespace unAventonApi
 {
@@ -40,14 +42,21 @@ namespace unAventonApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.AddDbContext<UnAventonDbContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             // services.AddDbContext<CodingBlastDbContext>(options =>
             //         options.UseInMemoryDatabase("prueba"));
             SetRepositories(services);
             services.AddMvc();
-            
-           
+
+            services.Configure<MvcOptions>(options =>
+{
+    options.Filters.Add(new CorsAuthorizationFilterFactory("AllowSpecificOrigin"));
+});
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
