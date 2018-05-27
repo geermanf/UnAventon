@@ -1,9 +1,19 @@
+.navbar {
+    .navbar &{
+        top: 5.5em;
+    }
+    .navbar:not(.navbar-transparent) &{
+        top: 3.3em;
+    }
+}
 .alert{
+    height: 3em;
     border: 0;
     border-radius: 0;
     color: #FFFFFF;
     padding: 10px 15px;
     font-size: 14px;
+    margin-bottom: 0;
 
     & .close{
         font-size: $font-size-large;
@@ -19,12 +29,8 @@
         left: 0;
         position: absolute;
         right: 0;
-        top: 85px;
         width: 100%;
         z-index: 3;
-    }
-    .navbar:not(.navbar-transparent) &{
-        top: 70px;
     }
     .alert-icon{
         display: block;

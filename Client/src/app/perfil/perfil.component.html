@@ -1,12 +1,16 @@
 <div class="wrapper">
-  <div class="page-header page-header-xs" data-parallax="true"  style="background-image: url('../assets/img/home.jpg');">
+  <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('../assets/img/home.jpg');">
     <div class="filter"></div>
   </div>
   <div class="section profile-content">
     <div class="container">
       <div class="owner">
-        <div class="avatar">
-          <img src="../assets/img/joe-gardner-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+        <div class="avatar ">
+
+          <img src="{{usuario.fotoPerfil}}" alt="Circle Image" class="img-circle img-responsive" style="width: 20vw">
+          <div class="middle" (click)="abrirModalFoto(cargarFoto)">
+            Cambiar Foto
+          </div>
         </div>
         <div class="name">
           <h4 class="title">Jane Faker
@@ -51,7 +55,7 @@
                     <p>Nombre del titular:</p>
                     <button type="button" class="btn btn-pink">Editar</button>
                     <button type="button" class="btn btn-rellenopink">Borrar</button>
-                  </div>                 
+                  </div>
                 </div>
               </ng-template>
             </ngb-tab>
@@ -228,7 +232,7 @@
                           </div>
                           <div class="col-md-3 col-sm-2 ml-auto mr-auto">
                             <h6>Puntaje como:</h6>
-                             <p>Acompañante</p>
+                            <p>Acompañante</p>
                           </div>
                         </div>
                       </li>
@@ -243,3 +247,29 @@
     </div>
   </div>
 </div>
+
+<ng-template #cargarFoto let-c="close" let-d="dismiss">
+  <form class="contact100-form validate-form flex-sb flex-w" name="form" (ngSubmit)="f.form.valid && c('Close click')"
+    #f="ngForm" novalidate>
+    <div class="modal-header">
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Ingrese el URL de la foto</p>
+
+      <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !urlFotoId.valid }">
+        <input class="form-control" type="text" name="urlFoto" placeholder="Ingrese el url" [(ngModel)]="urlFoto"
+          #urlFotoId="ngModel"  required>
+        <span class="focus-input100"></span>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-rosa" (click)="cambiarFoto()">Guardar foto</button>
+      <button type="button" class="btn btn-default" (click)="c('Close click')">Cancelar</button>
+    </div>
+  </form>
+
+</ng-template>

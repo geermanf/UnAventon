@@ -28,28 +28,49 @@
                         Iniciar Sesion
                     </a>
                 </li>
-                <li class="nav-item " *ngIf="authGuard.isLogued();">
+                <li class="nav-item" *ngIf="authGuard.isLogued();">
                     <div class="dropdown" ngbDropdown>
                         <a aria-haspopup="true" class="nav-link dropdown-toggle" id="userDropdown" ngbDropdownToggle aria-expanded="false">
                             <i aria-hidden="true" class="nc-icon nc-single-02"></i>
+                            {{usuario.nombre}}
                         </a>
-                        <div aria-labelledby="userDropdown" class="dropdown-rosa dropdown-menu" ngbDropdownMenu>
+                        
+                        <div aria-labelledby="userDropdown" class="dropdown-rosa dropdown-menu dropdown-menu-right" ngbDropdownMenu>
                             <a class="dropdown-item" href="/perfil">Ver perfil</a>
-                            <a class="dropdown-item" href="/editarperfil">Editar perfil</a>
+                            <a class="dropdown-item" href="/editar">Editar perfil</a>
                             <a class="dropdown-item" href="/cambiarcontra">Cambiar Contraseña</a>
-                            <a class="dropdown-item" href="/registrarvehiculo">Registrar Vehiculo</a>
-                            <a class="dropdown-item" href="/registrartarjeta">Registrar Tarjeta</a>
-                          <!--  <a class="dropdown-item" href="">Puntuaciones Pendientes</a>
-                            <a class="dropdown-item" href="">Preguntas Pendientes</a>
-                            <a class="dropdown-item" href="">Pagos Pendientes</a> -->
-                            <div class="dropdown-divider"></div>                            
-                            <a class="dropdown-item" (click)="logout()">Cerrar sesion</a>
-                            <a class="dropdown-item">Eliminar cuenta</a>
+                            <a class="dropdown-item" href="/registrarvehiculo">Vehiculos</a>
+                            <!-- <a class="dropdown-item">Puntuaciones Pendientes</a>
+                            <a class="dropdown-item">Preguntas Pendientes</a>
+                            <a class="dropdown-item">Pagos Pendientes</a> -->
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" (click)="logoutModal(CerrarSesionModal)">Cerrar sesion</a>
+                            <!-- <a class="dropdown-item" (click)="eliminarCuentaModal(borrarCuentaModal)">Eliminar cuenta</a> -->
+
                         </div>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
+    <app-alertas></app-alertas>
 </nav>
-    <app-regmodal></app-regmodal>
+
+<!-- MODALS -->
+
+<ng-template #CerrarSesionModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <h4><strong>¿Deseas cerrar sesión?</strong></h4>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" (click)="logout();c('Close click')">Cerrar sesion</button>
+            <button type="button" class="btn btn-rosa" (click)="c('Close click')">Cancelar</button>
+        </div>
+    </ng-template>
+
+<app-regmodal></app-regmodal>

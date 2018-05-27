@@ -16,9 +16,9 @@ namespace unAventonApi.Data
 
         public string Password { get; set; }
 
-        public DateTime FechaNacimiento { get; set; }
+        public DateTime fechaDeNacimiento { get; set; }
 
-        public byte[] FotoPerfil { get; set; }
+        public string FotoPerfil { get; set; }
 
         public IList<Vehiculo> Vehiculos { get; set; }
 

@@ -1,9 +1,12 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { AuthGuard } from '../../guards/auth.guard';
 import { AuthenticationService } from '../../services/authentication.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertasService } from '../../alertas/alertas.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'app-navbar',
@@ -14,11 +17,17 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
     public logueado: any;
+    usuario: any;
 
-    constructor(public location: Location, private element: ElementRef,
-                private modalService: NgbModal, public ngxSmartModalService: NgxSmartModalService,
-                public authGuard: AuthGuard,
-                private authenticationService: AuthenticationService) {
+    constructor(private route: ActivatedRoute,
+        private router: Router,
+        private element: ElementRef,
+        public ngxSmartModalService: NgxSmartModalService,
+        public authGuard: AuthGuard,
+        private authenticationService: AuthenticationService,
+        private alertService: AlertasService,
+        private userService: UserService,
+        private modalService: NgbModal) {
         this.sidebarVisible = false;
     }
 
@@ -28,12 +37,21 @@ export class NavbarComponent implements OnInit {
     ngOnInit() {
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
+
+        this.usuario = this.authGuard.getUser().subscribe(
+            data => {
+                this.usuario = data;
+                return data;
+            },
+            error => {
+                return error;
+            });
     }
     sidebarOpen() {
         const toggleButton = this.toggleButton;
         const html = document.getElementsByTagName('html')[0];
 
-        setTimeout(function() {
+        setTimeout(function () {
             toggleButton.classList.add('toggled');
         }, 500);
         html.classList.add('nav-open');
@@ -54,7 +72,13 @@ export class NavbarComponent implements OnInit {
         }
     };
 
+    logoutModal(CerrarSesionModal) {
+        this.modalService.open(CerrarSesionModal);
+    }
+
     logout() {
         this.authenticationService.logout();
+        this.router.navigate(['/home']);
+        this.alertService.addAlert('info', 'Se cerró sesion en Un Aventón, nos vemos pronto!');
     }
 }

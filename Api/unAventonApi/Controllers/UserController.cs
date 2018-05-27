@@ -1,66 +1,32 @@
-using System.Diagnostics;
-using System.Threading.Tasks;
-using unAventonApi.Data.Entities;
-using Microsoft.AspNetCore.Mvc;
-using unAventonApi.Models;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using unAventonApi.Services.Base;
-using unAventonApi.Data;
-using unAventonApi.Data.DTOEntities;
-using unAventonApi.Services.Interfaces;
 using System;
-using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
+using unAventonApi.Controllers.Base;
+using unAventonApi.Data;
 
 namespace unAventonApi.Controllers
 {
     [Route("api/[controller]")]
-    public class UserController : Controller
+    public class UserController : GenericController<IUserRepository, User>
     {
-        private readonly IUserRepository userRepo;
-
-        public UserController(IUserRepository userRepo)
+        public UserController(IUserRepository genericRepo) : base(genericRepo)
         {
-            this.userRepo = userRepo;
         }
 
-        [HttpPost("Registrar")]
-        public async Task<ApiResponse<User>> Registrar(UserDTO user)
+        [HttpPost("ListarPorEmail")]
+        public IActionResult Get([FromBody]string email)
         {
-            var data = new User
-            {
-                Nombre = user.Nombre,
-                Apellido = user.Apellido,
-                FechaNacimiento = user.FechaNacimiento,
-                Password = user.Password,
-                Email = user.Email
-            };
             try
             {
-                await this.userRepo.Create(data);
+                var response = this.genericRepo.GetByEmail(email).Result;
 
-                return BuildApiResponse.BuildOk<User>(data);
+                // return BuildApiResponse.BuildOk();
+                return Ok(response);
             }
             catch (Exception)
             {
-                return BuildApiResponse.BuildNotOk<User>(data, "Hubo un error al registrar el usuario");
+                // return BuildApiResponse.BuildNotOk("Hubo un error al modificar");
+                return BadRequest("Hubo un error al listar con id: " + email);
             }
-
-
-        }
-        [HttpGet("GetAll")]
-        public ApiResponse<List<User>> Get()
-        {
-            var response = this.userRepo.GetAll();
-            try
-            {
-                return BuildApiResponse.BuildOk<List<User>>(response.ToListAsync().Result);
-            }
-            catch (Exception)
-            {
-                return BuildApiResponse.BuildNotOk<List<User>>(response.ToListAsync().Result, "Hubo un error al obtener los usuarios");
-            }
-
         }
     }
 }

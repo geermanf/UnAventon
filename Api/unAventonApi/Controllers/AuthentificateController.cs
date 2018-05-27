@@ -22,15 +22,19 @@ namespace unAventonApi.Controllers
             this.authService = authService;
         }
 
-        [HttpGet]
-        public ApiResponse Authentificate(string email, string password)
+        [HttpPost]
+        public IActionResult Authentificate([FromBody]UserCredentialsDTO userCredentials)
         {
-            var userCredentials = new UserCredentialsDTO {
-                Email = email,
-                Password = password
-            };
+
             var response = this.authService.AuthentificateUser(userCredentials);
-            return response;
+
+            if (response.Ok) {
+                return Ok(response.Data);
+            }
+            else
+            {
+                return BadRequest(response.Message);
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 .card-iniciarSesion {
-  background-color: #0000006e;
+  background-color: #000000bd;
   border-radius: 8px;
   color: #fff;
   max-width: none;
@@ -29,6 +29,10 @@
 }
 
 .btn.rosa {
+  color: #f17376;
+}
+
+.hover-rosa:hover {
   color: #f17376;
 }
 

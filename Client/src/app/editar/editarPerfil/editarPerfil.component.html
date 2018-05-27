@@ -1,0 +1,41 @@
+<form class="contact100-form validate-form flex-sb flex-w" name="form" (ngSubmit)="f.form.valid && esMayorDeEdad() && register()"
+    #f="ngForm" novalidate>
+    <span class="contact100-form-title">
+        Editar datos personales
+    </span>
+
+    <div class="wrap-input100 rs1 validate-input">
+        <input class="input100" type="text" name="nombre" placeholder="Nombre" [(ngModel)]="usuario.nombre" #nombre="ngModel" 
+        [ngClass]="{ 'has-danger': f.submitted && !nombre.valid }" required>
+        <span class="focus-input100"></span>
+    </div>
+
+
+    <div class="wrap-input100 rs1 validate-input" >
+        <input class="input100" type="text" name="apellido" placeholder="Apellido" [(ngModel)]="usuario.apellido" #apellido="ngModel"
+        [ngClass]="{ 'has-danger': f.submitted && !apellido.valid }" required>
+        <span class="focus-input100"></span>
+    </div>
+   
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="text" name="email" placeholder="Email" [(ngModel)]="usuario.email" #apellido="ngModel" required
+            readonly>
+        
+    </div>
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="date" name="fechaDeNacimiento" [(ngModel)]="usuario.fechaDeNacimiento" #fechaDeNacimiento="ngModel"
+        [ngClass]="{ 'has-danger': f.submitted && !fechaDeNacimiento.valid }" required>
+        <span class="focus-input100"></span>
+    </div>
+
+
+    <div *ngIf="f.submitted && (!nombre.valid || !apellido.valid || !fechaDeNacimiento.valid )" class="form-control-feedback">Por favor, rellene todos los campos</div>
+
+    <div class="container-contact100-form-btn">
+        <button class="contact100-form-btn" (click)="sendNotification()">
+            Guardar
+        </button>
+    </div>
+</form>

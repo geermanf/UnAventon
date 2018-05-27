@@ -1,0 +1,31 @@
+    <form class="contact100-form validate-form flex-sb flex-w" name="form" (ngSubmit)="f.form.valid && contraseniasValidas() && register()" #f="ngForm" novalidate>
+    <span class="contact100-form-title">
+        Cambiar contraseña
+    </span>
+
+    <div class="wrap-input100 validate-input">
+        <input class="input100" type="password" name="pwdViejoId" placeholder="Ingrese su contraseña" [(ngModel)]="pwdViejo" #pwdViejoId="ngModel" 
+        [ngClass]="{ 'has-danger': f.submitted && !pwdViejoId.valid }" required>
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100 rs1 validate-input">
+        <input class="input100" type="password" name="pwdNuevoId" placeholder="Ingrese su nueva contraseña" [(ngModel)]="pwdNuevo" #pwdNuevoId="ngModel" 
+        [ngClass]="{ 'has-danger': f.submitted && !pwdNuevoId.valid }" required>
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100 rs1 validate-input">
+        <input class="input100" type="password" name="pwdNuevoRepeatedId" placeholder="Repita su nueva contraseña" [(ngModel)]="pwdNuevoRepeated" #pwdNuevoRepeatedId="ngModel" 
+        [ngClass]="{ 'has-danger': f.submitted && !pwdNuevoRepeatedId.valid }" required>
+        <span class="focus-input100"></span>
+    </div>
+
+    <div *ngIf="f.submitted && (!pwdViejoId.valid || !pwdNuevoId.valid || !pwdNuevoRepeatedId.valid )" class="form-control-feedback">Por favor, rellene todos los campos</div>
+
+    <div class="container-contact100-form-btn">
+        <button class="contact100-form-btn" (click)="sendNotification()">
+            Guardar
+        </button>
+    </div>
+</form>
