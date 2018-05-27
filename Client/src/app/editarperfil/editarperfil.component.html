@@ -1,0 +1,47 @@
+<div class="wrapper">
+  <div class="page-header page-grey">
+      <div class="filter"></div>
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-8 col-sm-8 mr-auto ml-auto">
+                  <div class="card card-register no-width">
+                      <div class="separador-abajo">
+                          <h2 class="title">Editar Perfil</h2>
+                      </div>
+
+                      <form class="register-form" name="form" (ngSubmit)="f.form.valid " #f="ngForm">
+                          <div class="col-lg-8 col-sm-8 mr-auto ml-auto">
+                              <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !nombre.valid }">
+                                  <label for="nombre">Nombre:</label>
+                                  <input type="text" class="form-control" name="nombre"  [(ngModel)]="usuario.nombre" #nombre="ngModel" required />
+                                  <div *ngIf="f.submitted && !nombre.valid" class="form-control-feedback">Ingrese un nombre</div>
+                              </div>
+
+                              <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !apellido.valid }">
+                                  <label for="apellido">Apellido:</label>
+                                  <input type="text" class="form-control" name="apellido" [(ngModel)]="usuario.apellido" #apellido="ngModel" required />
+                                  <div *ngIf="f.submitted && !apellido.valid" class="form-control-feedback">Ingrese un apellido</div>
+                              </div>
+
+                              <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !fNac.valid }">
+                                  <label>Fecha de Nacimiento:</label>
+                                  <input type="date" class="form-control" name="fNac" [(ngModel)]="usuario.fechaDeNacimiento" #fNac="ngModel" required />
+                                  <div *ngIf="f.submitted && !fNac.valid" class="form-control-feedback">Ingrese Fecha de Nacimiento</div>
+                              </div>
+
+                              <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !email.valid }">
+                                  <label for="email">Email:</label>
+                                  <input type="text" class="form-control" name="email" readonly />
+                              </div>
+                              <div class="form-group">
+                                  <button class="btn btn-danger btn-block btn-round btn-register mr-auto ml-auto">Guardar</button>
+                              </div>
+                          </div>
+                      </form>
+
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

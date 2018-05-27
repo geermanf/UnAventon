@@ -36,6 +36,7 @@ import { EditarPerfilComponent } from './editar/editarPerfil/editarPerfil.compon
 
 
 
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -64,6 +65,7 @@ import { EditarPerfilComponent } from './editar/editarPerfil/editarPerfil.compon
     BorrarCuentaComponent,
     CambiarContraseniaComponent,
     EditarPerfilComponent
+
 ],
   exports: [
     ContenedorViajeComponent,

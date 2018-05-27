@@ -11,6 +11,7 @@ import { RegistrarvehiculoComponent } from './registrarvehiculo/registrarvehicul
 import { EditarComponent } from './editar/editar.component';
 
 
+
 const routes: Routes = [
 
     // PUBLICAS
