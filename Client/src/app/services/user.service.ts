@@ -2,7 +2,6 @@
 import { HttpClient } from '@angular/common/http';
 
 import { User } from '../models/User';
-import { ApiResponse } from '../models/ApiResponse';
 
 @Injectable()
 export class UserService {

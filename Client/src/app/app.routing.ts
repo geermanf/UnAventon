@@ -7,7 +7,6 @@ import { HomeComponent } from './home/home.component';
 import { RegistrarseComponent } from './registrarse/registrarse.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PerfilComponent } from './perfil/perfil.component';
-import { RegistrarvehiculoComponent } from './registrarvehiculo/registrarvehiculo.component';
 import { EditarComponent } from './editar/editar.component';
 
 
@@ -21,7 +20,6 @@ const routes: Routes = [
     // USUARIOS LOGUEADOS
     { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard]},
     { path: 'editar', component: EditarComponent, canActivate: [AuthGuard]},
-    { path: 'registrarvehiculo', component: RegistrarvehiculoComponent, canActivate: [AuthGuard]},
 
     // INCORRECTO O VACIO
     { path: '', redirectTo: 'home', pathMatch: 'full'},

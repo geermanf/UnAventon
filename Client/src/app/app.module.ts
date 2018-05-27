@@ -27,7 +27,6 @@ import { IniciarSesionModalComponent } from './iniciarSesion/iniciarSesionModal/
 import { ContenedorViajeComponent } from './viaje/contenedorViaje.component';
 import { BuscadorComponent } from './buscador/buscador.component';
 import { PerfilComponent } from './perfil/perfil.component';
-import { RegistrarvehiculoComponent } from './registrarvehiculo/registrarvehiculo.component';
 import { AlertasComponent } from './alertas/alertas.component';
 import { EditarComponent } from './editar/editar.component';
 import { BorrarCuentaComponent } from './editar/borrarCuenta/borrarCuenta.component';
@@ -59,7 +58,6 @@ import { EditarPerfilComponent } from './editar/editarPerfil/editarPerfil.compon
     ContenedorViajeComponent,
     BuscadorComponent,
     PerfilComponent,
-    RegistrarvehiculoComponent,
     AlertasComponent,
     EditarComponent,
     BorrarCuentaComponent,
