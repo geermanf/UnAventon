@@ -9,13 +9,15 @@ export class UserService {
     constructor(private http: HttpClient) { }
 
     getAll() {
-        let response = this.http.get<ApiResponse<User>>('http://localhost:5000/api/User/GetAll');
-        return response;
+        return this.http.get('http://localhost:5000/api/User/GetAll');
     }
 
     getById(id: number) {
-        let response = this.http.get<ApiResponse<User>>('http://localhost:5000/api/User/GetById' + id);
-        return response;
+        return this.http.post('http://localhost:5000/api/User/ListarPorId', id);
+    }
+
+    getByEmail(email: string) {
+        return this.http.post('http://localhost:5000/api/User/ListarPorEmail', email);
     }
 
     create(user: User) {
@@ -23,10 +25,14 @@ export class UserService {
     }
 
     update(user: User) {
-        return this.http.put('/api/users/' + user.id, user);
+        return this.http.post('http://localhost:5000/api/User/Modificar', user);
     }
 
     delete(id: number) {
-        return this.http.delete('/api/users/' + id);
+        return this.http.post('http://localhost:5000/api/User/Borrar', id);
+    }
+
+    executeLogin(email: string, password: string) {
+        return this.http.post('http://localhost:5000/api/Authentificate', { email: email, password: password })
     }
 }

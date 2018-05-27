@@ -23,7 +23,7 @@
                                     <div *ngIf="f.submitted && !apellido.valid" class="form-control-feedback">ingrese un apellido</div>
                                 </div>
 
-                                <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !fechaDeNacimiento.valid }">
+                                <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && (!fechaDeNacimiento.valid || !esMayorDeEdad())}">
                                     <label for="fechaDeNacimiento">Fecha de Nacimiento</label>
                                     <input type="date" class="form-control" name="fechaDeNacimiento" [(ngModel)]="usuario.fechaDeNacimiento" #fechaDeNacimiento="ngModel" required />
                                     <div *ngIf="f.submitted && !fechaDeNacimiento.valid" class="form-control-feedback">ingrese una fecha</div>
@@ -50,7 +50,7 @@
                                     <div *ngIf="f.submitted && !contraseniasValidas() && passwordR.valid" class="form-control-feedback">las contraseñas no son iguales</div>
                                 </div>
                                 <div class="form-group">
-                                    <button class="btn btn-danger btn-block btn-round btn-register mr-auto ml-auto">Crear cuenta</button>
+                                    <button class="btn btn-danger btn-block btn-round btn-register mr-auto ml-auto" (click)="sendNotification()" >Crear cuenta</button>
                                 </div>
                             </div>
                         </form>

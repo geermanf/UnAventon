@@ -12,8 +12,4 @@ export class HomeComponent {
     constructor(
         public authGuard: AuthGuard) { }
 
-    ngOnInit(){
-        console.log(this.authGuard.isLogued());
-    }
-    
 }

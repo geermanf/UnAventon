@@ -30,10 +30,10 @@ namespace unAventonApi.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Apellido = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: false),
-                    FechaNacimiento = table.Column<DateTime>(nullable: false),
-                    FotoPerfil = table.Column<byte[]>(nullable: true),
+                    FotoPerfil = table.Column<string>(nullable: true),
                     Nombre = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true)
+                    Password = table.Column<string>(nullable: true),
+                    fechaDeNacimiento = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -66,7 +66,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     const urlParts = request.url.split('/');
                     // tslint:disable-next-line:radix
                     const id = parseInt( urlParts[urlParts.length - 1]);
-                    const matchedUsers = users.filter(user => user.id === id);
+                    const matchedUsers = users.filter(us => us.id === id);
                     const user = matchedUsers.length ? matchedUsers[0] : null;
 
                     return Observable.of(new HttpResponse({ status: 200, body: user }));

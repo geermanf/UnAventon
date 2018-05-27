@@ -14,18 +14,22 @@ namespace unAventonApi.Services.Base
         {
             this.userRepo = userRepo;
         }
-        public ApiResponse AuthentificateUser(UserCredentialsDTO userCredentials)
+        public ApiResponse<User>  AuthentificateUser(UserCredentialsDTO userCredentials)
         {
             var user = this.userRepo.GetByEmail(userCredentials.Email).Result;
 
-            if (user.Email == userCredentials.Email && user.Password == userCredentials.Password)
+            if (user == null)
+            {
+                return BuildApiResponse.BuildNotOk<User>(null,"Email no registrado en el sistema");
+            }
+            else if (user.Email == userCredentials.Email && user.Password == userCredentials.Password)
             {
                 return BuildApiResponse.BuildOk<User>(user);
 
             }
             else
             {
-                return BuildApiResponse.BuildNotOk("Email o Password incorrecto");
+                return BuildApiResponse.BuildNotOk<User>(null,"Email o Password incorrecto");
             }
 
 

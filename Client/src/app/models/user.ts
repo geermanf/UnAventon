@@ -5,4 +5,5 @@
     nombre: string;
     apellido: string;
     fechaDeNacimiento: Date;
+    fotoPerfil: '../assets/img/joe-gardner-2.jpg';
 }

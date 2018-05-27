@@ -13,11 +13,11 @@ using System;
 
 namespace unAventonApi.Controllers.Base
 {
-    public class GenericController<IGenericRepo,GenericClass> : Controller
+    public class GenericController<IGenericRepo, GenericClass> : Controller
         where GenericClass : class, IEntity
         where IGenericRepo : IGenericRepository<GenericClass>
     {
-        private readonly IGenericRepo genericRepo;
+        public readonly IGenericRepo genericRepo;
 
         public GenericController(IGenericRepo genericRepo)
         {
@@ -25,24 +25,26 @@ namespace unAventonApi.Controllers.Base
         }
 
         [HttpPost("Registrar")]
-        public async Task<ApiResponse> Registrar(GenericClass genericClass)
+        public async Task<IActionResult> Registrar([FromBody]GenericClass genericClass)
         {
             try
             {
                 await this.genericRepo.Create(genericClass);
 
-                return BuildApiResponse.BuildOk();
+                // return BuildApiResponse.BuildOk();
+                return Ok();
             }
             catch (Exception)
             {
-                return BuildApiResponse.BuildNotOk( "Hubo un error al registrar");
+                // return BuildApiResponse.BuildNotOk( "Hubo un error al registrar");
+                return BadRequest("Hubo un error al registrar");
             }
-            
+
 
         }
 
         [HttpGet("Listar")]
-        public ApiResponse<List<GenericClass>> Get()
+        public IActionResult Get()
         {
             var response = new List<GenericClass>();
 
@@ -50,66 +52,74 @@ namespace unAventonApi.Controllers.Base
             {
                 response = this.genericRepo.GetAll().ToListAsync().Result;
 
-                return BuildApiResponse.BuildOk<List<GenericClass>>(response);
+                // return BuildApiResponse.BuildOk<List<GenericClass>>(response);
+                return Ok(response);
             }
             catch (Exception)
             {
-                return BuildApiResponse.BuildNotOk<List<GenericClass>>(response, "Hubo un error al realizar el listar");
+                // return BuildApiResponse.BuildNotOk<List<GenericClass>>(response, "Hubo un error al realizar el listar");
+                return BadRequest("Hubo un error al listar");
             }
-            
-            
+
+
 
         }
 
         [HttpPost("Modificar")]
-        public ApiResponse Modificar(GenericClass genericClass)
+        public IActionResult Modificar([FromBody]GenericClass genericClass)
         {
 
             try
             {
                 this.genericRepo.Update(genericClass.Id, genericClass);
 
-                return BuildApiResponse.BuildOk();
+                // return BuildApiResponse.BuildOk();
+                return Ok();
             }
             catch (Exception)
             {
-                return BuildApiResponse.BuildNotOk("Hubo un error al modificar");
+                // return BuildApiResponse.BuildNotOk("Hubo un error al modificar");
+                return BadRequest("Hubo un error al modificar");
             }
-            
-            
+
+
 
         }
 
         // GET
-        [HttpGet("ListarPorId")]
-        public ApiResponse<GenericClass> Get(int id)
+        [HttpPost("ListarPorId")]
+        public IActionResult Get([FromBody]int id)
         {
-            
             try
             {
                 var response = this.genericRepo.GetById(id).Result;
-                return BuildApiResponse.BuildOk<GenericClass>(response);
+
+                // return BuildApiResponse.BuildOk();
+                return Ok(response);
             }
             catch (Exception)
             {
-                return BuildApiResponse.BuildNotOk<GenericClass>(null,"Hubo un error al listar por id");
+                // return BuildApiResponse.BuildNotOk("Hubo un error al modificar");
+                return BadRequest("Hubo un error al listar con id: " + id);
             }
         }
 
         // DELETE
         [HttpPost("Borrar")]
-        public ApiResponse Delete(int id)
+        public IActionResult Delete([FromBody]int id)
         {
+
             try
             {
                 this.genericRepo.Delete(id);
 
-
-                return BuildApiResponse.BuildOk();
+                // return BuildApiResponse.BuildOk();
+                return Ok();
             }
             catch (Exception)
             {
-                return BuildApiResponse.BuildNotOk("Hubo un error al borrar");
+                // return BuildApiResponse.BuildNotOk("Hubo un error al modificar");
+                return BadRequest("Hubo un error al borrar con id: " + id);
             }
         }
     }

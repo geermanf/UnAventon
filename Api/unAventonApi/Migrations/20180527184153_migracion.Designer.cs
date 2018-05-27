@@ -11,7 +11,7 @@ using unAventonApi.Data;
 namespace unAventonApi.Migrations
 {
     [DbContext(typeof(UnAventonDbContext))]
-    [Migration("20180525184013_migracion")]
+    [Migration("20180527184153_migracion")]
     partial class migracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,13 +67,13 @@ namespace unAventonApi.Migrations
                     b.Property<string>("Email")
                         .IsRequired();
 
-                    b.Property<DateTime>("FechaNacimiento");
-
-                    b.Property<byte[]>("FotoPerfil");
+                    b.Property<string>("FotoPerfil");
 
                     b.Property<string>("Nombre");
 
                     b.Property<string>("Password");
+
+                    b.Property<DateTime>("fechaDeNacimiento");
 
                     b.HasKey("Id");
 

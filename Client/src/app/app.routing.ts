@@ -7,25 +7,25 @@ import { HomeComponent } from './home/home.component';
 import { RegistrarseComponent } from './registrarse/registrarse.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PerfilComponent } from './perfil/perfil.component';
-import { EditarperfilComponent } from './editarperfil/editarperfil.component';
-import { CambiarcontraComponent } from './cambiarcontra/cambiarcontra.component';
 import { RegistrarvehiculoComponent } from './registrarvehiculo/registrarvehiculo.component';
+import { EditarComponent } from './editar/editar.component';
 
 
 const routes: Routes = [
+
+    // PUBLICAS
     { path: 'home', component: HomeComponent},
     { path: 'registrarse', component: RegistrarseComponent},
-    { path: 'perfil', component: PerfilComponent},
-    { path: 'editarperfil', component: EditarperfilComponent},
-    { path: 'cambiarcontra', component: CambiarcontraComponent},
-    { path: 'registrarvehiculo', component: RegistrarvehiculoComponent},
-    { path: '', redirectTo: 'home', pathMatch: 'full'},
 
-    // otherwise redirect to home
+    // USUARIOS LOGUEADOS
+    { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard]},
+    { path: 'editar', component: EditarComponent, canActivate: [AuthGuard]},
+    { path: 'registrarvehiculo', component: RegistrarvehiculoComponent, canActivate: [AuthGuard]},
+
+    // INCORRECTO O VACIO
+    { path: '', redirectTo: 'home', pathMatch: 'full'},
     { path: '**', redirectTo: 'home', pathMatch: 'full'}
 ];
-
-//  , canActivate: [AuthGuard]
 
 @NgModule({
   imports: [

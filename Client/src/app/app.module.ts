@@ -9,6 +9,13 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+
+// Import Services
+import { UserService } from './services/user.service';
+import { AuthGuard } from './guards/auth.guard';
+import { AuthenticationService } from './services/authentication.service';
+import { AlertasService } from './alertas/alertas.service';
 
 // Import Components
 import { AppComponent } from './app.component';
@@ -19,17 +26,13 @@ import { RegistrarseComponent } from './registrarse/registrarse.component';
 import { IniciarSesionModalComponent } from './iniciarSesion/iniciarSesionModal/iniciarSesionModal.component';
 import { ContenedorViajeComponent } from './viaje/contenedorViaje.component';
 import { BuscadorComponent } from './buscador/buscador.component';
-// Import Services
-import { UserService } from './services/user.service';
-import { AuthGuard } from './guards/auth.guard';
-import { JwtInterceptor } from './iniciarSesion/login/helpers/jwt.interceptor';
-import { AuthenticationService } from './services/authentication.service';
-import { fakeBackendProvider } from './iniciarSesion/login/helpers/fake-backend';
 import { PerfilComponent } from './perfil/perfil.component';
-import { EditarperfilComponent } from './editarperfil/editarperfil.component';
-import { CambiarcontraComponent } from './cambiarcontra/cambiarcontra.component';
 import { RegistrarvehiculoComponent } from './registrarvehiculo/registrarvehiculo.component';
-
+import { AlertasComponent } from './alertas/alertas.component';
+import { EditarComponent } from './editar/editar.component';
+import { BorrarCuentaComponent } from './editar/borrarCuenta/borrarCuenta.component';
+import { CambiarContraseniaComponent } from './editar/cambiarContrasenia/cambiarContrasenia.component';
+import { EditarPerfilComponent } from './editar/editarPerfil/editarPerfil.component';
 
 
 
@@ -43,6 +46,7 @@ import { RegistrarvehiculoComponent } from './registrarvehiculo/registrarvehicul
     AppRoutingModule,
     HttpClientModule,
     NgxSmartModalModule.forRoot(),
+    TabsModule.forRoot(),
   ],
   declarations: [
     AppComponent,
@@ -54,27 +58,26 @@ import { RegistrarvehiculoComponent } from './registrarvehiculo/registrarvehicul
     ContenedorViajeComponent,
     BuscadorComponent,
     PerfilComponent,
-    EditarperfilComponent,
-    CambiarcontraComponent,
     RegistrarvehiculoComponent,
+    AlertasComponent,
+    EditarComponent,
+    BorrarCuentaComponent,
+    CambiarContraseniaComponent,
+    EditarPerfilComponent
 ],
   exports: [
     ContenedorViajeComponent,
-    BuscadorComponent
+    BuscadorComponent,
+    BorrarCuentaComponent,
+    CambiarContraseniaComponent,
+    EditarPerfilComponent
   ],
   providers: [
     AuthGuard,
     AuthenticationService,
     UserService,
-    {
-        provide: HTTP_INTERCEPTORS,
-        useClass: JwtInterceptor,
-        multi: true
-    },
+    AlertasService,
     NgxSmartModalService,
-
-    // provider used to create fake backend
-    fakeBackendProvider
   ],
   entryComponents: [IniciarSesionModalComponent],
   bootstrap: [AppComponent]
