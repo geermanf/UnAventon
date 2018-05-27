@@ -29,6 +29,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { EditarperfilComponent } from './editarperfil/editarperfil.component';
 import { CambiarcontraComponent } from './cambiarcontra/cambiarcontra.component';
 import { RegistrarvehiculoComponent } from './registrarvehiculo/registrarvehiculo.component';
+import { RegistrartarjetaComponent } from './registrartarjeta/registrartarjeta.component';
 
 
 
@@ -57,6 +58,7 @@ import { RegistrarvehiculoComponent } from './registrarvehiculo/registrarvehicul
     EditarperfilComponent,
     CambiarcontraComponent,
     RegistrarvehiculoComponent,
+    RegistrartarjetaComponent
 ],
   exports: [
     ContenedorViajeComponent,

@@ -6,30 +6,27 @@
         <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
           <div class="card card-register card-grey">
             <h6 class="title title-pink">Cambiar Contraseña</h6>
-            <form class="register-form" name="form" (ngSubmit)="f.form.valid " #f="ngForm" novalidate>
-              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+            <form class="register-form" name="form" (ngSubmit)="f.form.valid && contraseniasValidas()" #f="ngForm">
+              <div class="form-group" [ngClass]="{'has-danger': f.submitted && !cactual.valid}">
                 <label>Contraseña Actual</label>
-                <input type="text" class="form-control" name="contraseñaactual" placeholder="Contraseña Actual" required
-                />
-                <div *ngIf="f.submitted && !email.valid" class="help-block">Se requiere contraseña</div>
+                <input type="password" class="form-control" name="cactual" placeholder="Contraseña Actual" required />
+                <div *ngIf="f.submitted && !cactual.valid" class="form-control-feedback">Se requiere contraseña</div>
               </div>
-              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+              <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !cnueva.valid }">
                 <label>Nueva Contraseña</label>
-                <input type="text" class="form-control" name="nuevacontraseña" placeholder="Nueva Contraseña" required
-                />
-                <div *ngIf="f.submitted && !email.valid" class="help-block">Se requiere nueva contraseña</div>
+                <input type="password" class="form-control" name="cnueva" placeholder="Nueva Contraseña" required />
+                <div *ngIf="f.submitted && !cnueva.valid" class="form-control-feedback">Se requiere nueva contraseña</div>
               </div>
-              <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+              <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !cconfirmada.valid }">
                 <label>Confirme Contraseña</label>
-                <input type="text" class="form-control" name="contraseñaconfirmada" placeholder="Confirme Contraseña" required
-                />
-                <div *ngIf="f.submitted && !email.valid" class="help-block">Se requiere confirmar contraseña</div>
+                <input type="password" class="form-control" name="cconfirmada" placeholder="Confirme Contraseña" required />
+                <div *ngIf="f.submitted && !cconfirmada.valid" class="form-control-feedback">Se requiere confirmar contraseña</div>
               </div>
-            
+
               <div class="form-group">
                 <button type="submit" class="btn btn-danger btn-block btn-round btn-register btn-pink">Cambiar</button>
               </div>
-            </form>            
+            </form>
           </div>
         </div>
       </div>

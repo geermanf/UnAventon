@@ -1,0 +1,40 @@
+<div class="wrapper">
+  <div class="page-header">
+    <div class="filter"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
+          <div class="card card-register card-grey">
+            <h6 class="title title-pink">Registrar Tarjeta</h6>
+            <form class="register-form" name="form" (ngSubmit)="f.form.valid" #f="ngForm">
+              <div class="form-group" [ngClass]="{' has-danger': f.submitted && !numero.valid}">
+                <label>Número de tarjeta:</label>
+                <input type="text" class="form-control" name="numero" placeholder="Número de tarjeta" required />
+                <div *ngIf="f.submitted && !numero.valid" class="form-control-feedback">Se requiere número de tarjeta</div>
+              </div>
+              <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !fVen.valid }">
+                <label>Fecha de vencimiento:</label>
+                <input type="date" class="form-control" name="fVen" placeholder="Fecha de Vencimiento" required />
+                <div *ngIf="f.submitted && !fVen.valid" class="form-control-feedback">Se requiere fecha de vencimiento</div>
+              </div>
+              <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !nombre.valid }">
+                <label>Nombre del titular:</label>
+                <input type="password" class="form-control" name="nombre" placeholder="Nombre del titular" required />
+                <div *ngIf="f.submitted && !nombre.valid" class="form-control-feedback">Se requiere nombre del titular</div>
+              </div>
+              <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !dni.valid }">
+                <label>DNI del titular:</label>
+                <input type="password" class="form-control" name="dni" placeholder="DNI del titular" required />
+                <div *ngIf="f.submitted && !dni.valid" class="form-control-feedback">Se requiere DNI del titular</div>
+              </div>
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-danger btn-block btn-round btn-register btn-pink">Guardar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

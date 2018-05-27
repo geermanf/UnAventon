@@ -10,6 +10,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { EditarperfilComponent } from './editarperfil/editarperfil.component';
 import { CambiarcontraComponent } from './cambiarcontra/cambiarcontra.component';
 import { RegistrarvehiculoComponent } from './registrarvehiculo/registrarvehiculo.component';
+import { RegistrartarjetaComponent } from './registrartarjeta/registrartarjeta.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: 'editarperfil', component: EditarperfilComponent},
     { path: 'cambiarcontra', component: CambiarcontraComponent},
     { path: 'registrarvehiculo', component: RegistrarvehiculoComponent},
+    { path: 'registrartarjeta', component: RegistrartarjetaComponent},
     { path: '', redirectTo: 'home', pathMatch: 'full'},
 
     // otherwise redirect to home
