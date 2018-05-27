@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./editarperfil.component.css']
 })
 export class EditarperfilComponent implements OnInit {
-
+  usuario: any = {};
   constructor() { }
 
   ngOnInit() {
