@@ -34,4 +34,5 @@ export class UserService {
     executeLogin(email: string, password: string) {
         return this.http.post('http://localhost:5000/api/Authentificate', { email: email, password: password })
     }
+
 }

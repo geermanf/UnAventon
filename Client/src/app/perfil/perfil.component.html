@@ -1,9 +1,14 @@
+<!-- IMAGEN SUPERIOR -->
+
 <div class="wrapper">
   <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('../assets/img/home.jpg');">
     <div class="filter"></div>
   </div>
   <div class="section profile-content">
     <div class="container">
+
+      <!-- FOTO Y NOMBRE -->
+
       <div class="owner">
         <div class="avatar ">
 
@@ -13,26 +18,125 @@
           </div>
         </div>
         <div class="name">
-          <h4 class="title">Jane Faker
+          <h4 class="title">
+            {{usuario.nombre}} {{usuario.apellido}}
             <br />
+            <a href="/editar" class="btn btn-link link-rosa">Editar perfil</a>
           </h4>
         </div>
       </div>
+
+      <!-- TABS -->
+
+
       <div class="nav-tabs-navigation">
         <div class="nav-tabs-wrapper">
-          <ngb-tabset [justify]="'center'">
-            <!-- Mis Datos-->
+          <tabset [justified]="true">
+
+            <tab>
+              <ng-template tabHeading>
+                <span class="tab-link hover-rosa">Inicio</span>
+              </ng-template>
+
+              <p>
+                <span class="link-rosa">Fecha De Nacimiento: </span>
+                <span>{{usuario.fechaDeNacimiento | date:'dd-MM-yyyy'}}</span>
+              </p>
+              <br>
+              <p>
+                <span class="link-rosa">Email: </span>
+                <span>{{usuario.email}}</span>
+              </p>
+
+
+            </tab>
+            <tab disabled="true">
+              <ng-template tabHeading>
+                <span class="tab-link hover-rosa disabled">Viajes activos</span>
+              </ng-template>
+
+            </tab>
+            <tab disabled="true">
+              <ng-template tabHeading>
+                <span class="tab-link hover-rosa disabled">Historial de viajes</span>
+              </ng-template>
+
+            </tab>
+
+            <!-- INICIO VEHICULOS -->
+
+            <tab>
+              <ng-template tabHeading>
+                <span class="tab-link hover-rosa">Mis vehiculos</span>
+              </ng-template>
+
+              <!-- TITULO VEHICULOS -->
+              <span class="title">
+                Mis vehiculos disponibles
+                <button class="btn btn-round btn-rosa">Agregar</button>
+              </span>
+
+              <!-- CUERPO VEHICULOS -->
+
+              <span *ngFor="let vehiculo of vehiculos">
+                <app-contenedorvehiculo [vehiculo]="vehiculo" (refresh)="getVehiculos()">
+                </app-contenedorvehiculo>
+              </span>
+              <span *ngIf="vehiculos.length === 0">
+                <h4 class="rosa">No tienes vehiculos registrados en el sistema.</h4>
+              </span>
+
+            </tab>
+
+             <!-- FIN VEHICULOS -->
+
+            <!-- INICIO TARJETAS -->
+
+            <tab>
+                <ng-template tabHeading>
+                  <span class="tab-link hover-rosa">Mis tarjetas</span>
+                </ng-template>
+  
+                <!-- TITULO TARJETAS -->
+                <span class="title">
+                  Mis tarjetas disponibles
+                  <button class="btn btn-round btn-rosa">Agregar</button>
+                </span>
+  
+                <!-- CUERPO TARJETAS -->
+  
+                <span *ngFor="let tarjeta of tarjetas">
+                  <app-contenedortarjeta [tarjeta]="tarjeta" (refresh)="getTarjetas()">
+                  </app-contenedortarjeta>
+                </span>
+                <span *ngIf="tarjetas.length === 0">
+                  <h4 class="rosa">No tienes tarjetas registradas en el sistema.</h4>
+                </span>
+  
+              </tab>
+  
+               <!-- FIN TARJETAS -->
+
+            <tab disabled="true">
+              <ng-template tabHeading>
+                <span class="tab-link hover-rosa disabled">Mi reputación</span>
+              </ng-template>
+
+            </tab>
+
+          </tabset>
+
+
+          <!-- <ngb-tabset [justify]="'center'">
+
             <ngb-tab title="Mis Datos">
               <ng-template ngbTabContent>
-                <p>Fecha De Nacimiento: 12/10/1990</p>
-                <br>
-                <p>Email: jane@gmail.com </p>
-                <hr />
+
                 <h6>Tarjetas Registradas</h6>
                 <div class="row">
                   <div class="col-md-4 col-sm-2 ml-auto mr-auto">
                     <p>Número de Tarjeta: ********2345</p>
-                    <p>Fecha de Vencimiento:</p>                 
+                    <p>Fecha de Vencimiento:</p>
                     <p>DNI titular:</p>
                     <p>Nombre del titular:</p>
                     <button type="button" class="btn btn-pink">Editar</button>
@@ -41,7 +145,7 @@
                   <div class="col-md-4 col-sm-2 ml-auto mr-auto">
                     <p>Número de Tarjeta:</p>
                     <p>Fecha de Vencimiento:</p>
-                   
+
                     <p>DNI titular:</p>
                     <p>Nombre del titular:</p>
                     <button type="button" class="btn btn-pink">Editar</button>
@@ -50,7 +154,7 @@
                   <div class="col-md-4 col-sm-2 ml-auto mr-auto">
                     <p>Número de Tarjeta:</p>
                     <p>Fecha de Vencimiento:</p>
-                    
+
                     <p>DNI titular:</p>
                     <p>Nombre del titular:</p>
                     <button type="button" class="btn btn-pink">Editar</button>
@@ -59,7 +163,7 @@
                 </div>
               </ng-template>
             </ngb-tab>
-            <!-- Mis Vehiulos-->
+
             <ngb-tab title="Mis vehículos">
               <ng-template ngbTabContent>
                 <div class="row following" id="follows">
@@ -127,7 +231,7 @@
                 </div>
               </ng-template>
             </ngb-tab>
-            <!-- Mi Historial De Viajes -->
+
             <ngb-tab title="Mis Historial De Viajes">
               <ng-template ngbTabContent>
                 <div class="row following" id="follows">
@@ -241,7 +345,7 @@
                 </div>
               </ng-template>
             </ngb-tab>
-          </ngb-tabset>
+          </ngb-tabset> -->
         </div>
       </div>
     </div>
@@ -249,8 +353,8 @@
 </div>
 
 <ng-template #cargarFoto let-c="close" let-d="dismiss">
-  <form class="contact100-form validate-form flex-sb flex-w" name="form" (ngSubmit)="f.form.valid && c('Close click')"
-    #f="ngForm" novalidate>
+  <form class="contact100-form validate-form flex-sb flex-w" name="form" (ngSubmit)="f.form.valid && c('Close click')" #f="ngForm"
+    novalidate>
     <div class="modal-header">
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
@@ -260,8 +364,8 @@
       <p>Ingrese el URL de la foto</p>
 
       <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !urlFotoId.valid }">
-        <input class="form-control" type="text" name="urlFoto" placeholder="Ingrese el url" [(ngModel)]="urlFoto"
-          #urlFotoId="ngModel"  required>
+        <input class="form-control" type="text" name="urlFoto" placeholder="Ingrese el url" [(ngModel)]="urlFoto" #urlFotoId="ngModel"
+          required>
         <span class="focus-input100"></span>
       </div>
 

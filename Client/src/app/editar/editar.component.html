@@ -4,28 +4,38 @@
   </div>
   <div class="section profile-content">
     <div class="container">
-        <div class="owner">
-            <div class="name">
-                <h2>Editar</h2>
-            </div>
-          </div>
-        <br /><br />
-        
+      <div class="owner">
+        <div class="name">
+          <h2>Editar</h2>
+        </div>
+      </div>
+      <br />
+      <br />
+
       <div class="nav-tabs-navigation">
         <div class="nav-tabs-wrapper">
-            <tabset [justified]="true" >
+          <tabset [justified]="true">
 
-              <tab heading="Datos personales">
-                <app-editarperfil></app-editarperfil>
-              </tab>
-              <tab heading="Cambiar contraseña">
-                <app-cambiarcontrasenia></app-cambiarcontrasenia>
-              </tab>
-              <tab heading="Borrar cuenta">
-                  <app-borrarcuenta></app-borrarcuenta>
-              </tab>
+            <tab>
+              <ng-template tabHeading>
+                <span class="tab-link hover-rosa">Datos personales</span>
+              </ng-template>
+              <app-editarperfil></app-editarperfil>
+            </tab>
+            <tab>
+              <ng-template tabHeading>
+                <span class="tab-link hover-rosa">Cambiar contraseña</span>
+              </ng-template>
+              <app-cambiarcontrasenia></app-cambiarcontrasenia>
+            </tab>
+            <tab>
+              <ng-template tabHeading>
+                <span class="tab-link hover-rosa">Borrar cuenta</span>
+              </ng-template>
+              <app-borrarcuenta></app-borrarcuenta>
+            </tab>
 
-            </tabset>
+          </tabset>
         </div>
       </div>
     </div>

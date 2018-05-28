@@ -1,0 +1,16 @@
+
+  .tab-link.hover-rosa:hover:not(.disabled), .hover-rosa:active {
+    color: #f17376 !important;
+    font-weight: 400;
+  }
+
+  .tab-link.disabled{
+    color: #c9c9c9;
+  }
+
+ .link-rosa, .rosa {
+    color: #f17376;
+  }
+  .btn.btn-link.link-rosa:hover {
+    color: #f04649;
+  }
