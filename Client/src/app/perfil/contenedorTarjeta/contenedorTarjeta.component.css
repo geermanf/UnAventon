@@ -1,0 +1,41 @@
+.line{ 
+    display:block;
+    border:none;
+    color:white;
+    height:1px;
+    background:#f17376;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#f17376), to(#fff));
+}
+
+div.cont-line{
+    margin-top:2em;
+    margin-bottom:2em;
+}
+
+b {
+    margin: 0px;
+    padding: 0.8em 0.8em 0.8em 0.8em;
+    
+}
+
+.cont-icon {
+        border: 0 none;
+        box-shadow: 0 1px 2px rgba(164, 158, 147, 0.6);
+        margin-bottom: 10px;
+        padding: .25rem;
+        background-color: #fff;
+        border-radius: .25rem;
+        transition: all .2s ease-in-out;
+}
+
+.no-margin {
+    margin: 0px !important;
+}
+
+.rosa {
+    color:#f17376;
+}
+
+a {
+    cursor: pointer;
+}

@@ -13,6 +13,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 
 // Import Services
 import { UserService } from './services/user.service';
+import { VehiculoService } from './services/vehiculo.service';
+import { TarjetaService } from './services/tarjeta.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthenticationService } from './services/authentication.service';
 import { AlertasService } from './alertas/alertas.service';
@@ -32,6 +34,8 @@ import { EditarComponent } from './editar/editar.component';
 import { BorrarCuentaComponent } from './editar/borrarCuenta/borrarCuenta.component';
 import { CambiarContraseniaComponent } from './editar/cambiarContrasenia/cambiarContrasenia.component';
 import { EditarPerfilComponent } from './editar/editarPerfil/editarPerfil.component';
+import { ContenedorVehiculoComponent } from './perfil/contenedorVehiculo/contenedorVehiculo.component';
+import { ContenedorTarjetaComponent } from './perfil/contenedorTarjeta/contenedorTarjeta.component';
 
 
 
@@ -62,7 +66,9 @@ import { EditarPerfilComponent } from './editar/editarPerfil/editarPerfil.compon
     EditarComponent,
     BorrarCuentaComponent,
     CambiarContraseniaComponent,
-    EditarPerfilComponent
+    EditarPerfilComponent,
+    ContenedorVehiculoComponent,
+    ContenedorTarjetaComponent
 
 ],
   exports: [
@@ -70,12 +76,15 @@ import { EditarPerfilComponent } from './editar/editarPerfil/editarPerfil.compon
     BuscadorComponent,
     BorrarCuentaComponent,
     CambiarContraseniaComponent,
-    EditarPerfilComponent
+    EditarPerfilComponent,
+    ContenedorVehiculoComponent
   ],
   providers: [
     AuthGuard,
     AuthenticationService,
     UserService,
+    VehiculoService,
+    TarjetaService,
     AlertasService,
     NgxSmartModalService,
   ],

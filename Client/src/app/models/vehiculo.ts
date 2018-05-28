@@ -1,8 +1,10 @@
 export class Vehiculo {
+    id: number;
     marca: string;
     modelo: string;
-    plazas: number;
+    cantidadPlazas: number;
     patente: string;
     color: string;
     tipo: string;
+    foto: string;
 }

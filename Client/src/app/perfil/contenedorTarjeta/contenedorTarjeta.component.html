@@ -1,0 +1,42 @@
+
+<div class="col-md-12 ml-auto mr-auto">
+  <div class="row">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-4 ml-auto mr-auto">
+      
+    </div>
+    <div class="col-md-4">
+      <span>
+
+          <a data-toggle="tooltip" title="Editar vehiculo">
+            <img src="../assets/img/edit.png" alt="" class="cont-icon" style="width:2.2em" >
+          </a>
+
+          <a (click)="abrirBorrarTarjetaModal(BorrarTarjeta)" data-toggle="tooltip" title="Borrar vehiculo">
+            <img src="../assets/img/garbage.png" alt="" class="cont-icon" style="width:2.2em">
+          </a>
+
+      </span>
+    </div>
+  </div>
+</div>
+<div class="cont-line">
+  <span class="line"></span>
+</div>
+
+<ng-template #BorrarTarjeta let-c="close" let-d="dismiss">
+  <div class="modal-header">
+      <button type="button" class="close" aria-label="Close" (click)="d()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <h4>¿Estas seguro de borrar la tarjeta con numero <span class="rosa">{{tarjeta.numero}}</span>?</h4>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="borrarTarjeta();c()">Borrar</button>
+      <button type="button" class="btn btn-rosa" (click)="c()">Cancelar</button>
+  </div>
+</ng-template>
