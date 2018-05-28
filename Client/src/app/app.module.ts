@@ -36,6 +36,8 @@ import { CambiarContraseniaComponent } from './editar/cambiarContrasenia/cambiar
 import { EditarPerfilComponent } from './editar/editarPerfil/editarPerfil.component';
 import { ContenedorVehiculoComponent } from './perfil/contenedorVehiculo/contenedorVehiculo.component';
 import { ContenedorTarjetaComponent } from './perfil/contenedorTarjeta/contenedorTarjeta.component';
+import { FormularioVehiculosComponent } from './perfil/formularioVehiculos/formularioVehiculos.component';
+import { FormularioTarjetasComponent } from './perfil/formularioTarjetas/formularioTarjetas.component';
 
 
 
@@ -68,7 +70,9 @@ import { ContenedorTarjetaComponent } from './perfil/contenedorTarjeta/contenedo
     CambiarContraseniaComponent,
     EditarPerfilComponent,
     ContenedorVehiculoComponent,
-    ContenedorTarjetaComponent
+    ContenedorTarjetaComponent,
+    FormularioVehiculosComponent,
+    FormularioTarjetasComponent,
 
 ],
   exports: [
@@ -77,7 +81,9 @@ import { ContenedorTarjetaComponent } from './perfil/contenedorTarjeta/contenedo
     BorrarCuentaComponent,
     CambiarContraseniaComponent,
     EditarPerfilComponent,
-    ContenedorVehiculoComponent
+    ContenedorVehiculoComponent,
+    FormularioVehiculosComponent,
+    FormularioTarjetasComponent
   ],
   providers: [
     AuthGuard,

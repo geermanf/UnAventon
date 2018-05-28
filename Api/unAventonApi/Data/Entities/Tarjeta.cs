@@ -8,13 +8,15 @@ namespace unAventonApi.Data
         public int Id { get; set; }
 
         public int NumeroTarjeta { get; set; }
-        public int CodigoSeguridad { get; set; }
 
-        public int DniTitular { get; set; }
+        public string Banco { get; set; }
 
+        public string Tipo { get; set; }
         public string NombreTitular { get; set; }
 
         public DateTime FechaVencimiento { get; set; }
+
+        public User Usuario { get; set; }
 
     }
 }

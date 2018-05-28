@@ -15,8 +15,12 @@ export class TarjetaService {
         return this.http.post('http://localhost:5000/api/Tarjeta/ListarPorId', id);
     }
 
-    create(tarjeta: Tarjeta) {
-        return this.http.post('http://localhost:5000/api/Tarjeta/Registrar', tarjeta);
+    // create(tarjeta: Tarjeta) {
+    //     return this.http.post('http://localhost:5000/api/Tarjeta/Registrar', tarjeta);
+    // }
+
+    create(tarjeta: Tarjeta, userId: number) {
+        return this.http.post('http://localhost:5000/api/Tarjeta/RegistrarEnUser?userId=' + userId, tarjeta);
     }
 
     update(tarjeta: Tarjeta) {

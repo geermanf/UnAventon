@@ -22,6 +22,7 @@
         modelBuilder.Entity<User>()
             .HasAlternateKey(c => c.Email)
             .HasName("Email");
+        // modelBuilder.Entity<Tarjeta>().HasOne<User>( t => t.Usuario).WithMany( u => u.Tarjetas);
     }
     }
 }

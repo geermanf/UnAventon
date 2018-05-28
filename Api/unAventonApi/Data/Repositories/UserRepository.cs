@@ -17,5 +17,9 @@ namespace unAventonApi.Data
                 .AsNoTracking()
                 .FirstOrDefaultAsync(e => e.Email == email);
         }
+
+        public Task<User> GetById(int id){
+            return _dbContext.Users.Include(x => x.Tarjetas).FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

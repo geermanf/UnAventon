@@ -37,7 +37,7 @@
 //             {
 //                 return BuildApiResponse.BuildNotOk("Hubo un error al registrar el usuario");
 //             }
-            
+
 
 //         }
 
@@ -56,8 +56,8 @@
 //             {
 //                 return BuildApiResponse.BuildNotOk<List<Tarjeta>>(response, "Hubo un error al obtener los Tarjetas");
 //             }
-            
-            
+
+
 
 //         }
 
@@ -75,8 +75,8 @@
 //             {
 //                 return BuildApiResponse.BuildNotOk("Hubo un error al obtener los Tarjetas");
 //             }
-            
-            
+
+
 
 //         }
 
@@ -84,7 +84,7 @@
 //         [HttpGet("ListarPorId")]
 //         public ApiResponse<Tarjeta> Get(int id)
 //         {
-           
+
 //             var response = new Tarjeta();
 
 //             try
@@ -118,6 +118,8 @@
 //         }
 //     }
 // }
+using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using unAventonApi.Controllers.Base;
 using unAventonApi.Data;
@@ -127,8 +129,33 @@ namespace unAventonApi.Controllers
     [Route("api/[controller]")]
     public class TarjetaController : GenericController<ITarjetaRepository, Tarjeta>
     {
-        public TarjetaController(ITarjetaRepository genericRepo) : base(genericRepo)
+        public IUserRepository userRepository { get; }
+
+        public TarjetaController(ITarjetaRepository genericRepo, IUserRepository userRepository) : base(genericRepo)
         {
+            this.userRepository = userRepository;
+        }
+
+        [HttpPost("RegistrarEnUser")]
+        public async Task<IActionResult> Registrar([FromBody] Tarjeta tarjeta, [FromQuery]int userId)
+        {
+            try
+            {
+                var user = await this.userRepository.GetById(userId);
+                tarjeta.Usuario = user;
+                user.Tarjetas.Add(tarjeta);
+                await this.genericRepo.Create(tarjeta);
+
+                // return BuildApiResponse.BuildOk();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                // return BuildApiResponse.BuildNotOk( "Hubo un error al registrar");
+                return BadRequest("Hubo un error al registrar");
+            }
+
+
         }
     }
 }

@@ -25,9 +25,7 @@ namespace unAventonApi.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CodigoSeguridad");
-
-                    b.Property<int>("DniTitular");
+                    b.Property<string>("Banco");
 
                     b.Property<DateTime>("FechaVencimiento");
 
@@ -35,11 +33,13 @@ namespace unAventonApi.Migrations
 
                     b.Property<int>("NumeroTarjeta");
 
-                    b.Property<int?>("UserId");
+                    b.Property<string>("Tipo");
+
+                    b.Property<int?>("UsuarioId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Tarjetas");
                 });
@@ -112,9 +112,9 @@ namespace unAventonApi.Migrations
 
             modelBuilder.Entity("unAventonApi.Data.Tarjeta", b =>
                 {
-                    b.HasOne("unAventonApi.Data.User")
+                    b.HasOne("unAventonApi.Data.User", "Usuario")
                         .WithMany("Tarjetas")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UsuarioId");
                 });
 
             modelBuilder.Entity("unAventonApi.Data.Vehiculo", b =>

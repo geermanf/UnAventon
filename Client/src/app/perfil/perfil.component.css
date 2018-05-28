@@ -67,7 +67,7 @@
     padding-bottom: 43px;
   }
 
-  .tab-link.hover-rosa:hover:not(.disabled), .hover-rosa:active {
+  .tab-link.hover-rosa:hover:not(.disabled) {
     color: #f17376 !important;
     font-weight: 400;
   }

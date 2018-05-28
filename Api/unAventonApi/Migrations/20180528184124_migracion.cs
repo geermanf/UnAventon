@@ -47,19 +47,19 @@ namespace unAventonApi.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    CodigoSeguridad = table.Column<int>(nullable: false),
-                    DniTitular = table.Column<int>(nullable: false),
+                    Banco = table.Column<string>(nullable: true),
                     FechaVencimiento = table.Column<DateTime>(nullable: false),
                     NombreTitular = table.Column<string>(nullable: true),
                     NumeroTarjeta = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: true)
+                    Tipo = table.Column<string>(nullable: true),
+                    UsuarioId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tarjetas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tarjetas_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Tarjetas_Users_UsuarioId",
+                        column: x => x.UsuarioId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -97,9 +97,9 @@ namespace unAventonApi.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tarjetas_UserId",
+                name: "IX_Tarjetas_UsuarioId",
                 table: "Tarjetas",
-                column: "UserId");
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vehiculos_TipoVehiculoId",
