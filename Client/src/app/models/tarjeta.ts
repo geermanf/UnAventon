@@ -1,8 +1,11 @@
+import { TipoTarjeta } from './TipoTarjeta';
+import { Banco } from './Banco';
+
 export class Tarjeta {
 id: number;
 nombreTitular: string;
 numeroTarjeta: number;
 fechaVencimiento: Date;
-tipoTarjeta: string;
-banco: string;
+tipo: TipoTarjeta;
+banco: Banco;
 }

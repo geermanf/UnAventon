@@ -2,17 +2,15 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using unAventonApi.Data.Entities;
 
-namespace unAventonApi.Data
+namespace unAventonApi.Data.DTOEntities
 {
-    public class Tarjeta : IEntity
+    public class TarjetaDTO
     {
-        public int Id { get; set; }
-
         public int NumeroTarjeta { get; set; }
 
-        public Banco Banco { get; set; }
+        public int Banco { get; set; }
 
-        public TipoTarjeta Tipo { get; set; }
+        public int Tipo { get; set; }
         public string NombreTitular { get; set; }
 
         public DateTime FechaVencimiento { get; set; }

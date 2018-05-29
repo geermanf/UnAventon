@@ -1,66 +1,20 @@
-<!-- <form class="contact100-form validate-form flex-sb flex-w" name="form" (ngSubmit)="fTarjeta.form.valid && register() && releaseCtrl()"
-    #fTarjeta="ngForm" novalidate>
-
-    <div class="wrap-input100 rs1 validate-input">
-        <input class="input100" type="text" name="tipo" placeholder="Tipo de tarjeta (por ej. Visa o Mastercard" [(ngModel)]="tarjeta.tipoTarjeta"
-            #tipo="ngModel" [ngClass]="{ 'has-danger': fTarjeta.submitted && !tipo.valid }" required>
-        <span class="focus-input100"></span>
-    </div>
-
-
-    <div class="wrap-input100 rs1 validate-input">
-        <input class="input100" type="text" name="banco" placeholder="Banco emisor" [(ngModel)]="tarjeta.banco" #banco="ngModel"
-            [ngClass]="{ 'has-danger': fTarjeta.submitted && !banco.valid }" required>
-        <span class="focus-input100"></span>
-    </div>
-
-    <div class="wrap-input100 rs1 validate-input">
-        <input class="input100" type="number" name="numero" placeholder="Numero de tarjeta de credito" [(ngModel)]="tarjeta.numeroTarjeta"
-            #numeroTarjeta="ngModel" [ngClass]="{ 'has-danger': fTarjeta.submitted && !numeroTarjeta.valid }" required>
-        <span class="focus-input100"></span>
-    </div>
-
-    <div class="wrap-input100 rs1 validate-input">
-        <input class="input100" type="text" name="nombre" placeholder="Nombre y Apellido del titular" [(ngModel)]="tarjeta.nombreTitular"
-            #nombre="ngModel" [ngClass]="{ 'has-danger': fTarjeta.submitted && !nombre.valid }" required>
-        <span class="focus-input100"></span>
-    </div>
-
-    <div class="wrap-input100 validate-input">
-        <input class="input100" id="dt" type="text" name="dt" [(ngModel)]="tarjeta.fechaVencimiento" #fechaVencimiento="ngModel"
-        [ngClass]="{ 'has-danger': fTarjeta.submitted && !fechaVencimiento.valid }" required>
-        <span class="focus-input100"></span>
-    </div>
-
-
-
-    <div *ngIf="fTarjeta.submitted && (!tipo.valid || !banco.valid || !numero.valid || !nombre.valid || !fechaVencimiento.valid)" class="form-control-feedback">
-        Por favor, rellene todos los campos
-    </div>
-
-    <div class="container-contact100-form-btn">
-        <button type="submit" class="contact100-form-btn" style="margin-right: 2%">
-            Guardar
-        </button>
-        <button class="contact100-form-btn grey" (click)="releaseCtrl()">
-            Cancelar
-        </button>
-    </div>
-</form> -->
-
 <form class="contact100-form validate-form flex-sb flex-w" name="form" (ngSubmit)="f.form.valid && register() && releaseCtrl()"
     #f="ngForm" novalidate>
 
     <div class="wrap-input100 rs1 validate-input">
-        <input class="input100" type="text" name="tipoTarjeta" placeholder="Tipo de tarjeta (por ej. Visa o Mastercard" [(ngModel)]="tarjeta.tipoTarjeta"
-            #tipoTarjeta="ngModel" [ngClass]="{ 'has-danger': f.submitted && !tipoTarjeta.valid }" required>
-        <span class="focus-input100"></span>
+        <select class="input100" name="tipoTarjeta" [(ngModel)]="tarjeta.tipo" #tipoTarjeta="ngModel" [ngClass]="{ 'has-danger': f.submitted && !tipoTarjeta.valid }"
+            required>
+            <option *ngFor="let tipo of tiposTarjetas" [ngValue]="tipo.id">{{tipo.descripcion}}</option>
+        </select>
+        <span class="focus-input100"></span><span *ngIf="!tipoTarjeta.valid" class="focus-input-label">Tipo de tarjeta</span>
     </div>
 
     <div class="wrap-input100 rs1 validate-input">
-        <input class="input100" type="text" name="banco" placeholder="Banco emisor" [(ngModel)]="tarjeta.banco" #banco="ngModel"
-            [ngClass]="{ 'has-danger': f.submitted && !banco.valid }" required>
-        <span class="focus-input100"></span>
+        <select class="input100" name="banco" [(ngModel)]="tarjeta.banco" #banco="ngModel" [ngClass]="{ 'has-danger': f.submitted && !banco.valid }"
+            required>
+            <option *ngFor="let banco of bancos" [value]="banco.id">{{banco.descripcion}}</option>
+        </select>
+        <span class="focus-input100"></span><span *ngIf="!banco.valid" class="focus-input-label">Banco emisor</span>
     </div>
 
 
@@ -79,13 +33,12 @@
     <div class="wrap-input100 rs1 validate-input">
         <input class="input100" type="month" name="fechaV" [(ngModel)]="tarjeta.fechaVencimiento" #fechaV="ngModel" [ngClass]="{ 'has-danger': f.submitted && !fechaV.valid }"
             required>
-        <span class="focus-input100"></span>
+        <span class="focus-input100"></span><span *ngIf="!fechaV.valid" class="focus-input-label">Fecha de vencimiento</span>
     </div>
 
 
-
-
-    <div *ngIf="f.submitted && (!tipoTarjeta.valid || !banco.valid || !numeroTarjeta.valid || !nombreTitular.valid || !fechaV.valid)" class="form-control-feedback">
+    <div *ngIf="f.submitted && (!tipoTarjeta.valid || !banco.valid || !numeroTarjeta.valid || !nombreTitular.valid || !fechaV.valid)"
+        class="form-control-feedback">
         Por favor, rellene todos los campos
     </div>
 

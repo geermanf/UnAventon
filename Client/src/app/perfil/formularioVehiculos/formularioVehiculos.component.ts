@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { VehiculoService } from '../../services/vehiculo.service';
 import { AlertasService } from '../../alertas/alertas.service';
 import { Router } from '@angular/router';
+import { AuthGuard } from '../../guards/auth.guard';
 
 @Component({
     selector: 'app-formulariovehiculos',
@@ -12,12 +13,16 @@ import { Router } from '@angular/router';
 export class FormularioVehiculosComponent implements OnInit {
     vehiculo: any = {};
     @Output() releaseControl = new EventEmitter();
+    idUserLogued: number;
 
     constructor(private router: Router,
                 private vehiculoService: VehiculoService,
-                private alertService: AlertasService) { }
+                private alertService: AlertasService,
+                public authGuard: AuthGuard) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.authGuard.getCurrentUserId().subscribe(data => this.idUserLogued = data);
+     }
 
     releaseCtrl() {
         this.releaseControl.emit('cerrar form');
@@ -25,9 +30,7 @@ export class FormularioVehiculosComponent implements OnInit {
 
     register() {
         if (this.vehiculo.foto === undefined) { this.vehiculo.foto = '../assets/img/anonym-bw.png'; }
-        // tslint:disable-next-line:no-debugger
-        debugger;
-        this.vehiculoService.create(this.vehiculo)
+        this.vehiculoService.create(this.vehiculo, )
             .subscribe(
                 data => {
                     this.alertService.addAlert('success', 'Tus datos se modificaron de manera satisfactoria!');

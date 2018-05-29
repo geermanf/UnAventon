@@ -8,7 +8,7 @@ export class VehiculoService {
     constructor(private http: HttpClient) { }
 
     getAll() {
-        return this.http.get('http://localhost:5000/api/Vehiculo/GetAll');
+        return this.http.get('http://localhost:5000/api/Vehiculo/Listar');
     }
 
     getById(id: number) {

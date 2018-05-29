@@ -1,3 +1,5 @@
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using unAventonApi.Data.Repositories.Base;
 
 namespace unAventonApi.Data.Repositories
@@ -8,5 +10,6 @@ namespace unAventonApi.Data.Repositories
         : base(dbContext)
         {
         }
+
     }
 }

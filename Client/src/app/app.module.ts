@@ -18,6 +18,8 @@ import { TarjetaService } from './services/tarjeta.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthenticationService } from './services/authentication.service';
 import { AlertasService } from './alertas/alertas.service';
+import { TipoTarjetaService } from './services/tipoTarjeta.service';
+import { BancoService } from './services/banco.service';
 
 // Import Components
 import { AppComponent } from './app.component';
@@ -52,7 +54,7 @@ import { FormularioTarjetasComponent } from './perfil/formularioTarjetas/formula
     AppRoutingModule,
     HttpClientModule,
     NgxSmartModalModule.forRoot(),
-    TabsModule.forRoot(),
+    TabsModule.forRoot()
   ],
   declarations: [
     AppComponent,
@@ -93,6 +95,8 @@ import { FormularioTarjetasComponent } from './perfil/formularioTarjetas/formula
     TarjetaService,
     AlertasService,
     NgxSmartModalService,
+    TipoTarjetaService,
+    BancoService
   ],
   entryComponents: [IniciarSesionModalComponent],
   bootstrap: [AppComponent]

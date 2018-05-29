@@ -31,7 +31,7 @@
 
       <div class="nav-tabs-navigation">
         <div class="nav-tabs-wrapper">
-          <tabset [justified]="true">
+          <tabset #perfilTabs [justified]="true">
 
             <tab>
               <ng-template tabHeading>
@@ -39,7 +39,7 @@
               </ng-template>
 
               <p>
-                <span class="link-rosa">Fecha De Nacimiento: </span>
+                <span class="link-rosa">Fecha de nacimiento: </span>
                 <span>{{usuario.fechaDeNacimiento | date:'dd-MM-yyyy'}}</span>
               </p>
               <br>

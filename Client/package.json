@@ -11,7 +11,7 @@
     "e2e": "ng e2e"
   },
   "dependencies": {
-    "@angular/animations": "5.2.7",
+    "@angular/animations": "^5.2.11",
     "@angular/common": "^5.2.7",
     "@angular/compiler": "^5.2.7",
     "@angular/core": "^5.2.7",
@@ -28,12 +28,14 @@
     "jw-bootstrap-switch-ng2": "1.0.3",
     "moment": "^2.22.1",
     "ng2-nouislider": "1.6.1",
+    "ng2-select": "^2.0.0",
     "ngx-bootstrap": "^3.0.0",
     "ngx-smart-modal": "^6.0.0",
     "nouislider": "9.2.0",
     "popper": "^1.0.1",
     "popper.js": "^1.12.3",
-    "rxjs": "^5.4.1",
+    "rxjs": "^5.5.11",
+    "rxjs-compat": "^6.2.0",
     "web-animations-js": "^2.3.1",
     "zone.js": "^0.8.20"
   },

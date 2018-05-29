@@ -33,7 +33,8 @@
               "src/assets/css/style.scss",
               "src/assets/css/demo.css",
               "src/assets/css/nucleo-icons.css",
-              "src/assets/css/flaticon.css"
+              "src/assets/css/flaticon.css",
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
           ],
           "scripts": [
             "node_modules/jquery/dist/jquery.slim.min.js",

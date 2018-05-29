@@ -29,15 +29,8 @@ export class ContenedorTarjetaComponent implements OnInit {
     this.modalService.open(BorrarTarjeta);
   }
 
-  tipoTarjeta() {
-    if ( this.tarjeta.tipoTarjeta.toLowerCase() === 'visa' ) {
-      return '-visa';
-    } else if (( this.tarjeta.tipoTarjeta.toLowerCase() === 'master' ) ||
-               ( this.tarjeta.tipoTarjeta.toLowerCase() === 'mastercard' )) {
-      return '-master';
-    } else {
-      return '';
-    }
+  TipoTarjetaParaImagen() {
+    return this.tarjeta.tipo.descripcion.replace(' ', '').toLowerCase()
   }
 
   ultimosCuatroNumeros() {
@@ -45,16 +38,15 @@ export class ContenedorTarjetaComponent implements OnInit {
   }
 
   borrarTarjeta() {
-    this.refrescarTarjetas();
-    // this.tarjetaService.delete(this.tarjeta.id)
-    // .subscribe(
-    //     data => {
-    //         this.alertService.addAlert('success', 'Tus datos se modificaron de manera satisfactoria!');
-    //         this.refrescarTarjetas();
-    //     },
-    //     error => {
-    //         this.alertService.addAlert('danger', 'Lo sentimos, no fue posible modificar tus datos');
-    //     });
+    this.tarjetaService.delete(this.tarjeta.id)
+    .subscribe(
+        data => {
+            this.alertService.addAlert('success', 'Tus datos se modificaron de manera satisfactoria!');
+            this.refrescarTarjetas();
+        },
+        error => {
+            this.alertService.addAlert('danger', 'Lo sentimos, no fue posible modificar tus datos');
+        });
   }
 
 }

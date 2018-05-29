@@ -34,6 +34,8 @@ namespace unAventonApi
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IVehiculoRepository, VehiculoRepository>();
             services.AddScoped<ITarjetaRepository, TarjetaRepository>();
+            services.AddScoped<IBancoRepository, BancoRepositoty>();
+            services.AddScoped<ITipoTarjetaRepository, TipoTarjetaRepository>();
 
             // Services
             services.AddScoped<IAuthentificateService, AuthentificateService>();

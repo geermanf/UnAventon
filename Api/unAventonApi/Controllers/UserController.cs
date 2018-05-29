@@ -28,5 +28,40 @@ namespace unAventonApi.Controllers
                 return BadRequest("Hubo un error al listar con id: " + email);
             }
         }
+
+
+        [HttpGet("ListarVehiculos")]
+        public IActionResult GetVehiculos(int id)
+        {
+            try
+            {
+                var response = this.genericRepo.GetVehiculos(id);
+
+                // return BuildApiResponse.BuildOk();
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                // return BuildApiResponse.BuildNotOk("Hubo un error al modificar");
+                return BadRequest("Hubo un error al listar con id: " + id);
+            }
+        }
+
+        [HttpGet("ListarTarjetas")]
+        public IActionResult GetTarjetas(int id)
+        {
+            try
+            {
+                var response = this.genericRepo.GetTarjetas(id);
+
+                // return BuildApiResponse.BuildOk();
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                // return BuildApiResponse.BuildNotOk("Hubo un error al modificar");
+                return BadRequest("Hubo un error al listar con id: " + id);
+            }
+        }
     }
 }

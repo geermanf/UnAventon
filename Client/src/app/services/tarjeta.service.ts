@@ -8,7 +8,7 @@ export class TarjetaService {
     constructor(private http: HttpClient) { }
 
     getAll() {
-        return this.http.get('http://localhost:5000/api/Tarjeta/GetAll');
+        return this.http.get('http://localhost:5000/api/Tarjeta/Listar');
     }
 
     getById(id: number) {
