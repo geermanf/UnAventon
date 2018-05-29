@@ -16,7 +16,7 @@ export class AuthenticationService {
         .map(
             data => {
                 localStorage.setItem('currentUser', JSON.stringify(data));
-                this.authGuard.evaluateLogin();
+                this.authGuard.authenticatedOk();
                 return data;
             },
             error => {
@@ -27,7 +27,7 @@ export class AuthenticationService {
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
-        this.authGuard.evaluateLogin();
+        this.authGuard.authenticatedNotOk();
     }
 
 }

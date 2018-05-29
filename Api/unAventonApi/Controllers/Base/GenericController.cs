@@ -25,7 +25,7 @@ namespace unAventonApi.Controllers.Base
         }
 
         [HttpPost("Registrar")]
-        public async Task<IActionResult> Registrar(GenericClass genericClass)
+        public async Task<IActionResult> Registrar([FromBody]GenericClass genericClass)
         {
             try
             {

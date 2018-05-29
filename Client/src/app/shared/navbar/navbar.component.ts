@@ -7,6 +7,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertasService } from '../../alertas/alertas.service';
 import { UserService } from '../../services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-navbar',
@@ -14,41 +15,60 @@ import { UserService } from '../../services/user.service';
     styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+    subscription: Subscription;
     private toggleButton: any;
     private sidebarVisible: boolean;
     public logueado: any;
     usuario: any = {};
 
-    constructor(private route: ActivatedRoute,
-        private router: Router,
-        private element: ElementRef,
-        public ngxSmartModalService: NgxSmartModalService,
-        public authGuard: AuthGuard,
-        private authenticationService: AuthenticationService,
-        private alertService: AlertasService,
-        private userService: UserService,
-        private modalService: NgbModal) {
+    constructor(private route: ActivatedRoute, private router: Router, private element: ElementRef,
+        public ngxSmartModalService: NgxSmartModalService, public authGuard: AuthGuard,
+        private authenticationService: AuthenticationService, private alertService: AlertasService,
+        private userService: UserService, private modalService: NgbModal) {
+
+        this.subscription = authGuard.authenticated$.subscribe(
+            data => {
+                if (this.authGuard.isLogued()) {
+                this.getUser();
+                }
+            });
         this.sidebarVisible = false;
     }
 
     open() {
         this.ngxSmartModalService.getModal('regModal').open()
     }
+
     ngOnInit() {
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
         if (this.authGuard.isLogued()) {
-            this.usuario = this.authGuard.getUser().subscribe(
-                data => {
-                    this.usuario = data;
-                    return data;
-                },
-                error => {
-                    return error;
-                });
+            this.getUser();
         }
     }
 
+    getUser() {
+        this.usuario = this.authGuard.getUser().subscribe(
+            data => {
+                this.usuario = data;
+                return data;
+            },
+            error => {
+                return error;
+            });
+    }
+
+    logoutModal(CerrarSesionModal) {
+        this.modalService.open(CerrarSesionModal);
+    }
+
+    logout() {
+        this.authenticationService.logout();
+        this.router.navigate(['/home']);
+        this.alertService.addAlert('info', 'Se cerró sesion en Un Aventón, nos vemos pronto!');
+    }
+
+                    // FUNCIONALIDAD DE SHOW/HIDE
     sidebarOpen() {
         const toggleButton = this.toggleButton;
         const html = document.getElementsByTagName('html')[0];
@@ -60,6 +80,7 @@ export class NavbarComponent implements OnInit {
 
         this.sidebarVisible = true;
     };
+
     sidebarClose() {
         const html = document.getElementsByTagName('html')[0];
         this.toggleButton.classList.remove('toggled');
@@ -73,14 +94,4 @@ export class NavbarComponent implements OnInit {
             this.sidebarClose();
         }
     };
-
-    logoutModal(CerrarSesionModal) {
-        this.modalService.open(CerrarSesionModal);
-    }
-
-    logout() {
-        this.authenticationService.logout();
-        this.router.navigate(['/home']);
-        this.alertService.addAlert('info', 'Se cerró sesion en Un Aventón, nos vemos pronto!');
-    }
 }

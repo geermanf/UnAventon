@@ -6,6 +6,7 @@ import { Banco } from '../../models/Banco';
 import { TipoTarjeta } from '../../models/TipoTarjeta';
 import { BancoService } from '../../services/banco.service';
 import { TipoTarjetaService } from '../../services/tipoTarjeta.service';
+import { AuthGuard } from '../../guards/auth.guard';
 
 @Component({
     selector: 'app-formulariotarjetas',
@@ -15,6 +16,7 @@ import { TipoTarjetaService } from '../../services/tipoTarjeta.service';
 
 export class FormularioTarjetasComponent implements OnInit {
     tarjeta: any = {};
+    usuario: any = {};
     bancos: Banco[] = []
     tiposTarjetas: TipoTarjeta[] = []
 
@@ -24,7 +26,8 @@ export class FormularioTarjetasComponent implements OnInit {
                 private tarjetaService: TarjetaService,
                 private bancoService: BancoService,
                 private tipoTarjetaService: TipoTarjetaService,
-                private alertService: AlertasService) { }
+                private alertService: AlertasService,
+                private authGuard: AuthGuard) { }
 
     ngOnInit() {
         this.bancoService.getAll()
@@ -34,16 +37,27 @@ export class FormularioTarjetasComponent implements OnInit {
         this.tipoTarjetaService.getAll()
         .map( res => Object.keys(res).map(index => this.tiposTarjetas.push(res[index])))
         .subscribe();
+
+        this.getUser();
     }
 
     releaseCtrl() {
         this.releaseControl.emit('cerrar form');
     }
 
+    getUser() {
+        this.usuario = this.authGuard.getUser().subscribe(
+            data => {
+                this.usuario = data;
+                return data;
+            },
+            error => {
+                return error;
+            });
+    }
+
     register() {
-        // tslint:disable-next-line:no-debugger
-        debugger;
-        this.tarjetaService.create(this.tarjeta, 1)
+        this.tarjetaService.create(this.tarjeta, this.usuario.id)
             .subscribe(
                 data => {
                     this.alertService.addAlert('success', 'Tus datos se modificaron de manera satisfactoria!');

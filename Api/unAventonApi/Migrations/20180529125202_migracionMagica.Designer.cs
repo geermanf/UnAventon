@@ -11,7 +11,7 @@ using unAventonApi.Data;
 namespace unAventonApi.Migrations
 {
     [DbContext(typeof(UnAventonDbContext))]
-    [Migration("20180528205951_migracionMagica")]
+    [Migration("20180529125202_migracionMagica")]
     partial class migracionMagica
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

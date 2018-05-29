@@ -96,7 +96,7 @@ import { FormularioTarjetasComponent } from './perfil/formularioTarjetas/formula
     AlertasService,
     NgxSmartModalService,
     TipoTarjetaService,
-    BancoService
+    BancoService,
   ],
   entryComponents: [IniciarSesionModalComponent],
   bootstrap: [AppComponent]

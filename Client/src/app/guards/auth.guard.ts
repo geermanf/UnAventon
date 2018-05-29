@@ -4,12 +4,22 @@ import { User } from '../models/User';
 import { UserService } from '../services/user.service';
 import { IfObservable } from 'rxjs/observable/IfObservable';
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    public authenticated = new BehaviorSubject(null);
+    public authenticated = new Subject<boolean>();
+    authenticated$ = this.authenticated.asObservable();
+
     constructor(private router: Router, private userService: UserService) { }
+
+    public authenticatedOk() {
+        this.authenticated.next(true);
+    }
+
+    public authenticatedNotOk() {
+        this.authenticated.next(false);
+    }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (localStorage.getItem('currentUser')) {
@@ -18,12 +28,11 @@ export class AuthGuard implements CanActivate {
         }
 
         // not logged in so redirect to login page with the return url
-        this.router.navigate(['registrarse']);
+        this.router.navigate(['/registrarse'], { queryParams: { access: 'notOk' } } );
         return false;
     }
 
     getUser() {
-        if (this.isLogued()) {
             const user: User = JSON.parse(localStorage.getItem('currentUser'));
             return this.userService.getById(user.id).map(
                 data => {
@@ -32,7 +41,6 @@ export class AuthGuard implements CanActivate {
                 error => {
                     return error;
                 })
-        }
     }
 
     getCurrentUserId() {
@@ -45,10 +53,6 @@ export class AuthGuard implements CanActivate {
             return true;
         }
         return false;
-    }
-
-    evaluateLogin() {
-        this.authenticated.next(this.isLogued());
     }
 
 }

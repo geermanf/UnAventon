@@ -8,7 +8,9 @@
                         <div class="separador-abajo">
                             <h2 class="title">Registrarse</h2>
                         </div>
-                        <form class="register-form" name="form" (ngSubmit)="f.form.valid && contraseniasValidas() && esMayorDeEdad() && register()" #f="ngForm">
+                        <form class="register-form" name="form" #f="ngForm"
+                        (ngSubmit)="f.form.valid && contraseniasValidas() && formatoContraseniaValido() && esMayorDeEdad() && esUnEmail() && register()">
+
                             <div class="col-lg-8 col-sm-8 mr-auto ml-auto">
                                 <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !nombre.valid }">
                                     <label for="nombre">Nombre</label>
@@ -29,24 +31,25 @@
                                     <div *ngIf="f.submitted && fechaDeNacimiento.valid && !esMayorDeEdad()" class="form-control-feedback">Debes ser mayor de edad para registrarte</div>
                                 </div>
 
-                                <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !email.valid }">
+                                <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && (!email.valid || !esUnEmail())}">
                                     <label for="email">Email</label>
                                     <input type="email" class="form-control" name="email" [(ngModel)]="usuario.email" #email="ngModel" required />
                                     <div *ngIf="f.submitted && !email.valid" class="form-control-feedback">Ingrese su email</div>
                                 </div>
 
-                                <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !password.valid }">
+                                <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && (!password.valid || !contraseniasValidas() || !formatoContraseniaValido()) }">
                                     <label for="password">Contraseña</label>
                                     <input type="password" class="form-control" name="password" [(ngModel)]="usuario.password" #password="ngModel" required />
                                     <div *ngIf="f.submitted && !password.valid" class="form-control-feedback">Ingrese su contraseña</div>
-                                    <div *ngIf="f.submitted && !contraseniasValidas() && password.valid" class="form-control-feedback">Las contraseñas no son iguales</div>
+                                    <div *ngIf="f.submitted && !contraseniasValidas() && formatoContraseniaValido() && password.valid" class="form-control-feedback">Las contraseñas no son iguales</div>
+                                    <div *ngIf="f.submitted && !formatoContraseniaValido() && password.valid" class="form-control-feedback">Tu contraseña debe tener al menos 6 caracteres</div>
                                 </div>
 
-                                <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !passwordR.valid }">
+                                <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && (!password.valid || !contraseniasValidas()) }">
                                     <label for="passwordR">Repita su contraseña</label>
                                     <input type="password" class="form-control" name="passwordR" [(ngModel)]="passwordRepeat" #passwordR="ngModel" required />
                                     <div *ngIf="f.submitted && !passwordR.valid" class="form-control-feedback">Repita su contraseña</div>
-                                    <div *ngIf="f.submitted && !contraseniasValidas() && passwordR.valid" class="form-control-feedback">Las contraseñas no son iguales</div>
+                                    <div *ngIf="f.submitted && !contraseniasValidas() && formatoContraseniaValido() && passwordR.valid" class="form-control-feedback">Las contraseñas no son iguales</div>
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-danger btn-block btn-round btn-register mr-auto ml-auto" (click)="sendNotification()" >Crear cuenta</button>
