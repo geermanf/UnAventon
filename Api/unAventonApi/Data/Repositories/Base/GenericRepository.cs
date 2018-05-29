@@ -20,17 +20,24 @@ namespace unAventonApi.Data.Repositories.Base
             return _dbContext.Set<TEntity>().AsNoTracking();
         }
 
-        public async Task<TEntity> GetById(int id)
+        public async Task<TEntity> GetByIdAsync(int id)
         {
             return await _dbContext.Set<TEntity>()
                 .AsNoTracking()
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public async Task Create(TEntity entity)
+        public TEntity GetById(int id)
         {
-            await _dbContext.Set<TEntity>().AddAsync(entity);
+            return _dbContext.Set<TEntity>()
+                .Find(id);
+        }
+
+        public async Task<TEntity> Create(TEntity entity)
+        {
+            var ret = await _dbContext.Set<TEntity>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
+            return ret.Entity;
         }
 
         public async Task UpdateAsync(int id, TEntity entity)

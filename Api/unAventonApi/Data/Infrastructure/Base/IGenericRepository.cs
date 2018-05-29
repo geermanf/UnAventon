@@ -8,10 +8,12 @@ namespace unAventonApi.Data
     {
         IQueryable<TEntity> GetAll();
 
-        Task<TEntity> GetById(int id);
+        Task<TEntity> GetByIdAsync(int id);
 
-        Task Create(TEntity entity);
+        TEntity GetById(int id);
 
+        // Task Create(TEntity entity);
+        Task<TEntity> Create(TEntity entity);
         Task UpdateAsync(int id, TEntity entity);
 
         void Update(int id, TEntity entity);

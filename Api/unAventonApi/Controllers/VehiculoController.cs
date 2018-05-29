@@ -136,16 +136,27 @@ namespace unAventonApi.Controllers
             this.userRepository = userRepository;
         }
 
-        [HttpPost("RegistrarEnUser")]
-        public async Task<IActionResult> Registrar([FromBody] Vehiculo vehiculo, [FromQuery]int userId)
+[HttpPost("RegistrarEnUser")]
+        public async Task<IActionResult> Registrar([FromBody] VehiculoDTO vehiculo, [FromQuery]int userId)
         {
+            var car = new Vehiculo() {
+                Marca = vehiculo.Marca,
+                Modelo = vehiculo.Modelo,
+                CantidadPlazas = vehiculo.CantidadPlazas,
+                Patente = vehiculo.Patente,
+                Color = vehiculo.Color,
+                Foto = vehiculo.Foto,
+                TipoVehiculo = vehiculo.TipoVehiculo
+            };
             try
             {
-                var user = await this.userRepository.GetById(userId);
-                user.Vehiculos.Add(vehiculo);
-                await this.genericRepo.Create(vehiculo);
+                var user = this.userRepository.GetAllUserById(userId);
 
-                // return BuildApiResponse.BuildOk();
+                var newCar = this.genericRepo.Create(car);
+
+                user.Vehiculos.Add(newCar.Result);
+                this.userRepository.Update(user.Id, user);
+
                 return Ok();
             }
             catch (Exception)

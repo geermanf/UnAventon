@@ -12,6 +12,7 @@ import { AuthGuard } from '../../guards/auth.guard';
 
 export class FormularioVehiculosComponent implements OnInit {
     vehiculo: any = {};
+    usuario: any = {};
     @Output() releaseControl = new EventEmitter();
     idUserLogued: number;
 
@@ -22,15 +23,27 @@ export class FormularioVehiculosComponent implements OnInit {
 
     ngOnInit() {
         this.authGuard.getCurrentUserId().subscribe(data => this.idUserLogued = data);
+        this.getUser();
      }
 
     releaseCtrl() {
         this.releaseControl.emit('cerrar form');
     }
 
+    getUser() {
+        this.usuario = this.authGuard.getUser().subscribe(
+            data => {
+                this.usuario = data;
+                return data;
+            },
+            error => {
+                return error;
+            });
+    }
+
     register() {
         if (this.vehiculo.foto === undefined) { this.vehiculo.foto = '../assets/img/anonym-bw.png'; }
-        this.vehiculoService.create(this.vehiculo, )
+        this.vehiculoService.create(this.vehiculo, this.usuario.id)
             .subscribe(
                 data => {
                     this.alertService.addAlert('success', 'Tus datos se modificaron de manera satisfactoria!');
