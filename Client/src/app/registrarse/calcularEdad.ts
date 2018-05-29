@@ -38,12 +38,12 @@ export function calcularEdad(fecha) {
         // calculo los dias
         let dias = 0;
         if (ahora_dia > dia) {
-            dias = ahora_dia - dia;
+            // edad = edad - 1
         }
         if (ahora_dia < dia) {
             const ultimoDiaMes = new Date(ahora_ano, ahora_mes, 0);
             dias = ultimoDiaMes.getDate() - (dia - ahora_dia);
         }
 
-        return edad
+        return (edad != 1900 ? edad : 0);
 }

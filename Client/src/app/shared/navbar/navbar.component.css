@@ -72,3 +72,7 @@
     border-color: #f17376;
     color: #FFFFFF;
 }
+.dropdown-item.active, .dropdown-item:active {
+    text-decoration: none;
+    background-color: white;
+}

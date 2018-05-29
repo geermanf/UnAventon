@@ -11,8 +11,8 @@ using unAventonApi.Data;
 namespace unAventonApi.Migrations
 {
     [DbContext(typeof(UnAventonDbContext))]
-    [Migration("20180529125202_migracionMagica")]
-    partial class migracionMagica
+    [Migration("20180529194503_migracion")]
+    partial class migracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,18 +73,6 @@ namespace unAventonApi.Migrations
                     b.ToTable("Tarjetas");
                 });
 
-            modelBuilder.Entity("unAventonApi.Data.TipoVehiculo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Descripcion");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TipoVehiculo");
-                });
-
             modelBuilder.Entity("unAventonApi.Data.User", b =>
                 {
                     b.Property<int>("Id")
@@ -126,15 +114,13 @@ namespace unAventonApi.Migrations
 
                     b.Property<string>("Patente");
 
-                    b.Property<int?>("TipoVehiculoId");
+                    b.Property<string>("TipoVehiculo");
 
-                    b.Property<int?>("UsuarioId");
+                    b.Property<int?>("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TipoVehiculoId");
-
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Vehiculos");
                 });
@@ -156,13 +142,9 @@ namespace unAventonApi.Migrations
 
             modelBuilder.Entity("unAventonApi.Data.Vehiculo", b =>
                 {
-                    b.HasOne("unAventonApi.Data.TipoVehiculo", "TipoVehiculo")
-                        .WithMany()
-                        .HasForeignKey("TipoVehiculoId");
-
-                    b.HasOne("unAventonApi.Data.User", "Usuario")
+                    b.HasOne("unAventonApi.Data.User")
                         .WithMany("Vehiculos")
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

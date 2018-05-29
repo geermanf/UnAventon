@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace unAventonApi.Migrations
 {
-    public partial class migracionMagica : Migration
+    public partial class migracion : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,19 +33,6 @@ namespace unAventonApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TipoTarjeta", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TipoVehiculo",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Descripcion = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TipoVehiculo", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -114,21 +101,15 @@ namespace unAventonApi.Migrations
                     Marca = table.Column<string>(nullable: true),
                     Modelo = table.Column<string>(nullable: true),
                     Patente = table.Column<string>(nullable: true),
-                    TipoVehiculoId = table.Column<int>(nullable: true),
-                    UsuarioId = table.Column<int>(nullable: true)
+                    TipoVehiculo = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vehiculos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Vehiculos_TipoVehiculo_TipoVehiculoId",
-                        column: x => x.TipoVehiculoId,
-                        principalTable: "TipoVehiculo",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Vehiculos_Users_UsuarioId",
-                        column: x => x.UsuarioId,
+                        name: "FK_Vehiculos_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -150,14 +131,9 @@ namespace unAventonApi.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vehiculos_TipoVehiculoId",
+                name: "IX_Vehiculos_UserId",
                 table: "Vehiculos",
-                column: "TipoVehiculoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vehiculos_UsuarioId",
-                table: "Vehiculos",
-                column: "UsuarioId");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -173,9 +149,6 @@ namespace unAventonApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "TipoTarjeta");
-
-            migrationBuilder.DropTable(
-                name: "TipoVehiculo");
 
             migrationBuilder.DropTable(
                 name: "Users");
