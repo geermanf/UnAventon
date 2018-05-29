@@ -142,7 +142,6 @@ namespace unAventonApi.Controllers
             try
             {
                 var user = await this.userRepository.GetById(userId);
-                vehiculo.Usuario = user;
                 user.Vehiculos.Add(vehiculo);
                 await this.genericRepo.Create(vehiculo);
 
