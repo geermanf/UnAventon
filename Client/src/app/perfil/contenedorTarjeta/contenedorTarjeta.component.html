@@ -1,18 +1,18 @@
 
 <div class="col-md-12 ml-auto mr-auto">
   <div class="row">
-    <div class="col-md-4">
-
+    <div class="col-md-2">
+        <img src="../assets/img/credit-card-{{TipoTarjetaParaImagen()}}.png" alt="" class="cont-icon" style="width:3.5em">
     </div>
-    <div class="col-md-4 ml-auto mr-auto">
-      
+    <div class="col-md-2">
+      <div class="rosa" style="margin-top: 10%;">Terminada en {{ultimosCuatroNumeros()}}</div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-5">
+      <p>Tarjeta {{tarjeta.tipo.descripcion}} ,Banco {{tarjeta.banco.descripcion}}</p>
+      <p>Vencimiento: {{tarjeta.fechaVencimiento | date:'MM/yy'}}</p>
+    </div>
+    <div class="col-md-3">
       <span>
-
-          <a data-toggle="tooltip" title="Editar vehiculo">
-            <img src="../assets/img/edit.png" alt="" class="cont-icon" style="width:2.2em" >
-          </a>
 
           <a (click)="abrirBorrarTarjetaModal(BorrarTarjeta)" data-toggle="tooltip" title="Borrar vehiculo">
             <img src="../assets/img/garbage.png" alt="" class="cont-icon" style="width:2.2em">
@@ -33,7 +33,7 @@
       </button>
   </div>
   <div class="modal-body">
-      <h4>¿Estas seguro de borrar la tarjeta con numero <span class="rosa">{{tarjeta.numero}}</span>?</h4>
+      <h4>¿Estas seguro de borrar la tarjeta terminada en <span class="rosa">{{ultimosCuatroNumeros()}}</span>?</h4>
   </div>
   <div class="modal-footer">
       <button type="button" class="btn btn-default" (click)="borrarTarjeta();c()">Borrar</button>

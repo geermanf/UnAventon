@@ -36,7 +36,7 @@
 //             {
 //                 return BuildApiResponse.BuildNotOk( "Hubo un error al registrar el usuario");
 //             }
-            
+
 
 //         }
 
@@ -55,8 +55,8 @@
 //             {
 //                 return BuildApiResponse.BuildNotOk<List<Vehiculo>>(response, "Hubo un error al obtener los vehiculos");
 //             }
-            
-            
+
+
 
 //         }
 
@@ -75,8 +75,8 @@
 //             {
 //                 return BuildApiResponse.BuildNotOk("Hubo un error al obtener los vehiculos");
 //             }
-            
-            
+
+
 
 //         }
 
@@ -84,7 +84,7 @@
 //         [HttpGet("ListarPorId")]
 //         public ApiResponse<Vehiculo> Get(int id)
 //         {
-           
+
 //             var response = new Vehiculo();
 
 //             try
@@ -118,6 +118,8 @@
 //         }
 //     }
 // }
+using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using unAventonApi.Controllers.Base;
 using unAventonApi.Data;
@@ -127,8 +129,31 @@ namespace unAventonApi.Controllers
     [Route("api/[controller]")]
     public class VehiculoController : GenericController<IVehiculoRepository, Vehiculo>
     {
-        public VehiculoController(IVehiculoRepository genericRepo) : base(genericRepo)
+        public IUserRepository userRepository { get; }
+
+        public VehiculoController(IVehiculoRepository genericRepo, IUserRepository userRepository) : base(genericRepo)
         {
+            this.userRepository = userRepository;
+        }
+
+        [HttpPost("RegistrarEnUser")]
+        public async Task<IActionResult> Registrar([FromBody] Vehiculo vehiculo, [FromQuery]int userId)
+        {
+            try
+            {
+                var user = await this.userRepository.GetById(userId);
+                vehiculo.Usuario = user;
+                user.Vehiculos.Add(vehiculo);
+                await this.genericRepo.Create(vehiculo);
+
+                // return BuildApiResponse.BuildOk();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                // return BuildApiResponse.BuildNotOk( "Hubo un error al registrar");
+                return BadRequest("Hubo un error al registrar");
+            }
         }
     }
 }

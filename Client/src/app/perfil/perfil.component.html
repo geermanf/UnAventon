@@ -31,7 +31,7 @@
 
       <div class="nav-tabs-navigation">
         <div class="nav-tabs-wrapper">
-          <tabset [justified]="true">
+          <tabset #perfilTabs [justified]="true">
 
             <tab>
               <ng-template tabHeading>
@@ -39,7 +39,7 @@
               </ng-template>
 
               <p>
-                <span class="link-rosa">Fecha De Nacimiento: </span>
+                <span class="link-rosa">Fecha de nacimiento: </span>
                 <span>{{usuario.fechaDeNacimiento | date:'dd-MM-yyyy'}}</span>
               </p>
               <br>
@@ -73,38 +73,48 @@
               <!-- TITULO VEHICULOS -->
               <span class="title">
                 Mis vehiculos disponibles
-                <button class="btn btn-round btn-rosa">Agregar</button>
+                <button *ngIf="!mostrarFormularioVehiculos" class="btn btn-round btn-rosa" (click)="mostrarFormularioVehiculos = true">Agregar</button>
+                <button *ngIf="mostrarFormularioVehiculos" class="btn btn-round btn-default" (click)="mostrarFormularioVehiculos = false">Ver vehiculos</button>
               </span>
 
               <!-- CUERPO VEHICULOS -->
+              <span *ngIf="!mostrarFormularioVehiculos">
 
-              <span *ngFor="let vehiculo of vehiculos">
-                <app-contenedorvehiculo [vehiculo]="vehiculo" (refresh)="getVehiculos()">
-                </app-contenedorvehiculo>
+                <span *ngFor="let vehiculo of vehiculos">
+                  <app-contenedorvehiculo [vehiculo]="vehiculo" (refresh)="getVehiculos()">
+                  </app-contenedorvehiculo>
+                </span>
+                <span *ngIf="vehiculos.length === 0">
+                  <h4 class="rosa">No tienes vehiculos registrados en el sistema.</h4>
+                </span>
               </span>
-              <span *ngIf="vehiculos.length === 0">
-                <h4 class="rosa">No tienes vehiculos registrados en el sistema.</h4>
+
+              <span *ngIf="mostrarFormularioVehiculos">
+                <app-formulariovehiculos (releaseControl)="ocultarFormVehiculos()">
+                </app-formulariovehiculos>
               </span>
 
             </tab>
 
-             <!-- FIN VEHICULOS -->
+            <!-- FIN VEHICULOS -->
 
             <!-- INICIO TARJETAS -->
 
             <tab>
-                <ng-template tabHeading>
-                  <span class="tab-link hover-rosa">Mis tarjetas</span>
-                </ng-template>
-  
-                <!-- TITULO TARJETAS -->
-                <span class="title">
-                  Mis tarjetas disponibles
-                  <button class="btn btn-round btn-rosa">Agregar</button>
-                </span>
-  
-                <!-- CUERPO TARJETAS -->
-  
+              <ng-template tabHeading>
+                <span class="tab-link hover-rosa">Mis tarjetas</span>
+              </ng-template>
+
+              <!-- TITULO TARJETAS -->
+              <span class="title">
+                Mis tarjetas disponibles
+                <button *ngIf="!mostrarFormularioTarjetas" class="btn btn-round btn-rosa" (click)="mostrarFormularioTarjetas = true">Agregar</button>
+                <button *ngIf="mostrarFormularioTarjetas" class="btn btn-round btn-default" (click)="mostrarFormularioTarjetas = false">Ver vehiculos</button>
+              </span>
+
+              <!-- CUERPO TARJETAS -->
+              <span *ngIf="!mostrarFormularioTarjetas">
+
                 <span *ngFor="let tarjeta of tarjetas">
                   <app-contenedortarjeta [tarjeta]="tarjeta" (refresh)="getTarjetas()">
                   </app-contenedortarjeta>
@@ -112,10 +122,17 @@
                 <span *ngIf="tarjetas.length === 0">
                   <h4 class="rosa">No tienes tarjetas registradas en el sistema.</h4>
                 </span>
-  
-              </tab>
-  
-               <!-- FIN TARJETAS -->
+
+              </span>
+
+              <span *ngIf="mostrarFormularioTarjetas">
+                <app-formulariotarjetas (releaseControl)="ocultarFormTarjetas()">
+                </app-formulariotarjetas>
+              </span>
+
+            </tab>
+
+            <!-- FIN TARJETAS -->
 
             <tab disabled="true">
               <ng-template tabHeading>

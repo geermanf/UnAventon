@@ -2,9 +2,13 @@
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { User } from '../models/User';
 import { UserService } from '../services/user.service';
+import { IfObservable } from 'rxjs/observable/IfObservable';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
+    public authenticated = new BehaviorSubject(null);
     constructor(private router: Router, private userService: UserService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -18,33 +22,21 @@ export class AuthGuard implements CanActivate {
         return false;
     }
 
-    // currentUser() {
-    //     const user: User = JSON.parse(localStorage.getItem('currentUser'));
-    //     return user
-    // }
-
-    // currentUser() {
-    //     let ret;
-    //     this.getUser().subscribe(
-    //         data => {
-    //             ret = data;
-    //             return data;
-    //         },
-    //         error => {
-    //             return error;
-    //         });
-    //     return ret;
-    // }
-
     getUser() {
-        const user: User = JSON.parse(localStorage.getItem('currentUser'));
-        return this.userService.getById(user.id).map(
-            data => {
-                return data;
-            },
-            error => {
-                return error;
-            });
+        if (this.isLogued()) {
+            const user: User = JSON.parse(localStorage.getItem('currentUser'));
+            return this.userService.getById(user.id).map(
+                data => {
+                    return data;
+                },
+                error => {
+                    return error;
+                })
+        }
+    }
+
+    getCurrentUserId() {
+        return this.getUser().map(data => data.id);
     }
 
     isLogued() {
@@ -54,4 +46,9 @@ export class AuthGuard implements CanActivate {
         }
         return false;
     }
+
+    evaluateLogin() {
+        this.authenticated.next(this.isLogued());
+    }
+
 }

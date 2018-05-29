@@ -24,5 +24,10 @@ namespace unAventonApi.Data
 
         public IList<Tarjeta> Tarjetas { get; set; }
 
+        User() {
+            this.Tarjetas = new List<Tarjeta>();
+            this.Vehiculos = new List<Vehiculo>();
+        }
+
     }
 }

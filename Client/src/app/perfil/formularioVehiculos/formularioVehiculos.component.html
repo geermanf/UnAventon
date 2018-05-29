@@ -1,0 +1,63 @@
+<form class="contact100-form validate-form flex-sb flex-w" name="form" (ngSubmit)="f.form.valid && register() && releaseCtrl()" #f="ngForm"
+    novalidate>
+
+    <div class="wrap-input100 rs1 validate-input">
+        <input class="input100" type="text" name="marca" placeholder="Marca" [(ngModel)]="vehiculo.marca" #marca="ngModel" [ngClass]="{ 'has-danger': f.submitted && !marca.valid }"
+            required>
+        <span class="focus-input100"></span>
+    </div>
+
+
+    <div class="wrap-input100 rs1 validate-input">
+        <input class="input100" type="text" name="modelo" placeholder="Modelo" [(ngModel)]="vehiculo.modelo" #modelo="ngModel" [ngClass]="{ 'has-danger': f.submitted && !modelo.valid }"
+            required>
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100 rs1 validate-input">
+        <input class="input100" type="number" name="cantidadPlazas" placeholder="Cantidad de plazas" [(ngModel)]="vehiculo.cantidadPlazas"
+            #cantidadPlazas="ngModel" [ngClass]="{ 'has-danger': f.submitted && !marca.valid }" required>
+        <span class="focus-input100"></span>
+    </div>
+
+
+    <div class="wrap-input100 rs1 validate-input">
+        <input class="input100" type="text" name="color" placeholder="Color" [(ngModel)]="vehiculo.color" #color="ngModel" [ngClass]="{ 'has-danger': f.submitted && !color.valid }"
+            required>
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100 rs1 validate-input">
+        <input class="input100" type="text" name="patente" placeholder="Patente" [(ngModel)]="vehiculo.patente" #patente="ngModel"
+            [ngClass]="{ 'has-danger': f.submitted && !patente.valid }" required>
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100 rs1 validate-input">
+        <input class="input100" type="text" name="tipo" placeholder="Tipo de vehiculo" [(ngModel)]="vehiculo.tipo" #tipo="ngModel"
+            [ngClass]="{ 'has-danger': f.submitted && !tipo.valid }" required>
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100">
+        <input class="input100" type="text" name="foto" placeholder="URL de foto del vehiculo (opcional)" [(ngModel)]="vehiculo.foto" #foto="ngModel">
+        <span class="focus-input100"></span>
+    </div>
+
+
+
+
+    <div *ngIf="f.submitted && (!marca.valid || !modelo.valid || !color.valid || !patente.valid || !tipo.valid)"
+        class="form-control-feedback">
+        Por favor, rellene todos los campos
+    </div>
+
+    <div class="container-contact100-form-btn">
+        <button type="submit" class="contact100-form-btn" style="margin-right: 2%">
+            Guardar
+        </button>
+        <button class="contact100-form-btn grey" (click)="releaseCtrl()">
+            Cancelar
+        </button>
+    </div>
+</form>

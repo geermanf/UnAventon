@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
     public logueado: any;
-    usuario: any;
+    usuario: any = {};
 
     constructor(private route: ActivatedRoute,
         private router: Router,
@@ -37,16 +37,18 @@ export class NavbarComponent implements OnInit {
     ngOnInit() {
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
-
-        this.usuario = this.authGuard.getUser().subscribe(
-            data => {
-                this.usuario = data;
-                return data;
-            },
-            error => {
-                return error;
-            });
+        if (this.authGuard.isLogued()) {
+            this.usuario = this.authGuard.getUser().subscribe(
+                data => {
+                    this.usuario = data;
+                    return data;
+                },
+                error => {
+                    return error;
+                });
+        }
     }
+
     sidebarOpen() {
         const toggleButton = this.toggleButton;
         const html = document.getElementsByTagName('html')[0];

@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuard } from '../guards/auth.guard';
 import { UserService } from '../services/user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertasService } from '../alertas/alertas.service';
 import { VehiculoService } from '../services/vehiculo.service';
 import { TarjetaService } from '../services/tarjeta.service';
+import { Tarjeta } from '../models/tarjeta';
+import { Vehiculo } from '../models/vehiculo';
+import { TabsetComponent } from 'ngx-bootstrap/tabs';
 
 @Component({
   selector: 'app-perfil',
@@ -13,12 +16,17 @@ import { TarjetaService } from '../services/tarjeta.service';
   styleUrls: ['./perfil.component.css', '../../assets/css/modal.css']
 })
 export class PerfilComponent implements OnInit {
+  @ViewChild('perfilTabs') staticTabs: TabsetComponent;
   urlFoto: any;
   usuario: any = {};
   vehiculos: any[] = [];
   tarjetas: any[] = [];
+  mostrarFormularioVehiculos = false;
+  mostrarFormularioTarjetas = false;
+
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
     private vehiculoService: VehiculoService,
@@ -28,6 +36,9 @@ export class PerfilComponent implements OnInit {
     public authGuard: AuthGuard) { }
 
   ngOnInit() {
+    const tabId = this.route.snapshot.queryParams['tabId'] !== undefined ? this.route.snapshot.queryParams['tabId'] : 0 ;
+    this.staticTabs.tabs[tabId].active = true;
+
     this.usuario = this.authGuard.getUser().subscribe(
               data => {
                   this.usuario = data;
@@ -38,7 +49,6 @@ export class PerfilComponent implements OnInit {
               error => {
                   return error;
               });
-
   }
 
   getVehiculos() {
@@ -53,6 +63,16 @@ export class PerfilComponent implements OnInit {
     this.tarjetaService.getByUserId(this.usuario.id)
     .map( res => Object.keys(res).map(index => this.tarjetas.push(res[index])))
     .subscribe();
+  }
+
+  ocultarFormVehiculos() {
+    this.mostrarFormularioVehiculos = false
+    this.getVehiculos();
+  }
+
+  ocultarFormTarjetas() {
+    this.mostrarFormularioTarjetas = false
+    this.getTarjetas();
   }
 
   abrirModalFoto(cargarFoto) {

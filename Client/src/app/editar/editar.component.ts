@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { TabsetComponent } from 'ngx-bootstrap/tabs';
 
 @Component({
   selector: 'app-editar',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./editar.component.css']
 })
 export class EditarComponent implements OnInit {
+  @ViewChild('editarTabs') staticTabs: TabsetComponent;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    const tabId = this.route.snapshot.queryParams['tabId'] !== undefined ? this.route.snapshot.queryParams['tabId'] : 0 ;
+    this.staticTabs.tabs[tabId].active = true;
   }
 
 }

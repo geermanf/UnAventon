@@ -29,6 +29,14 @@ export class ContenedorTarjetaComponent implements OnInit {
     this.modalService.open(BorrarTarjeta);
   }
 
+  TipoTarjetaParaImagen() {
+    return this.tarjeta.tipo.descripcion.replace(' ', '').toLowerCase()
+  }
+
+  ultimosCuatroNumeros() {
+    return this.tarjeta.numeroTarjeta.toString().substr(-4);
+  }
+
   borrarTarjeta() {
     this.tarjetaService.delete(this.tarjeta.id)
     .subscribe(

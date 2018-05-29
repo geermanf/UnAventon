@@ -31,7 +31,7 @@
 
                                 <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !email.valid }">
                                     <label for="email">Email</label>
-                                    <input type="text" class="form-control" name="email" [(ngModel)]="usuario.email" #email="ngModel" required />
+                                    <input type="email" class="form-control" name="email" [(ngModel)]="usuario.email" #email="ngModel" required />
                                     <div *ngIf="f.submitted && !email.valid" class="form-control-feedback">Ingrese su email</div>
                                 </div>
 

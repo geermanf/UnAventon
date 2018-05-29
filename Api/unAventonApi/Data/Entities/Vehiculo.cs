@@ -11,6 +11,7 @@ namespace unAventonApi.Data
         public string Patente { get; set; }
         public string Color { get; set; }
         public TipoVehiculo TipoVehiculo { get; set; }
+        public User Usuario { get; set; }
         [Key]
         public int Id { get; set; }
     }
