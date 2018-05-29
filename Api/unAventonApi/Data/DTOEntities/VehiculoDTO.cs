@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace unAventonApi.Data
 {
-    public class Vehiculo : IEntity
+    public class VehiculoDTO
     {
         public string Marca { get; set; }
 
@@ -12,7 +12,6 @@ namespace unAventonApi.Data
         public string Color { get; set; }
         public string Foto { get; set; }
         public string TipoVehiculo { get; set; }
-        [Key]
-        public int Id { get; set; }
+
     }
 }

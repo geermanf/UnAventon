@@ -92,7 +92,7 @@ namespace unAventonApi.Controllers.Base
         {
             try
             {
-                var response = this.genericRepo.GetById(id).Result;
+                var response = this.genericRepo.GetById(id);
 
                 // return BuildApiResponse.BuildOk();
                 return Ok(response);

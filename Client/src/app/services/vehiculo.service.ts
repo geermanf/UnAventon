@@ -15,8 +15,12 @@ export class VehiculoService {
         return this.http.post('http://localhost:5000/api/Vehiculo/ListarPorId', id);
     }
 
-    create(vehiculo: Vehiculo) {
-        return this.http.post('http://localhost:5000/api/Vehiculo/Registrar', vehiculo);
+    // create(vehiculo: Vehiculo) {
+    //     return this.http.post('http://localhost:5000/api/Vehiculo/Registrar', vehiculo);
+    // }
+
+    create(vehiculo: Vehiculo, userId: number) {
+        return this.http.post('http://localhost:5000/api/Vehiculo/RegistrarEnUser?userId=' + userId, vehiculo);
     }
 
     update(vehiculo: Vehiculo) {

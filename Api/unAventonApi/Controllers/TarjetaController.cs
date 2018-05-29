@@ -25,20 +25,21 @@ namespace unAventonApi.Controllers
         [HttpPost("RegistrarEnUser")]
         public async Task<IActionResult> Registrar([FromBody] TarjetaDTO tarjeta, [FromQuery]int userId)
         {
-            // var card = new Tarjeta() {
-            //     NumeroTarjeta = tarjeta.NumeroTarjeta,
-            //     NombreTitular = tarjeta.NombreTitular,
-            //     FechaVencimiento = tarjeta.FechaVencimiento
-            // };
+            var card = new Tarjeta() {
+                NumeroTarjeta = tarjeta.NumeroTarjeta,
+                NombreTitular = tarjeta.NombreTitular,
+                FechaVencimiento = tarjeta.FechaVencimiento
+            };
             try
             {
-                // card.Banco = await this.bancoRepository.GetById(tarjeta.Banco);
-                // card.Tipo = await this.tipoTarjetaRepository.GetById(tarjeta.Tipo);
+                card.Banco = this.bancoRepository.GetById(tarjeta.Banco);
+                card.Tipo = this.tipoTarjetaRepository.GetById(tarjeta.Tipo);
+                
                 var user = this.userRepository.GetAllUserById(userId);
-                // user.Tarjetas.Add(card);
-                var newCard = this.genericRepo.CreateWithRel(tarjeta, userId);
-                // await this.genericRepo.Create(card);
-                user.Tarjetas.Add(newCard);
+
+                var newCard = this.genericRepo.Create(card);
+
+                user.Tarjetas.Add(newCard.Result);
                 this.userRepository.Update(user.Id, user);
 
                 return Ok();
