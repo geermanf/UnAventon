@@ -47,8 +47,8 @@ export class RegistrarseComponent implements OnInit {
 
     esMayorDeEdad() {
         if (this.usuario.fechaDeNacimiento !== undefined) {
-            const años = calcularEdad(this.usuario.fechaDeNacimiento);
-            console.log(años);
+            //const años = calcularEdad(this.usuario.fechaDeNacimiento);
+            let años = moment().diff(this.usuario.fechaDeNacimiento, 'years');          
             return (años >= 18);
         }
     }
