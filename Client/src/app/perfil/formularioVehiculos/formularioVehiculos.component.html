@@ -16,7 +16,7 @@
 
     <div class="wrap-input100 rs1 validate-input">
         <input class="input100" type="number" name="cantidadPlazas" placeholder="Cantidad de plazas" [(ngModel)]="vehiculo.cantidadPlazas"
-            #cantidadPlazas="ngModel" [ngClass]="{ 'has-danger': f.submitted && !marca.valid }" required>
+            #cantidadPlazas="ngModel" [ngClass]="{ 'has-danger': f.submitted && !cantidadPlazas.valid }" required>
         <span class="focus-input100"></span>
     </div>
 
@@ -34,7 +34,7 @@
     </div>
 
     <div class="wrap-input100 rs1 validate-input">
-        <input class="input100" type="text" name="tipo" placeholder="Tipo de vehiculo" [(ngModel)]="vehiculo.tipo" #tipo="ngModel"
+        <input class="input100" type="text" name="tipo" placeholder="Tipo de vehiculo" [(ngModel)]="vehiculo.tipoVehiculo" #tipo="ngModel"
             [ngClass]="{ 'has-danger': f.submitted && !tipo.valid }" required>
         <span class="focus-input100"></span>
     </div>

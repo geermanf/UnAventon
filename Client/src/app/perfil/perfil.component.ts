@@ -8,7 +8,7 @@ import { VehiculoService } from '../services/vehiculo.service';
 import { TarjetaService } from '../services/tarjeta.service';
 import { Tarjeta } from '../models/tarjeta';
 import { Vehiculo } from '../models/vehiculo';
-import { TabsetComponent } from 'ngx-bootstrap/tabs';
+import { TabsetComponent, TabDirective } from 'ngx-bootstrap/tabs';
 
 @Component({
   selector: 'app-perfil',
@@ -35,34 +35,40 @@ export class PerfilComponent implements OnInit {
     private modalService: NgbModal,
     public authGuard: AuthGuard) { }
 
+  show(data: TabDirective): void {
+    this.staticTabs.tabs.forEach(e => e.customClass = 'no-visible');
+    setTimeout(() => data.customClass = 'visible', 100);
+  }
+
   ngOnInit() {
-    const tabId = this.route.snapshot.queryParams['tabId'] !== undefined ? this.route.snapshot.queryParams['tabId'] : 0 ;
+    const tabId = this.route.snapshot.queryParams['tabId'] === undefined ? 0 : this.route.snapshot.queryParams['tabId'];
+    this.show(this.staticTabs.tabs[tabId]);
     this.staticTabs.tabs[tabId].active = true;
 
     this.usuario = this.authGuard.getUser().subscribe(
-              data => {
-                  this.usuario = data;
-                  this.getVehiculos();
-                  this.getTarjetas();
-                  return data;
-              },
-              error => {
-                  return error;
-              });
+      data => {
+        this.usuario = data;
+        this.getVehiculos();
+        this.getTarjetas();
+        return data;
+      },
+      error => {
+        return error;
+      });
   }
 
   getVehiculos() {
     this.vehiculos = [];
     this.vehiculoService.getByUserId(this.usuario.id)
-    .map( res => Object.keys(res).map(index => this.vehiculos.push(res[index])))
-    .subscribe();
+      .map(res => Object.keys(res).map(index => this.vehiculos.push(res[index])))
+      .subscribe();
   }
 
   getTarjetas() {
     this.tarjetas = [];
     this.tarjetaService.getByUserId(this.usuario.id)
-    .map( res => Object.keys(res).map(index => this.tarjetas.push(res[index])))
-    .subscribe();
+      .map(res => Object.keys(res).map(index => this.tarjetas.push(res[index])))
+      .subscribe();
   }
 
   ocultarFormVehiculos() {
@@ -82,13 +88,13 @@ export class PerfilComponent implements OnInit {
   cambiarFoto() {
     this.usuario.fotoPerfil = this.urlFoto;
     this.userService.update(this.usuario)
-    .subscribe(
+      .subscribe(
         data => {
-            this.alertService.addAlert('success', 'Tus datos se modificaron de manera satisfactoria!');
-            this.router.navigate(['/perfil']);
+          this.alertService.addAlert('success', 'Tus datos se modificaron de manera satisfactoria!');
+          this.router.navigate(['/perfil']);
         },
         error => {
-            this.alertService.addAlert('danger', 'Lo sentimos, no fue posible modificar tus datos');
+          this.alertService.addAlert('danger', 'Lo sentimos, no fue posible modificar tus datos');
         });
   }
 

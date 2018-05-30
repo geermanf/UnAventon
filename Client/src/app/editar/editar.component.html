@@ -16,19 +16,21 @@
         <div class="nav-tabs-wrapper">
           <tabset #editarTabs [justified]="true">
 
-            <tab>
+            <tab (select)="show($event)">
               <ng-template tabHeading>
                 <span class="tab-link hover-rosa">Datos personales</span>
               </ng-template>
               <app-editarperfil></app-editarperfil>
             </tab>
-            <tab>
+
+            <tab (select)="show($event)">
               <ng-template tabHeading>
                 <span class="tab-link hover-rosa">Cambiar contraseña</span>
               </ng-template>
               <app-cambiarcontrasenia></app-cambiarcontrasenia>
             </tab>
-            <tab>
+
+            <tab (select)="show($event)">
               <ng-template tabHeading>
                 <span class="tab-link hover-rosa">Borrar cuenta</span>
               </ng-template>

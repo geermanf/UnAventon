@@ -11,10 +11,11 @@
 
       <div class="owner">
         <div class="avatar ">
-
-          <img src="{{usuario.fotoPerfil}}" alt="Circle Image" class="img-circle img-responsive" style="width: 20vw">
-          <div class="middle" (click)="abrirModalFoto(cargarFoto)">
-            Cambiar Foto
+          <div class="img-hover-content">
+            <img src="{{usuario.fotoPerfil}}" alt="Circle Image" class="img-circle img-responsive" style="width: 20vw; transition: .5s ease;">
+            <div class="middle" (click)="abrirModalFoto(cargarFoto)">
+              Cambiar Foto
+            </div>
           </div>
         </div>
         <div class="name">
@@ -33,7 +34,7 @@
         <div class="nav-tabs-wrapper">
           <tabset #perfilTabs [justified]="true">
 
-            <tab>
+            <tab (select)="show($event)">
               <ng-template tabHeading>
                 <span class="tab-link hover-rosa">Inicio</span>
               </ng-template>
@@ -65,7 +66,7 @@
 
             <!-- INICIO VEHICULOS -->
 
-            <tab>
+            <tab (select)="show($event)">
               <ng-template tabHeading>
                 <span class="tab-link hover-rosa">Mis vehiculos</span>
               </ng-template>
@@ -100,7 +101,7 @@
 
             <!-- INICIO TARJETAS -->
 
-            <tab>
+            <tab (select)="show($event)">
               <ng-template tabHeading>
                 <span class="tab-link hover-rosa">Mis tarjetas</span>
               </ng-template>

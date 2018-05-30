@@ -82,3 +82,19 @@
   .btn.btn-link.link-rosa:hover {
     color: #f04649;
   }
+
+  .img-hover-content {
+    background-color: #000000cc;
+    height: 12.5em;
+    border-radius: 50% !important;
+  }
+
+  .visible {
+    opacity: 1;
+    transition: .5s cubic-bezier(0.25, 0.1, 0.39, 0.71);
+  }
+
+  .no-visible {
+    opacity: 0;
+    transition: .5s cubic-bezier(0.25, 0.1, 0.39, 0.71);
+  }
