@@ -7,6 +7,7 @@ import { TipoTarjeta } from '../../models/TipoTarjeta';
 import { BancoService } from '../../services/banco.service';
 import { TipoTarjetaService } from '../../services/tipoTarjeta.service';
 import { AuthGuard } from '../../guards/auth.guard';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-formulariotarjetas',
@@ -23,20 +24,20 @@ export class FormularioTarjetasComponent implements OnInit {
     @Output() releaseControl = new EventEmitter();
 
     constructor(private router: Router,
-                private tarjetaService: TarjetaService,
-                private bancoService: BancoService,
-                private tipoTarjetaService: TipoTarjetaService,
-                private alertService: AlertasService,
-                private authGuard: AuthGuard) { }
+        private tarjetaService: TarjetaService,
+        private bancoService: BancoService,
+        private tipoTarjetaService: TipoTarjetaService,
+        private alertService: AlertasService,
+        private authGuard: AuthGuard) { }
 
     ngOnInit() {
         this.bancoService.getAll()
-        .map( res => Object.keys(res).map(index => this.bancos.push(res[index])))
-        .subscribe();
+            .map(res => Object.keys(res).map(index => this.bancos.push(res[index])))
+            .subscribe();
 
         this.tipoTarjetaService.getAll()
-        .map( res => Object.keys(res).map(index => this.tiposTarjetas.push(res[index])))
-        .subscribe();
+            .map(res => Object.keys(res).map(index => this.tiposTarjetas.push(res[index])))
+            .subscribe();
 
         this.getUser();
     }
@@ -56,7 +57,17 @@ export class FormularioTarjetasComponent implements OnInit {
             });
     }
 
+    validarFecha() {
+        const currentDate = new Date()
+        const mo = currentDate.getMonth() + 1
+        let month;
+        if (mo < 10) { month = ('0' + mo.toString()) } else { month = mo.toString() }
+        const year = currentDate.getFullYear();
+        return (this.tarjeta.fechaVencimiento > (year + '-' + month));
+    }
+
     register() {
+        this.tarjeta.banco = parseInt(this.tarjeta.banco, 10);
         this.tarjetaService.create(this.tarjeta, this.usuario.id)
             .subscribe(
                 data => {
