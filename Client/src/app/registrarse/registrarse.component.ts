@@ -33,11 +33,11 @@ export class RegistrarseComponent implements OnInit {
         if (access === 'notOk') {
             this.alertService.addAlert('danger', 'Debes estar registrado para acceder a esta funcionalidad. Puedes registrarte aquí');
         }
-        
+
     }
 
     contraseniasValidas() {
-        return ( ((this.usuario.passwordRepeat !== undefined) && (this.usuario.password !== undefined))
+        return ( ((this.passwordRepeat !== undefined) && (this.usuario.password !== undefined))
                     && (this.usuario.password === this.passwordRepeat));
     }
 
@@ -48,7 +48,6 @@ export class RegistrarseComponent implements OnInit {
     esMayorDeEdad() {
         if (this.usuario.fechaDeNacimiento !== undefined) {
             const años = calcularEdad(this.usuario.fechaDeNacimiento);
-            console.log(años);
             return (años >= 18);
         }
     }
@@ -61,7 +60,6 @@ export class RegistrarseComponent implements OnInit {
 
     sendNotification() {
         this.validado = true;
-        console.log(this.esMayorDeEdad());
         if (!this.esMayorDeEdad() && this.usuario.fechaDeNacimiento !== undefined) {
             this.alertService.addAlert('danger', 'Lo sentimos, debes ser mayor de edad para registrarte');
         }

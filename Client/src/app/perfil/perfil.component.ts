@@ -21,9 +21,10 @@ export class PerfilComponent implements OnInit {
   usuario: any = {};
   vehiculos: any[] = [];
   tarjetas: any[] = [];
+  vehiculoForEdit: any;
   mostrarFormularioVehiculos = false;
   mostrarFormularioTarjetas = false;
-
+  mostrarFormularioEditarVehiculos = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,8 +37,16 @@ export class PerfilComponent implements OnInit {
     public authGuard: AuthGuard) { }
 
   show(data: TabDirective): void {
-    this.staticTabs.tabs.forEach(e => e.customClass = 'no-visible');
-    setTimeout(() => data.customClass = 'visible', 100);
+      // Hay un bug con los tabs, cuando haces muchos clicks en los inputs con contenido, se esconde el tab
+      // Entonces, pregunto si se está mostrando un formulario
+    if (!this.hayFormulariosActivos()) {
+      this.staticTabs.tabs.forEach(e => e.customClass = 'no-visible');
+      setTimeout(() => data.customClass = 'visible', 100);
+    }
+  }
+
+  hayFormulariosActivos() {
+    return (this.mostrarFormularioVehiculos || this.mostrarFormularioTarjetas || this.mostrarFormularioEditarVehiculos)
   }
 
   ngOnInit() {
@@ -55,6 +64,11 @@ export class PerfilComponent implements OnInit {
       error => {
         return error;
       });
+  }
+
+  returnToEdit(data) {
+    this.vehiculoForEdit = data;
+    this.mostrarFormularioEditarVehiculos = true;
   }
 
   getVehiculos() {
@@ -79,6 +93,11 @@ export class PerfilComponent implements OnInit {
   ocultarFormTarjetas() {
     this.mostrarFormularioTarjetas = false
     this.getTarjetas();
+  }
+
+  ocultarFormEditarVehiculos() {
+    this.mostrarFormularioEditarVehiculos = false
+    this.getVehiculos();
   }
 
   abrirModalFoto(cargarFoto) {

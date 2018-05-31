@@ -1,46 +1,54 @@
+<div class="row">
+    <div class="col-md-3 mr-auto ml-auto">
+        <span>
+            <img src="{{bkpVehiculo.foto}}" alt="" class="img-thumbnail img-responsive" style="max-width: 17em" (error)="img.src = errorUrl()" #img>
+          </span>
+    </div>
+</div>
+
 <form class="contact100-form validate-form flex-sb flex-w" name="form" (ngSubmit)="f.form.valid && register() && releaseCtrl()" #f="ngForm"
     novalidate>
 
     <div class="wrap-input100 rs1 validate-input">
-        <input class="input100" type="text" name="marca" placeholder="Marca" [(ngModel)]="vehiculo.marca" #marca="ngModel" [ngClass]="{ 'has-danger': f.submitted && !marca.valid }"
+        <input class="input100" type="text" name="marca" placeholder="Marca" [(ngModel)]="bkpVehiculo.marca" #marca="ngModel" [ngClass]="{ 'has-danger': f.submitted && !marca.valid }"
             required>
         <span class="focus-input100"></span>
     </div>
 
 
     <div class="wrap-input100 rs1 validate-input">
-        <input class="input100" type="text" name="modelo" placeholder="Modelo" [(ngModel)]="vehiculo.modelo" #modelo="ngModel" [ngClass]="{ 'has-danger': f.submitted && !modelo.valid }"
+        <input class="input100" type="text" name="modelo" placeholder="Modelo" [(ngModel)]="bkpVehiculo.modelo" #modelo="ngModel" [ngClass]="{ 'has-danger': f.submitted && !modelo.valid }"
             required>
         <span class="focus-input100"></span>
     </div>
 
     <div class="wrap-input100 rs1 validate-input">
-        <input class="input100" type="number" name="cantidadPlazas" placeholder="Cantidad de plazas" [(ngModel)]="vehiculo.cantidadPlazas"
+        <input class="input100" type="number" name="cantidadPlazas" placeholder="Cantidad de plazas" [(ngModel)]="bkpVehiculo.cantidadPlazas"
             #cantidadPlazas="ngModel" [ngClass]="{ 'has-danger': f.submitted && !cantidadPlazas.valid }" required>
         <span class="focus-input100"></span>
     </div>
 
 
     <div class="wrap-input100 rs1 validate-input">
-        <input class="input100" type="text" name="color" placeholder="Color" [(ngModel)]="vehiculo.color" #color="ngModel" [ngClass]="{ 'has-danger': f.submitted && !color.valid }"
+        <input class="input100" type="text" name="color" placeholder="Color" [(ngModel)]="bkpVehiculo.color" #color="ngModel" [ngClass]="{ 'has-danger': f.submitted && !color.valid }"
             required>
         <span class="focus-input100"></span>
     </div>
 
     <div class="wrap-input100 rs1 validate-input">
-        <input class="input100" type="text" name="patente" placeholder="Patente" [(ngModel)]="vehiculo.patente" #patente="ngModel"
+        <input class="input100" type="text" name="patente" placeholder="Patente" [(ngModel)]="bkpVehiculo.patente" #patente="ngModel"
             [ngClass]="{ 'has-danger': f.submitted && !patente.valid }" required>
         <span class="focus-input100"></span>
     </div>
 
     <div class="wrap-input100 rs1 validate-input">
-        <input class="input100" type="text" name="tipo" placeholder="Tipo de vehiculo" [(ngModel)]="vehiculo.tipoVehiculo" #tipo="ngModel"
+        <input class="input100" type="text" name="tipo" placeholder="Tipo de vehiculo" [(ngModel)]="bkpVehiculo.tipoVehiculo" #tipo="ngModel"
             [ngClass]="{ 'has-danger': f.submitted && !tipo.valid }" required>
         <span class="focus-input100"></span>
     </div>
 
     <div class="wrap-input100">
-        <input class="input100" type="text" name="foto" placeholder="URL de foto del vehiculo (opcional)" [(ngModel)]="vehiculo.foto" #foto="ngModel">
+        <input class="input100" type="text" name="foto" placeholder="URL de foto del vehiculo (opcional)" [(ngModel)]="bkpVehiculo.foto" #foto="ngModel">
         <span class="focus-input100"></span>
     </div>
 

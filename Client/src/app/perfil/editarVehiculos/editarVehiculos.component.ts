@@ -1,20 +1,22 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { VehiculoService } from '../../services/vehiculo.service';
 import { AlertasService } from '../../alertas/alertas.service';
 import { Router } from '@angular/router';
 import { AuthGuard } from '../../guards/auth.guard';
 
 @Component({
-    selector: 'app-formulariovehiculos',
-    templateUrl: 'formularioVehiculos.component.html',
+    selector: 'app-editarvehiculos',
+    templateUrl: 'editarVehiculos.component.html',
     styleUrls: ['../../editar/formsEditar.css', '../../editar/util.css']
 })
 
-export class FormularioVehiculosComponent implements OnInit {
-    vehiculo: any = {};
+export class EditarVehiculosComponent implements OnInit {
+    @Input() vehiculo: any;
+    bkpVehiculo: any;
     usuario: any = {};
-    @Output() releaseControl = new EventEmitter();
+    @Output() event = new EventEmitter();
     idUserLogued: number;
+    urlERROR = '../assets/img/vehiculoNoDisponible.png';
 
     constructor(private router: Router,
                 private vehiculoService: VehiculoService,
@@ -24,10 +26,11 @@ export class FormularioVehiculosComponent implements OnInit {
     ngOnInit() {
         this.authGuard.getCurrentUserId().subscribe(data => this.idUserLogued = data);
         this.getUser();
+        this.bkpVehiculo = Object.assign({}, this.vehiculo);
      }
 
     releaseCtrl() {
-        this.releaseControl.emit('cerrar form');
+        this.event.emit('cerrar');
     }
 
     getUser() {
@@ -41,11 +44,15 @@ export class FormularioVehiculosComponent implements OnInit {
             });
     }
 
+    errorUrl() {
+        return this.urlERROR;
+    }
+
     register() {
-        if (this.vehiculo.foto === undefined || this.vehiculo.foto === '') {
-            this.vehiculo.foto = '../assets/img/vehiculoNoDisponible.png';
+        if (this.bkpVehiculo.foto === undefined || this.bkpVehiculo.foto === '') {
+            this.bkpVehiculo.foto = '../assets/img/vehiculoNoDisponible.png';
         }
-        this.vehiculoService.create(this.vehiculo, this.usuario.id)
+        this.vehiculoService.update(this.bkpVehiculo)
             .subscribe(
                 data => {
                     this.alertService.addAlert('success', 'Tus datos se modificaron de manera satisfactoria!');

@@ -12,7 +12,8 @@
       <div class="owner">
         <div class="avatar ">
           <div class="img-hover-content">
-            <img src="{{usuario.fotoPerfil}}" alt="Circle Image" class="img-circle img-responsive" style="width: 20vw; transition: .5s ease;">
+            <img src="{{usuario.fotoPerfil}}" alt="Circle Image" class="img-circle img-responsive" style="width: 20vw; transition: .5s ease;"
+              (error)="img.src = '../assets/img/anonym-bw.png'" #img>
             <div class="middle" (click)="abrirModalFoto(cargarFoto)">
               Cambiar Foto
             </div>
@@ -74,15 +75,16 @@
               <!-- TITULO VEHICULOS -->
               <span class="title">
                 Mis vehiculos disponibles
-                <button *ngIf="!mostrarFormularioVehiculos" class="btn btn-round btn-rosa" (click)="mostrarFormularioVehiculos = true">Agregar</button>
-                <button *ngIf="mostrarFormularioVehiculos" class="btn btn-round btn-default" (click)="mostrarFormularioVehiculos = false">Ver vehiculos</button>
+                <button *ngIf="!mostrarFormularioVehiculos && !mostrarFormularioEditarVehiculos" class="btn btn-round btn-rosa" (click)="mostrarFormularioVehiculos = true">Agregar</button>
+                <button *ngIf="mostrarFormularioVehiculos" class="btn btn-round btn-default" (click)="mostrarFormularioVehiculos = false">Volver</button>
+                <button *ngIf="mostrarFormularioEditarVehiculos" class="btn btn-round btn-default" (click)="mostrarFormularioEditarVehiculos = false">Volver</button>
               </span>
 
               <!-- CUERPO VEHICULOS -->
-              <span *ngIf="!mostrarFormularioVehiculos">
+              <span *ngIf="!mostrarFormularioVehiculos && !mostrarFormularioEditarVehiculos">
 
                 <span *ngFor="let vehiculo of vehiculos">
-                  <app-contenedorvehiculo [vehiculo]="vehiculo" (refresh)="getVehiculos()">
+                  <app-contenedorvehiculo [vehiculo]="vehiculo" (refresh)="getVehiculos()" (edit)="returnToEdit($event)">
                   </app-contenedorvehiculo>
                 </span>
                 <span *ngIf="vehiculos.length === 0">
@@ -93,6 +95,11 @@
               <span *ngIf="mostrarFormularioVehiculos">
                 <app-formulariovehiculos (releaseControl)="ocultarFormVehiculos()">
                 </app-formulariovehiculos>
+              </span>
+
+              <span *ngIf="mostrarFormularioEditarVehiculos">
+                <app-editarvehiculos [vehiculo]="vehiculoForEdit" (event)="ocultarFormEditarVehiculos()">
+                </app-editarvehiculos>
               </span>
 
             </tab>
@@ -110,7 +117,7 @@
               <span class="title">
                 Mis tarjetas disponibles
                 <button *ngIf="!mostrarFormularioTarjetas" class="btn btn-round btn-rosa" (click)="mostrarFormularioTarjetas = true">Agregar</button>
-                <button *ngIf="mostrarFormularioTarjetas" class="btn btn-round btn-default" (click)="mostrarFormularioTarjetas = false">Ver vehiculos</button>
+                <button *ngIf="mostrarFormularioTarjetas" class="btn btn-round btn-default" (click)="mostrarFormularioTarjetas = false">Volver</button>
               </span>
 
               <!-- CUERPO TARJETAS -->

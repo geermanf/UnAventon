@@ -13,17 +13,23 @@ import { Router } from '@angular/router';
 export class ContenedorVehiculoComponent implements OnInit {
   @Input() vehiculo: any;
   @Output() refresh = new EventEmitter();
+  @Output() edit = new EventEmitter();
 
   constructor(private router: Router,
-              private modalService: NgbModal,
-              private vehiculoService: VehiculoService,
-              private alertService: AlertasService) { }
+    private modalService: NgbModal,
+    private vehiculoService: VehiculoService,
+    private alertService: AlertasService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   private refrescarVehiculos(): void {
-    this.refresh.emit('refresh');
+    this.refresh.emit(null);
   }
+
+  retControlByEdit() {
+    this.edit.emit(this.vehiculo);
+  }
+
 
   abrirBorrarVehiculoModal(BorrarVehiculo) {
     this.modalService.open(BorrarVehiculo);
@@ -31,13 +37,13 @@ export class ContenedorVehiculoComponent implements OnInit {
 
   borrarVehiculo() {
     this.vehiculoService.delete(this.vehiculo.id)
-    .subscribe(
+      .subscribe(
         data => {
-            this.alertService.addAlert('success', 'Tus datos se modificaron de manera satisfactoria!');
-            this.refrescarVehiculos();
+          this.alertService.addAlert('success', 'Tus datos se modificaron de manera satisfactoria!');
+          this.refrescarVehiculos();
         },
         error => {
-            this.alertService.addAlert('danger', 'Lo sentimos, no fue posible modificar tus datos');
+          this.alertService.addAlert('danger', 'Lo sentimos, no fue posible modificar tus datos');
         });
   }
 

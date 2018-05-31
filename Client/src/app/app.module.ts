@@ -40,6 +40,7 @@ import { ContenedorVehiculoComponent } from './perfil/contenedorVehiculo/contene
 import { ContenedorTarjetaComponent } from './perfil/contenedorTarjeta/contenedorTarjeta.component';
 import { FormularioVehiculosComponent } from './perfil/formularioVehiculos/formularioVehiculos.component';
 import { FormularioTarjetasComponent } from './perfil/formularioTarjetas/formularioTarjetas.component';
+import { EditarVehiculosComponent } from './perfil/editarVehiculos/editarVehiculos.component';
 
 
 
@@ -75,6 +76,7 @@ import { FormularioTarjetasComponent } from './perfil/formularioTarjetas/formula
     ContenedorTarjetaComponent,
     FormularioVehiculosComponent,
     FormularioTarjetasComponent,
+    EditarVehiculosComponent,
 
 ],
   exports: [
@@ -85,7 +87,8 @@ import { FormularioTarjetasComponent } from './perfil/formularioTarjetas/formula
     EditarPerfilComponent,
     ContenedorVehiculoComponent,
     FormularioVehiculosComponent,
-    FormularioTarjetasComponent
+    FormularioTarjetasComponent,
+    EditarVehiculosComponent
   ],
   providers: [
     AuthGuard,
