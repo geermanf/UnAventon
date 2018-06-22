@@ -6,9 +6,7 @@ using unAventonApi.Data.Entities.TablasIntermedias;
 
 namespace unAventonApi.Data
 {
-    public interface IPostulantesRepository : IGenericRepository<Postulantes>
+    public interface IPostulantesRepository : ITwoPartsIdRepository<Postulantes>
     {
-        void DeleteByIds(int idPostulante, int idViaje);
-        Postulantes GetByIds(int idPostulante, int idViaje);
     }
 }

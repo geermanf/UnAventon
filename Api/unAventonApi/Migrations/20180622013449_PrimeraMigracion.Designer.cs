@@ -11,8 +11,8 @@ using unAventonApi.Data;
 namespace unAventonApi.Migrations
 {
     [DbContext(typeof(UnAventonDbContext))]
-    [Migration("20180609024246_migrationRol")]
-    partial class migrationRol
+    [Migration("20180622013449_PrimeraMigracion")]
+    partial class PrimeraMigracion
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,8 +46,6 @@ namespace unAventonApi.Migrations
 
                     b.Property<int?>("UserId");
 
-                    b.Property<int?>("UserId1");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PuntuacionId");
@@ -55,8 +53,6 @@ namespace unAventonApi.Migrations
                     b.HasIndex("RolId");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("UserId1");
 
                     b.ToTable("Calificacion");
                 });
@@ -78,6 +74,8 @@ namespace unAventonApi.Migrations
                     b.Property<int>("UserId");
 
                     b.Property<int>("ViajeId");
+
+                    b.Property<int>("Id");
 
                     b.HasKey("UserId", "ViajeId");
 
@@ -182,8 +180,6 @@ namespace unAventonApi.Migrations
 
                     b.Property<int?>("VehiculoId");
 
-                    b.Property<bool>("Vencido");
-
                     b.HasKey("Id");
 
                     b.HasIndex("TipoViajeId");
@@ -286,12 +282,8 @@ namespace unAventonApi.Migrations
                         .HasForeignKey("RolId");
 
                     b.HasOne("unAventonApi.Data.User")
-                        .WithMany("CalificacionesComoConductor")
+                        .WithMany("Calificaciones")
                         .HasForeignKey("UserId");
-
-                    b.HasOne("unAventonApi.Data.User")
-                        .WithMany("CalificacionesComoPasajero")
-                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("unAventonApi.Data.Entities.TablasIntermedias.Postulantes", b =>

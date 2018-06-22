@@ -6,7 +6,7 @@ using unAventonApi.Data.Entities.TablasIntermedias;
 
 namespace unAventonApi.Data
 {
-    public interface IViajerosRepository : IGenericRepository<Viajeros>
+    public interface IViajerosRepository : ITwoPartsIdRepository<Viajeros>
     {
     }
 }

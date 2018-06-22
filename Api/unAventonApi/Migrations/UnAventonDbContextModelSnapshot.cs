@@ -89,8 +89,6 @@ namespace unAventonApi.Migrations
 
                     b.Property<int>("ViajeId");
 
-                    b.Property<int>("Id");
-
                     b.HasKey("UserId", "ViajeId");
 
                     b.HasIndex("ViajeId");
@@ -167,13 +165,13 @@ namespace unAventonApi.Migrations
 
                     b.Property<double>("Costo");
 
+                    b.Property<int?>("CreadorId");
+
                     b.Property<string>("Destino");
 
                     b.Property<TimeSpan>("Duracion");
 
                     b.Property<DateTime>("FechaPartida");
-
-                    b.Property<TimeSpan>("HoraPartida");
 
                     b.Property<string>("Origen");
 
@@ -182,6 +180,8 @@ namespace unAventonApi.Migrations
                     b.Property<int?>("VehiculoId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CreadorId");
 
                     b.HasIndex("TipoViajeId");
 
@@ -341,6 +341,10 @@ namespace unAventonApi.Migrations
 
             modelBuilder.Entity("unAventonApi.Data.Entities.Viaje", b =>
                 {
+                    b.HasOne("unAventonApi.Data.User", "Creador")
+                        .WithMany("ViajesCreados")
+                        .HasForeignKey("CreadorId");
+
                     b.HasOne("unAventonApi.Data.Entities.TipoViaje", "TipoViaje")
                         .WithMany()
                         .HasForeignKey("TipoViajeId");

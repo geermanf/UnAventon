@@ -31,7 +31,7 @@ namespace unAventonApi.Controllers
                 var user = this.userRepository.GetAllUserById(idViajero);
                 var viaje = this.genericRepo.GetAllById(idViaje);
                 var postulantes = this.postulantesRepository.GetByIds(idViajero, idViaje);
-                this.postulantesRepository.DeleteByIds(idViajero, idViaje);
+                this.postulantesRepository.Delete(idViajero, idViaje);
                 var viajeros = new Viajeros() {
                     User = user,
                     UserId = idViajero,
@@ -73,42 +73,33 @@ namespace unAventonApi.Controllers
             }
         }
 
-        // [HttpGet("BorrarViajero")]
-        // public IActionResult removeViajero(int idViaje, int idViajero)
-        // {
-        //     try
-        //     {
-        //         this.postulantesRepository.DeleteByIds(idViajero, idViaje);
-        //         return Ok();
-        //     }
-        //     catch (Exception)
-        //     {
-        //         return BadRequest("Hubo un error en AgregarViajero");
-        //     }
-        // }
+        [HttpGet("BorrarViajero")]
+        public IActionResult removeViajero(int idViaje, int idViajero)
+        {
+            try
+            {
+                this.viajerosRepository.Delete(idViajero, idViaje);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error en AgregarViajero");
+            }
+        }
 
-        // [HttpGet("BorrarPostulante")]
-        // public IActionResult removePostulante(int idViaje, int idPostulante)
-        // {
-        //     try
-        //     {
-        //         var user = this.userRepository.GetAllUserById(idPostulante);
-        //         var viaje = this.genericRepo.GetById(idViaje);
-        //         var postulantes = new Postulantes() {
-        //             User = user,
-        //             UserId = idPostulante,
-        //             Viaje = viaje,
-        //             ViajeId = idViaje
-        //         };
-
-        //         this.postulantesRepository.Create(postulantes);
-        //         return Ok();
-        //     }
-        //     catch (Exception)
-        //     {
-        //         return BadRequest("Hubo un error en AgregarViajero");
-        //     }
-        // }
+        [HttpGet("BorrarPostulante")]
+        public IActionResult removePostulante(int idViaje, int idPostulante)
+        {
+            try
+            {
+                this.viajerosRepository.Delete(idPostulante, idViaje);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error en AgregarViajero");
+            }
+        }
 
     }
 }

@@ -31,6 +31,8 @@ namespace unAventonApi.Data
         public IList<ViajesPendientes> ViajesPendientes { get; set; }
 
         public IList<ViajesRealizados> ViajesRealizados { get; set; }
+
+        public IList<Viaje> ViajesCreados { get; set; }
         
 
     }
