@@ -13,5 +13,10 @@ namespace unAventonApi.Data.Repositories
         : base(dbContext)
         {
         }
+
+        public IQueryable<Postulantes> GetByIdViaje(int idViaje)
+        {
+            return _dbContext.Set<Postulantes>().Where(p => p.ViajeId == idViaje);
+        }
     }
 }
