@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace unAventonApi.Migrations
 {
-    public partial class migracion : Migration
+    public partial class mig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,6 +20,19 @@ namespace unAventonApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Banco", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TipoCalificacion",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Descripcion = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TipoCalificacion", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -52,6 +65,40 @@ namespace unAventonApi.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                     table.UniqueConstraint("Email", x => x.Email);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Calificacion",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Comentario = table.Column<string>(nullable: true),
+                    PuntuacionId = table.Column<int>(nullable: true),
+                    UserId = table.Column<int>(nullable: true),
+                    UserId1 = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Calificacion", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Calificacion_TipoCalificacion_PuntuacionId",
+                        column: x => x.PuntuacionId,
+                        principalTable: "TipoCalificacion",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Calificacion_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Calificacion_Users_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -98,6 +145,7 @@ namespace unAventonApi.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CantidadPlazas = table.Column<int>(nullable: false),
                     Color = table.Column<string>(nullable: true),
+                    Foto = table.Column<string>(nullable: true),
                     Marca = table.Column<string>(nullable: true),
                     Modelo = table.Column<string>(nullable: true),
                     Patente = table.Column<string>(nullable: true),
@@ -114,6 +162,21 @@ namespace unAventonApi.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Calificacion_PuntuacionId",
+                table: "Calificacion",
+                column: "PuntuacionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Calificacion_UserId",
+                table: "Calificacion",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Calificacion_UserId1",
+                table: "Calificacion",
+                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tarjetas_BancoId",
@@ -139,10 +202,16 @@ namespace unAventonApi.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Calificacion");
+
+            migrationBuilder.DropTable(
                 name: "Tarjetas");
 
             migrationBuilder.DropTable(
                 name: "Vehiculos");
+
+            migrationBuilder.DropTable(
+                name: "TipoCalificacion");
 
             migrationBuilder.DropTable(
                 name: "Banco");

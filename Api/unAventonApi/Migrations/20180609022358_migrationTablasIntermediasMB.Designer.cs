@@ -11,9 +11,10 @@ using unAventonApi.Data;
 namespace unAventonApi.Migrations
 {
     [DbContext(typeof(UnAventonDbContext))]
-    partial class UnAventonDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180609022358_migrationTablasIntermediasMB")]
+    partial class migrationTablasIntermediasMB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,31 +42,19 @@ namespace unAventonApi.Migrations
 
                     b.Property<int?>("PuntuacionId");
 
-                    b.Property<int?>("RolId");
-
                     b.Property<int?>("UserId");
+
+                    b.Property<int?>("UserId1");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PuntuacionId");
 
-                    b.HasIndex("RolId");
-
                     b.HasIndex("UserId");
 
+                    b.HasIndex("UserId1");
+
                     b.ToTable("Calificacion");
-                });
-
-            modelBuilder.Entity("unAventonApi.Data.Entities.Rol", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Descripcion");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Rol");
                 });
 
             modelBuilder.Entity("unAventonApi.Data.Entities.TablasIntermedias.Postulantes", b =>
@@ -73,8 +62,6 @@ namespace unAventonApi.Migrations
                     b.Property<int>("UserId");
 
                     b.Property<int>("ViajeId");
-
-                    b.Property<int>("Id");
 
                     b.HasKey("UserId", "ViajeId");
 
@@ -88,8 +75,6 @@ namespace unAventonApi.Migrations
                     b.Property<int>("UserId");
 
                     b.Property<int>("ViajeId");
-
-                    b.Property<int>("Id");
 
                     b.HasKey("UserId", "ViajeId");
 
@@ -180,6 +165,8 @@ namespace unAventonApi.Migrations
                     b.Property<int?>("TipoViajeId");
 
                     b.Property<int?>("VehiculoId");
+
+                    b.Property<bool>("Vencido");
 
                     b.HasKey("Id");
 
@@ -278,13 +265,13 @@ namespace unAventonApi.Migrations
                         .WithMany()
                         .HasForeignKey("PuntuacionId");
 
-                    b.HasOne("unAventonApi.Data.Entities.Rol", "Rol")
-                        .WithMany()
-                        .HasForeignKey("RolId");
+                    b.HasOne("unAventonApi.Data.User")
+                        .WithMany("CalificacionesComoConductor")
+                        .HasForeignKey("UserId");
 
                     b.HasOne("unAventonApi.Data.User")
-                        .WithMany("Calificaciones")
-                        .HasForeignKey("UserId");
+                        .WithMany("CalificacionesComoPasajero")
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("unAventonApi.Data.Entities.TablasIntermedias.Postulantes", b =>

@@ -11,9 +11,10 @@ using unAventonApi.Data;
 namespace unAventonApi.Migrations
 {
     [DbContext(typeof(UnAventonDbContext))]
-    partial class UnAventonDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180609024457_migrationRol2")]
+    partial class migrationRol2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,8 +75,6 @@ namespace unAventonApi.Migrations
 
                     b.Property<int>("ViajeId");
 
-                    b.Property<int>("Id");
-
                     b.HasKey("UserId", "ViajeId");
 
                     b.HasIndex("ViajeId");
@@ -88,8 +87,6 @@ namespace unAventonApi.Migrations
                     b.Property<int>("UserId");
 
                     b.Property<int>("ViajeId");
-
-                    b.Property<int>("Id");
 
                     b.HasKey("UserId", "ViajeId");
 
@@ -180,6 +177,8 @@ namespace unAventonApi.Migrations
                     b.Property<int?>("TipoViajeId");
 
                     b.Property<int?>("VehiculoId");
+
+                    b.Property<bool>("Vencido");
 
                     b.HasKey("Id");
 

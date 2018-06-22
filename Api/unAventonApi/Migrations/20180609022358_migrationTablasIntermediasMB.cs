@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace unAventonApi.Migrations
 {
-    public partial class migracion2 : Migration
+    public partial class migrationTablasIntermediasMB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

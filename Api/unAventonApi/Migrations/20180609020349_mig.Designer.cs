@@ -11,8 +11,8 @@ using unAventonApi.Data;
 namespace unAventonApi.Migrations
 {
     [DbContext(typeof(UnAventonDbContext))]
-    [Migration("20180529203543_migracion")]
-    partial class migracion
+    [Migration("20180609020349_mig")]
+    partial class mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,42 @@ namespace unAventonApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Banco");
+                });
+
+            modelBuilder.Entity("unAventonApi.Data.Entities.Calificacion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Comentario");
+
+                    b.Property<int?>("PuntuacionId");
+
+                    b.Property<int?>("UserId");
+
+                    b.Property<int?>("UserId1");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PuntuacionId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("Calificacion");
+                });
+
+            modelBuilder.Entity("unAventonApi.Data.Entities.TipoCalificacion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Descripcion");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TipoCalificacion");
                 });
 
             modelBuilder.Entity("unAventonApi.Data.Entities.TipoTarjeta", b =>
@@ -108,6 +144,8 @@ namespace unAventonApi.Migrations
 
                     b.Property<string>("Color");
 
+                    b.Property<string>("Foto");
+
                     b.Property<string>("Marca");
 
                     b.Property<string>("Modelo");
@@ -123,6 +161,21 @@ namespace unAventonApi.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Vehiculos");
+                });
+
+            modelBuilder.Entity("unAventonApi.Data.Entities.Calificacion", b =>
+                {
+                    b.HasOne("unAventonApi.Data.Entities.TipoCalificacion", "Puntuacion")
+                        .WithMany()
+                        .HasForeignKey("PuntuacionId");
+
+                    b.HasOne("unAventonApi.Data.User")
+                        .WithMany("CalificacionesComoConductor")
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("unAventonApi.Data.User")
+                        .WithMany("CalificacionesComoPasajero")
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("unAventonApi.Data.Tarjeta", b =>
