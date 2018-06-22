@@ -19,8 +19,8 @@ namespace unAventonApi.Controllers
         private readonly IVehiculoRepository vehiculoRepository;
         private readonly ITipoViajeRepository tipoViajeRepository;
 
-        public ViajeController(IViajeRepository genericRepo, IViajerosRepository viajerosRepository, IPostulantesRepository postulantesRepository,
-                                IUserRepository userRepository, IVehiculoRepository vehiculoRepository, ITipoViajeRepository tipoViajeRepository) : base(genericRepo)
+        public ViajeController(IViajeRepository genericRepo, IPostulantesRepository postulantesRepository, IViajerosRepository viajerosRepository,
+        IUserRepository userRepository, IVehiculoRepository vehiculoRepository, ITipoViajeRepository tipoViajeRepository) : base(genericRepo)
         {
             this.postulantesRepository = postulantesRepository;
             this.viajerosRepository = viajerosRepository;
@@ -29,8 +29,8 @@ namespace unAventonApi.Controllers
             this.tipoViajeRepository = tipoViajeRepository;
         }
 
-        [HttpPost("RegistrarEnUser")]
-        public IActionResult Registrar([FromBody] ViajeDTO viajeDTO, [FromQuery]int userId)
+        [HttpPost("Crear")]
+        public IActionResult Crear(ViajeDTO viajeDTO)
         {
             var viaje = new Viaje() {
                 Origen = viajeDTO.Origen,
@@ -45,12 +45,10 @@ namespace unAventonApi.Controllers
                 viaje.Creador = user;
                 viaje.Vehiculo = this.vehiculoRepository.GetById(viajeDTO.Vehiculo);
                 viaje.TipoViaje = this.tipoViajeRepository.GetById(viajeDTO.TipoViaje);
-                var nuevoViaje = this.genericRepo.Create(viaje);
+                var nuevoViaje = this.genericRepo.Create(viaje).Result;
 
                 this.addPostulante(nuevoViaje.Id,user.Id);
                 this.addViajero(nuevoViaje.Id,user.Id);
-
-                // this.userRepository.Update(user.Id, user);
 
                 return Ok();
             }
@@ -67,17 +65,30 @@ namespace unAventonApi.Controllers
             {
                 var user = this.userRepository.GetAllUserById(idViajero);
                 var viaje = this.genericRepo.GetAllById(idViaje);
-                var postulantes = this.postulantesRepository.GetByIds(idViajero, idViaje);
-                this.postulantesRepository.Delete(idViajero, idViaje);
-                var viajeros = new Viajeros() {
-                    User = user,
-                    UserId = idViajero,
-                    Viaje = viaje,
-                    ViajeId = idViaje
-                };
+                var postulantes = viaje.Postulantes.First(p => p.ViajeId == idViaje && p.UserId == idViajero);
+                // var postulantes = this.postulantesRepository.GetByIds(idViajero, idViaje);
+                // this.postulantesRepository.Delete(idViajero, idViaje);
 
-                var vj = this.viajerosRepository.Create(viajeros);
-                viaje.Viajeros.Add(vj.Result);
+                // var vj = this.viajerosRepository.Create(viajeros);
+                var vj = new Viajeros() {
+                    User = user,
+                    UserId = user.Id,
+                    Viaje = viaje,
+                    ViajeId = viaje.Id
+                };
+                viaje.Viajeros.Add(vj);
+                viaje.Postulantes.Remove(postulantes);
+
+                var vp = new ViajesPendientes() {
+                    User = user,
+                    UserId = user.Id,
+                    Viaje = viaje,
+                    ViajeId = viaje.Id
+                };
+                user.ViajesPendientes.Add(vp);
+                this.userRepository.Update(user.Id, user);
+
+                this.genericRepo.Update(viaje.Id, viaje);
                 return Ok();
             }
             catch (Exception)
@@ -100,8 +111,15 @@ namespace unAventonApi.Controllers
                     ViajeId = idViaje
                 };
 
-                var pst = this.postulantesRepository.Create(postulantes);
-                viaje.Postulantes.Add(pst.Result);
+                // var pst = this.postulantesRepository.Create(postulantes);
+                var pst = new Postulantes(){
+                    User = user,
+                    UserId = user.Id,
+                    Viaje = viaje,
+                    ViajeId = viaje.Id
+                };
+                viaje.Postulantes.Add(pst);
+                this.genericRepo.Update(viaje.Id, viaje);
                 return Ok();
             }
             catch (Exception)
@@ -116,6 +134,7 @@ namespace unAventonApi.Controllers
             try
             {
                 this.viajerosRepository.Delete(idViajero, idViaje);
+
                 return Ok();
             }
             catch (Exception)

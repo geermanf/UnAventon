@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace unAventonApi.Migrations
 {
-    public partial class PrimeraMigracion : Migration
+    public partial class viajesTerminado : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -196,10 +196,10 @@ namespace unAventonApi.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Costo = table.Column<double>(nullable: false),
+                    CreadorId = table.Column<int>(nullable: true),
                     Destino = table.Column<string>(nullable: true),
                     Duracion = table.Column<TimeSpan>(nullable: false),
                     FechaPartida = table.Column<DateTime>(nullable: false),
-                    HoraPartida = table.Column<TimeSpan>(nullable: false),
                     Origen = table.Column<string>(nullable: true),
                     TipoViajeId = table.Column<int>(nullable: true),
                     VehiculoId = table.Column<int>(nullable: true)
@@ -207,6 +207,12 @@ namespace unAventonApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Viaje", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Viaje_Users_CreadorId",
+                        column: x => x.CreadorId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Viaje_TipoViaje_TipoViajeId",
                         column: x => x.TipoViajeId,
@@ -226,8 +232,7 @@ namespace unAventonApi.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<int>(nullable: false),
-                    ViajeId = table.Column<int>(nullable: false),
-                    Id = table.Column<int>(nullable: false)
+                    ViajeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -271,7 +276,7 @@ namespace unAventonApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ViajesPentiendes",
+                name: "ViajesPendientes",
                 columns: table => new
                 {
                     UserId = table.Column<int>(nullable: false),
@@ -279,15 +284,15 @@ namespace unAventonApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ViajesPentiendes", x => new { x.UserId, x.ViajeId });
+                    table.PrimaryKey("PK_ViajesPendientes", x => new { x.UserId, x.ViajeId });
                     table.ForeignKey(
-                        name: "FK_ViajesPentiendes_Users_UserId",
+                        name: "FK_ViajesPendientes_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ViajesPentiendes_Viaje_ViajeId",
+                        name: "FK_ViajesPendientes_Viaje_ViajeId",
                         column: x => x.ViajeId,
                         principalTable: "Viaje",
                         principalColumn: "Id",
@@ -359,6 +364,11 @@ namespace unAventonApi.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Viaje_CreadorId",
+                table: "Viaje",
+                column: "CreadorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Viaje_TipoViajeId",
                 table: "Viaje",
                 column: "TipoViajeId");
@@ -374,8 +384,8 @@ namespace unAventonApi.Migrations
                 column: "ViajeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ViajesPentiendes_ViajeId",
-                table: "ViajesPentiendes",
+                name: "IX_ViajesPendientes_ViajeId",
+                table: "ViajesPendientes",
                 column: "ViajeId");
 
             migrationBuilder.CreateIndex(
@@ -399,7 +409,7 @@ namespace unAventonApi.Migrations
                 name: "Viajeros");
 
             migrationBuilder.DropTable(
-                name: "ViajesPentiendes");
+                name: "ViajesPendientes");
 
             migrationBuilder.DropTable(
                 name: "ViajesRealizados");

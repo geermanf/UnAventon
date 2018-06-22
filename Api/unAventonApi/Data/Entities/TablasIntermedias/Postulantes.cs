@@ -9,6 +9,5 @@ namespace unAventonApi.Data.Entities.TablasIntermedias
 
         public int ViajeId { get; set; }
         public Viaje Viaje { get; set; }
-        public int Id { get; set; }
     }
 }

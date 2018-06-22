@@ -11,8 +11,8 @@ using unAventonApi.Data;
 namespace unAventonApi.Migrations
 {
     [DbContext(typeof(UnAventonDbContext))]
-    [Migration("20180622015025_ActualizacionViajeUsuario")]
-    partial class ActualizacionViajeUsuario
+    [Migration("20180622231026_viajesTerminado")]
+    partial class viajesTerminado
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -75,8 +75,6 @@ namespace unAventonApi.Migrations
 
                     b.Property<int>("ViajeId");
 
-                    b.Property<int>("Id");
-
                     b.HasKey("UserId", "ViajeId");
 
                     b.HasIndex("ViajeId");
@@ -107,7 +105,7 @@ namespace unAventonApi.Migrations
 
                     b.HasIndex("ViajeId");
 
-                    b.ToTable("ViajesPentiendes");
+                    b.ToTable("ViajesPendientes");
                 });
 
             modelBuilder.Entity("unAventonApi.Data.Entities.TablasIntermedias.ViajesRealizados", b =>

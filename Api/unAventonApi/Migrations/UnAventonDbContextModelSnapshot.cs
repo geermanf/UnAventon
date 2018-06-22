@@ -74,8 +74,6 @@ namespace unAventonApi.Migrations
 
                     b.Property<int>("ViajeId");
 
-                    b.Property<int>("Id");
-
                     b.HasKey("UserId", "ViajeId");
 
                     b.HasIndex("ViajeId");
@@ -106,7 +104,7 @@ namespace unAventonApi.Migrations
 
                     b.HasIndex("ViajeId");
 
-                    b.ToTable("ViajesPentiendes");
+                    b.ToTable("ViajesPendientes");
                 });
 
             modelBuilder.Entity("unAventonApi.Data.Entities.TablasIntermedias.ViajesRealizados", b =>

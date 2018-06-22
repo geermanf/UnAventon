@@ -28,7 +28,7 @@
 
         public DbSet<Viajeros> Viajeros { get; set; }
 
-        public DbSet<ViajesPendientes> ViajesPentiendes { get; set; }
+        public DbSet<ViajesPendientes> ViajesPendientes { get; set; }
 
         public DbSet<ViajesRealizados> ViajesRealizados { get; set; }
 
