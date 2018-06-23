@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using unAventonApi.Data.Entities;
+using unAventonApi.Data.Entities.TablasIntermedias;
 
 namespace unAventonApi.Data
 {
@@ -23,6 +25,15 @@ namespace unAventonApi.Data
         public IList<Vehiculo> Vehiculos { get; set; }
 
         public IList<Tarjeta> Tarjetas { get; set; }
+
+        public IList<Calificacion> Calificaciones { get; set; }
+
+        public IList<ViajesPendientes> ViajesPendientes { get; set; }
+
+        public IList<ViajesRealizados> ViajesRealizados { get; set; }
+
+        public IList<Viaje> ViajesCreados { get; set; }
+        
 
     }
 }

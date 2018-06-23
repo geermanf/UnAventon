@@ -24,9 +24,12 @@ namespace unAventonApi.Data
         public User GetAllUserById(int id)
         {
             var user = _dbContext.Users
-                    .Include(x => x.Tarjetas).ThenInclude(t => t.Banco)
-                    .Include(x => x.Tarjetas).ThenInclude(t => t.Tipo)
-                    .Include(z => z.Vehiculos)
+                    .Include(u => u.Tarjetas).ThenInclude(t => t.Banco)
+                    .Include(u => u.Tarjetas).ThenInclude(t => t.Tipo)
+                    .Include(u => u.Vehiculos)
+                    .Include(u => u.ViajesCreados)
+                    .Include(u => u.ViajesPendientes)
+                    .Include(u => u.ViajesRealizados)
                     .FirstOrDefault(x => x.Id == id);
             return user;
         }
