@@ -8,6 +8,7 @@ import { RegistrarseComponent } from './registrarse/registrarse.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PerfilComponent } from './perfil/perfil.component';
 import { EditarComponent } from './editar/editar.component';
+import { CrearViajeComponent } from './crearViaje/crearViaje.component';
 
 
 
@@ -20,6 +21,7 @@ const routes: Routes = [
     // USUARIOS LOGUEADOS
     { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard]},
     { path: 'editar', component: EditarComponent, canActivate: [AuthGuard]},
+    { path: 'crearViaje', component: CrearViajeComponent, canActivate: [AuthGuard]},
 
     // INCORRECTO O VACIO
     { path: '', redirectTo: 'home', pathMatch: 'full'},

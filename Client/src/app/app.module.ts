@@ -41,6 +41,7 @@ import { ContenedorTarjetaComponent } from './perfil/contenedorTarjeta/contenedo
 import { FormularioVehiculosComponent } from './perfil/formularioVehiculos/formularioVehiculos.component';
 import { FormularioTarjetasComponent } from './perfil/formularioTarjetas/formularioTarjetas.component';
 import { EditarVehiculosComponent } from './perfil/editarVehiculos/editarVehiculos.component';
+import { CrearViajeComponent } from './crearViaje/crearViaje.component';
 
 
 
@@ -77,7 +78,7 @@ import { EditarVehiculosComponent } from './perfil/editarVehiculos/editarVehicul
     FormularioVehiculosComponent,
     FormularioTarjetasComponent,
     EditarVehiculosComponent,
-
+    CrearViajeComponent
 ],
   exports: [
     ContenedorViajeComponent,
