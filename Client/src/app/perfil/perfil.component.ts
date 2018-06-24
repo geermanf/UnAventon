@@ -36,22 +36,12 @@ export class PerfilComponent implements OnInit {
     private modalService: NgbModal,
     public authGuard: AuthGuard) { }
 
-  show(data: TabDirective): void {
-      // Hay un bug con los tabs, cuando haces muchos clicks en los inputs con contenido, se esconde el tab
-      // Entonces, pregunto si se está mostrando un formulario
-    if (!this.hayFormulariosActivos()) {
-      this.staticTabs.tabs.forEach(e => e.customClass = 'no-visible');
-      setTimeout(() => data.customClass = 'visible', 100);
-    }
-  }
-
   hayFormulariosActivos() {
     return (this.mostrarFormularioVehiculos || this.mostrarFormularioTarjetas || this.mostrarFormularioEditarVehiculos)
   }
 
   ngOnInit() {
     const tabId = this.route.snapshot.queryParams['tabId'] === undefined ? 0 : this.route.snapshot.queryParams['tabId'];
-    this.show(this.staticTabs.tabs[tabId]);
     this.staticTabs.tabs[tabId].active = true;
 
     this.usuario = this.authGuard.getUser().subscribe(

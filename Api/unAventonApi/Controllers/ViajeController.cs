@@ -30,7 +30,7 @@ namespace unAventonApi.Controllers
         }
 
         [HttpPost("Crear")]
-        public IActionResult Crear(ViajeDTO viajeDTO)
+        public IActionResult Crear([FromBody]ViajeDTO viajeDTO)
         {
             var viaje = new Viaje() {
                 Origen = viajeDTO.Origen,

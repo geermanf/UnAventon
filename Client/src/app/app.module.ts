@@ -10,9 +10,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { DatePipe } from '@angular/common';
 
 // Import Services
 import { UserService } from './services/user.service';
+import { ViajeService } from './services/viaje.service';
 import { VehiculoService } from './services/vehiculo.service';
 import { TarjetaService } from './services/tarjeta.service';
 import { AuthGuard } from './guards/auth.guard';
@@ -56,7 +59,8 @@ import { CrearViajeComponent } from './crearViaje/crearViaje.component';
     AppRoutingModule,
     HttpClientModule,
     NgxSmartModalModule.forRoot(),
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    GooglePlaceModule
   ],
   declarations: [
     AppComponent,
@@ -92,9 +96,11 @@ import { CrearViajeComponent } from './crearViaje/crearViaje.component';
     EditarVehiculosComponent
   ],
   providers: [
+    DatePipe,
     AuthGuard,
     AuthenticationService,
     UserService,
+    ViajeService,
     VehiculoService,
     TarjetaService,
     AlertasService,
