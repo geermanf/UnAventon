@@ -41,6 +41,7 @@ namespace unAventonApi
             services.AddScoped<ITipoViajeRepository, TipoViajeRepository>();
             services.AddScoped<IViajeRepository, ViajeRepository>();
             services.AddScoped<IViajerosRepository, ViajerosRepository>();
+            services.AddScoped<IDiaDeViajeRepository, DiaDeViajeRepository>();
 
             // Services
             services.AddScoped<IAuthentificateService, AuthentificateService>();

@@ -12,6 +12,7 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { DatePipe } from '@angular/common';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 // Import Services
 import { UserService } from './services/user.service';
@@ -54,6 +55,7 @@ import { CrearViajeComponent } from './crearViaje/crearViaje.component';
     BrowserModule,
     BrowserAnimationsModule,
     NgbModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     FormsModule,
     RouterModule,
     AppRoutingModule,

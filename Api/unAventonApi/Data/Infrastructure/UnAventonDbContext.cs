@@ -13,6 +13,7 @@
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Viaje> Viaje { get; set; }
+        public DbSet<DiaDeViaje> DiaDeViaje { get; set; }
         public DbSet<Tarjeta> Tarjetas { get; set; }
         public DbSet<Vehiculo> Vehiculos { get; set; }
 

@@ -17,6 +17,7 @@ import { ViajeService } from '../services/viaje.service';
 export class CrearViajeComponent implements OnInit {
   @ViewChild('origen') origen: GooglePlaceDirective;
   @ViewChild('destino') destino: GooglePlaceDirective;
+  minDate: Date;
   options = {
     types: [],
     componentRestrictions: { country: 'AR' }
@@ -37,6 +38,8 @@ export class CrearViajeComponent implements OnInit {
 
   ngOnInit() {
     this.getUsuario();
+    this.minDate = new Date();
+    this.minDate.setDate(this.minDate.getDate() + 1);
   }
 
   getUsuario() {
@@ -50,6 +53,8 @@ export class CrearViajeComponent implements OnInit {
         return error;
       });
   }
+
+  mostrarRango() {return false}
 
   getVehiculos() {
     this.vehiculos = [];
