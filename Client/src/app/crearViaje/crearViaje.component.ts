@@ -26,6 +26,7 @@ export class CrearViajeComponent implements OnInit {
   viaje: any = {};
   vehiculos: any[] = [];
   plazas: number[]
+  usarRango: false;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,8 +54,6 @@ export class CrearViajeComponent implements OnInit {
         return error;
       });
   }
-
-  mostrarRango() {return false}
 
   getVehiculos() {
     this.vehiculos = [];
@@ -89,6 +88,10 @@ export class CrearViajeComponent implements OnInit {
     }
   }
 
+  mostrarRango() {
+    return this.usarRango;
+  }
+
   public origenChange(address: Address) {
     this.viaje.origen = address.formatted_address;
   }
@@ -98,6 +101,7 @@ export class CrearViajeComponent implements OnInit {
   }
 
   register() {
+    debugger;
     this.viaje.creador = this.usuario.id;
     this.viajeService.create(this.viaje)
         .subscribe(
