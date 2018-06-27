@@ -32,6 +32,14 @@ export class UserService {
         return this.http.post<User>('http://localhost:5000/api/User/Borrar', id);
     }
 
+    TieneCalificacionesPendientes(id: number): Observable<boolean> {
+        return this.http.get<boolean>('http://localhost:5000/api/User/TieneCalificacionesPendientes?id=' + id);
+    }
+
+    TienePagosPendientes(id: number): Observable<boolean> {
+        return this.http.get<boolean>('http://localhost:5000/api/User/TienePagosPendientes?id=' + id);
+    }
+
     executeLogin(email: string, password: string): Observable<User> {
         return this.http.post<User>('http://localhost:5000/api/Authentificate', { email: email, password: password })
     }

@@ -7,6 +7,7 @@ import { VehiculoService } from '../services/vehiculo.service';
 import { AlertasService } from '../alertas/alertas.service';
 import { AuthGuard } from '../guards/auth.guard';
 import * as moment from 'moment';
+import * as dateHelper from '../../assets/js/dateHelper';
 import { ViajeService } from '../services/viaje.service';
 
 @Component({
@@ -27,6 +28,7 @@ export class CrearViajeComponent implements OnInit {
   vehiculos: any[] = [];
   plazas: number[]
   usarRango: false;
+  rangoDeFechas: any[];
 
   constructor(
     private route: ActivatedRoute,
@@ -100,20 +102,24 @@ export class CrearViajeComponent implements OnInit {
     this.viaje.destino = address.formatted_address;
   }
 
-  register() {
-    debugger;
-    this.viaje.creador = this.usuario.id;
-    this.viajeService.create(this.viaje)
+  async register() {
+    if (await this.authGuard.userAutorizado(this.usuario.id)) {  // usuarioAutorizado
+      const fechaInicio = this.rangoDeFechas !== undefined ? this.rangoDeFechas[0] : this.viaje.diasDeViaje;
+      const fechaFin = this.rangoDeFechas !== undefined ? this.rangoDeFechas[1] : this.viaje.diasDeViaje;
+      this.viaje.diasDeViaje = dateHelper.getDates(fechaInicio, fechaFin);
+      this.viaje.creador = this.usuario.id;
+      this.viajeService.create(this.viaje)
         .subscribe(
-            data => {
-                this.alertService.addAlert('success', 'El viaje se creó correctamente');
-                this.router.navigate(['/home']);
-            },
-            error => {
-                this.alertService.addAlert('danger', 'Lo sentimos, hubo un problema al crear tu viaje, itentalo nuevamente');
-            });
-}
-
-
-
+          data => {
+            this.alertService.addAlert('success', 'El viaje se creó correctamente');
+            this.router.navigate(['/home']);
+          },
+          error => {
+            this.alertService.addAlert('danger', 'Lo sentimos, hubo un problema al crear tu viaje, itentalo nuevamente');
+          });
+    } else {
+      this.alertService.addAlert('danger',
+        'Lo sentimos, no estas autorizado para realizar esta operacion. Revisa tus pagos o puntuaciones pendientes');
+    }
+  }
 }

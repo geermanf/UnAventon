@@ -63,5 +63,41 @@ namespace unAventonApi.Controllers
                 return BadRequest("Hubo un error al listar con id: " + id);
             }
         }
+
+        [HttpGet("TienePagosPendientes")]
+        public IActionResult CheckPagos(int id)
+        {
+            try
+            {
+                var user = this.genericRepo.GetAllUserById(id);
+
+                if (user.Id != 1)
+                    return Ok(true);
+                else
+                    return Ok(false);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al obtener pagos pendientes del usuario id: " + id);
+            }
+        }
+        
+        [HttpGet("TieneCalificacionesPendientes")]
+        public IActionResult CheckCalificaciones(int id)
+        {
+            try
+            {
+                var user = this.genericRepo.GetAllUserById(id);
+
+                if (user.Id != 3)
+                    return Ok(true);
+                else
+                    return Ok(false);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al obtener puntuaciones pendientes del usuario id: " + id);
+            }
+        }
     }
 }

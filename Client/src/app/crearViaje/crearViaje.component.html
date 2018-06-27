@@ -76,7 +76,7 @@
 
             <!-- -------------------- FECHA Y HORA -------------------- -->
             <div class="wrap-input100 rs1 validate-input" *ngIf="mostrarRango()">
-              <input class="input100" bsDaterangepicker type="text" [minDate]="minDate" name="fechaPRange" [(ngModel)]="viaje.fechaPartida"
+              <input class="input100" bsDaterangepicker type="text" [minDate]="minDate" name="fechaPRange" [(ngModel)]="rangoDeFechas"
                 #fechaPRange="ngModel" [ngClass]="{ 'has-danger': f.submitted && (!fechaPRange.valid) }"
                  [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-red' }" required>
               <span class="focus-input100"></span>
@@ -84,7 +84,7 @@
             </div>
 
             <div class="wrap-input100 rs1 validate-input" *ngIf="!mostrarRango()">
-              <input class="input100" bsDatepicker type="text" [minDate]="minDate" name="fechaP" [(ngModel)]="viaje.fechaPartida" #fechaP="ngModel"
+              <input class="input100" bsDatepicker type="text" [minDate]="minDate" name="fechaP" [(ngModel)]="viaje.diasDeViaje" #fechaP="ngModel"
                 [ngClass]="{ 'has-danger': f.submitted && (!fechaP.valid) }" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-red' }" required>
               <span class="focus-input100"></span>
               <span class="focus-input-label">Fecha de partida</span>

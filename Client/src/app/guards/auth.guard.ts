@@ -28,19 +28,26 @@ export class AuthGuard implements CanActivate {
         }
 
         // not logged in so redirect to login page with the return url
-        this.router.navigate(['/registrarse'], { queryParams: { access: 'notOk' } } );
+        this.router.navigate(['/registrarse'], { queryParams: { access: 'notOk' } });
         return false;
     }
 
     getUser() {
-            const user: User = JSON.parse(localStorage.getItem('currentUser'));
-            return this.userService.getById(user.id).map(
-                data => {
-                    return data;
-                },
-                error => {
-                    return error;
-                })
+        const user: User = JSON.parse(localStorage.getItem('currentUser'));
+        return this.userService.getById(user.id).map(
+            data => {
+                return data;
+            },
+            error => {
+                return error;
+            })
+    }
+
+    async userAutorizado(id: number) {
+        const cal = await this.userService.TieneCalificacionesPendientes(id).toPromise();
+        const cal2 = await this.userService.TienePagosPendientes(id).toPromise()
+        debugger;
+        return cal && cal2;
     }
 
     getCurrentUserId() {
