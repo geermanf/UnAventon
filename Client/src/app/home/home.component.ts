@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthGuard } from '../guards/auth.guard';
+import { ViajeService } from '../services/viaje.service';
+import { Viaje } from '../models/Viaje';
 
 @Component({
     selector: 'app-home',
@@ -7,9 +9,18 @@ import { AuthGuard } from '../guards/auth.guard';
     styleUrls: ['./home.component.css']
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
-    constructor(
-        public authGuard: AuthGuard) { }
+        viajes: Viaje[];
 
+        constructor(private viajeService: ViajeService, public authGuard: AuthGuard) { }
+        ngOnInit() {
+          this.cargarViajes();
+        }
+        cargarViajes() {
+          this.viajes = [];
+          this.viajeService.getAll()
+            .map(res => Object.keys(res).map(index => this.viajes.push(res[index])))
+            .subscribe();
+        }
 }

@@ -21,3 +21,17 @@ h1 {
     color: #FFFFFF;
     text-transform: uppercase;
 }
+
+.btn-rosa {
+    background-color: #f17376;
+    border-color: #f17376;
+    color: #FFFFFF;
+    width: 200px;
+    font-size: 15px;
+    height: 50px;
+}
+
+.btn-rosa:hover {
+    background-color: #ec4b4e;
+    border-color: #ec4b4e;
+}

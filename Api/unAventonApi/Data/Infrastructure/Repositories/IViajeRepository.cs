@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,5 +12,9 @@ namespace unAventonApi.Data
         Viaje GetAllById(int id);
 
         List<Viaje> GetByVehiculoId(int vehiculoId);
+
+        IQueryable<Object> GetAllNotIncludes();
+
+        Object GetByIdNotIncludes(int id);
     }
 }

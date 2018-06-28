@@ -32,7 +32,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { RegistrarseComponent } from './registrarse/registrarse.component';
 import { IniciarSesionModalComponent } from './iniciarSesion/iniciarSesionModal/iniciarSesionModal.component';
-import { ContenedorViajeComponent } from './viaje/contenedorViaje.component';
+import { ContenedorViajeComponent } from './viajes/contenedorViaje/contenedorViaje.component';
 import { BuscadorComponent } from './buscador/buscador.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { AlertasComponent } from './alertas/alertas.component';
@@ -46,6 +46,8 @@ import { FormularioVehiculosComponent } from './perfil/formularioVehiculos/formu
 import { FormularioTarjetasComponent } from './perfil/formularioTarjetas/formularioTarjetas.component';
 import { EditarVehiculosComponent } from './perfil/editarVehiculos/editarVehiculos.component';
 import { CrearViajeComponent } from './crearViaje/crearViaje.component';
+import { VerViajesComponent } from './viajes/verViajes/verViajes.component';
+import { DetalleViajeComponent } from './viajes/detalleViaje/detalleViaje.component';
 
 
 
@@ -84,7 +86,9 @@ import { CrearViajeComponent } from './crearViaje/crearViaje.component';
     FormularioVehiculosComponent,
     FormularioTarjetasComponent,
     EditarVehiculosComponent,
-    CrearViajeComponent
+    CrearViajeComponent,
+    VerViajesComponent,
+    DetalleViajeComponent
 ],
   exports: [
     ContenedorViajeComponent,

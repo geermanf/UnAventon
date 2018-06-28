@@ -1,0 +1,157 @@
+<div class="trip trip-with-driver" [ngClass]="{'trip-mostly-available': (lugaresDisponibles > 2) ,'trip-almost-fill': (lugaresDisponibles < 3), 'trip-fill': (lugaresDisponibles === 0) }">
+    <div class="panel panel-default panel-card card card-trip">
+        <div class="panel-heading card_heading">
+            <div class="panel-title card-trip_title row">
+                <div class="trip_driver_img_container">
+                    <div class="trip_driver_img circle-box">
+                            <img src="{{viaje.creador.fotoPerfil}}" alt="Circle Image" class="img-circle img-no-padding img-responsive"
+                            (error)="img.src = '../assets/img/anonym-bw.png'" #img>
+                    </div>
+                </div>
+                <div class="trip_driver_details">
+                    <div class="trip_driver_name">
+                        {{viaje.creador.nombre + " " + viaje.creador.apellido}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body card_body">
+            <div class="trip_location">
+                <div class="row trip_location_from">
+                    <div class="col-xs-4 text-right">
+                        <i aria-hidden="true" class="fa fa-map-marker"></i>
+                    </div>
+                    <div class="col-xs-20">
+                        <span class="trip_location_from_city">{{ciudadOrigen}}</span>
+                        <span class="trip_location_from_state-country">{{provinciaOrigen}}</span>
+                    </div>
+                </div>
+                <div class="row trip_location_to">
+                    <div class="col-xs-4 text-right">
+                        <i aria-hidden="true" class="fa fa-map-marker"></i>
+                    </div>
+                    <div class="col-xs-20">
+                        <span class="trip_location_from_city">{{ciudadDestino}}</span>
+                        <span class="trip_location_from_state-country">{{provinciaDestino}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <time class="trip_datetime col-xs-24">
+                    <div class="row">
+                        <div class="col-xs-14 trip_datetime_date">
+                            <span class="trip_datetime_date_day" *ngIf="viaje.diasDeViaje.length === 1">
+                                {{viaje.diasDeViaje[0] | date:'dd-MM-yyyy' }}
+                            </span>
+                            <span class="trip_datetime_date_day" *ngIf="viaje.diasDeViaje.length > 1">
+                                Pack de viajes
+                            </span>
+                        </div>
+                        <div class="col-xs-10">
+                            <span class="trip_datetime_time">{{viaje.horaPartida[0] + ':' + viaje.horaPartida[1]}} hs</span>
+                        </div>
+                    </div>
+                </time>
+            </div>
+            <div class="row">
+                <div class="trip_seats-available col-xs-offset-2 col-xs-12">
+                    <span class="trip_seats-available_value pull-left" [ngClass]="{'pink': (lugaresDisponibles === 0)}">{{lugaresDisponibles}}</span>
+                    <span class="trip_seats-available_label" [ngClass]="{'pink': (lugaresDisponibles === 0)}">
+                        <span>Lugares</span>
+                        <span>libres</span>
+                    </span>
+                </div>
+                <div class="trip_actions col-xs-10">
+                    <button class="btn btn-default btn-lg btn-trip-detail" [ngClass]="{'btn-trip-pink': (lugaresDisponibles === 0)}" (click)="verViaje()">Ver</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- 
+
+<div data-v-1f970b6a="" class="trip trip-mostly-available trip-with-driver">
+    <div data-v-1f970b6a="" class="panel panel-default panel-card card card-trip">
+        <div data-v-1f970b6a="" class="panel-heading card_heading">
+            <div data-v-1f970b6a="" class="panel-title card-trip_title row">
+                <div data-v-1f970b6a="" class="card-icon">
+                    <span data-v-1f970b6a="" class="trip_visibility">
+                        <span data-v-1f970b6a="" title="Visilidad: Público">
+                            <span data-v-1f970b6a="" title="Visibilidad: Público" data-tooltip="Público" class="tooltip-bottom">
+                                <i data-v-1f970b6a="" aria-hidden="true" class="fa fa-globe"></i>
+                            </span>
+                        </span>
+                    </span>
+                </div>
+                <div data-v-1f970b6a="" class="trip_driver_img_container">
+                    <div data-v-1f970b6a="" class="trip_driver_img circle-box" style="background-image: url(&quot;https://carpoolear.com.ar/image/profile/092020172338460242124001505961526.jpg&quot;);"></div>
+                </div>
+                <div data-v-1f970b6a="" class="trip_driver_details">
+                    <div data-v-1f970b6a="" class="trip_driver_name">
+                        Lucho Pesci
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-v-1f970b6a="" class="panel-body card_body">
+            <div data-v-1f970b6a="" class="trip_location">
+                <div data-v-1f970b6a="" class="row trip_location_from">
+                    <div data-v-1f970b6a="" class="col-xs-4 text-right">
+                        <i data-v-1f970b6a="" aria-hidden="true" class="fa fa-map-marker"></i>
+                    </div>
+                    <div data-v-1f970b6a="" class="col-xs-20">
+                        <span data-v-1f970b6a="" class="trip_location_from_city">Buenos Aires</span>
+                        <span data-v-1f970b6a="" class="trip_location_from_state-country">CABA</span>
+                    </div>
+                </div>
+                <div data-v-1f970b6a="" class="row trip_location_to">
+                    <div data-v-1f970b6a="" class="col-xs-4 text-right">
+                        <i data-v-1f970b6a="" aria-hidden="true" class="fa fa-map-marker"></i>
+                    </div>
+                    <div data-v-1f970b6a="" class="col-xs-20">
+                        <span data-v-1f970b6a="" class="trip_location_from_city">Rosario</span>
+                        <span data-v-1f970b6a="" class="trip_location_from_state-country">Santa Fe</span>
+                    </div>
+                </div>
+                <div data-v-1f970b6a="" class="col-xs-4 trip_location-dot-line">
+                    <div data-v-1f970b6a=""></div>
+                </div>
+            </div>
+            <div data-v-1f970b6a="" class="row">
+                <time data-v-1f970b6a="" datetime="2018-06-28 09:00:00" class="trip_datetime col-xs-24">
+                    <div data-v-1f970b6a="" class="row">
+                        <div data-v-1f970b6a="" class="col-xs-14 trip_datetime_date">
+                            <span data-v-1f970b6a="" class="trip_datetime_date_day">
+                                <span data-v-1f970b6a="" style="text-transform: uppercase;">jue.</span>
+                                28 junio
+                            </span>
+                            <br data-v-1f970b6a="">
+                            <span data-v-1f970b6a="" class="trip_datetime_date_year">2018</span>
+                        </div>
+                        <div data-v-1f970b6a="" class="col-xs-10">
+                            <span data-v-1f970b6a="" class="trip_datetime_time">09:00 hs</span>
+                        </div>
+                    </div>
+                </time>
+            </div>
+            <div data-v-1f970b6a="" class="row">
+                <div data-v-1f970b6a="" class="trip_seats-available col-xs-offset-2 col-xs-12">
+                    <span data-v-1f970b6a="" class="trip_seats-available_value pull-left">4</span>
+                    <span data-v-1f970b6a="" class="trip_seats-available_label">
+                        <span data-v-1f970b6a="">Lugares</span>
+                        <span data-v-1f970b6a="">libres</span>
+                    </span>
+                </div>
+                <div data-v-1f970b6a="" class="trip_actions col-xs-10">
+                    <div data-v-1f970b6a="" class="btn btn-default btn-lg btn-trip-detail">Ver</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

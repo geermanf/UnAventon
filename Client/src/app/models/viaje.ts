@@ -7,11 +7,12 @@ export class Viaje {
     tipoViaje: any;
     costo: number;
     descripcion: string;
-    fechaPartida: Date;
-    horaPartida: Time;
+    diasDeViaje: Date[];
+    horaPartida: any;
     vehiculo: any;
-    postulantes: any;
-    viajeros: any;
+    postulantes: any[];
+    viajeros: any[];
     creador: any;
+    cantidadDePlazas: number;
     id: number;
 }

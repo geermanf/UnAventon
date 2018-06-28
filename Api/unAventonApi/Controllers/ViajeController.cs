@@ -141,8 +141,10 @@ namespace unAventonApi.Controllers
         {
             try
             {
-                this.viajerosRepository.Delete(idViajero, idViaje);
-
+                var viaje = this.genericRepo.GetAllById(idViaje);
+                var viajero = viaje.Viajeros.First(p => p.ViajeId == idViaje && p.UserId == idViajero);
+                viaje.Viajeros.Remove(viajero);
+                this.genericRepo.Update(viaje.Id, viaje);
                 return Ok();
             }
             catch (Exception)
@@ -156,7 +158,10 @@ namespace unAventonApi.Controllers
         {
             try
             {
-                this.viajerosRepository.Delete(idPostulante, idViaje);
+                var viaje = this.genericRepo.GetAllById(idViaje);
+                var postulantes = viaje.Postulantes.First(p => p.ViajeId == idViaje && p.UserId == idPostulante);
+                viaje.Postulantes.Remove(postulantes);
+                this.genericRepo.Update(viaje.Id, viaje);
                 return Ok();
             }
             catch (Exception)
@@ -174,7 +179,9 @@ namespace unAventonApi.Controllers
             {
                 response = this.postulantesRepository.GetByIdViaje(idViaje).ToList();
 
-                return Ok(response);
+                var postulantes = response.Select(r => r.User).ToList();
+
+                return Ok(postulantes);
             }
             catch (Exception)
             {
@@ -191,12 +198,51 @@ namespace unAventonApi.Controllers
             {
                 response = this.viajerosRepository.GetByIdViaje(idViaje).ToList();
 
+                var viajeros = response.Select(r => r.User).ToList();
+
+                return Ok(viajeros);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al listar");
+            }
+        }
+
+        [HttpGet("ListarViajes")]
+        public new IActionResult Get()
+        {
+            var response = new List<Object>();
+
+            try
+            {
+                response = this.genericRepo.GetAllNotIncludes().ToList();
+                response.Reverse();
                 return Ok(response);
             }
             catch (Exception)
             {
                 return BadRequest("Hubo un error al listar");
             }
+
+
+
+        }
+
+        [HttpGet("ListarId")]
+        public IActionResult GetByIdNotIncludes(int id)
+        {
+            try
+            {
+                var response = this.genericRepo.GetByIdNotIncludes(id);
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al listar");
+            }
+
+
+
         }
 
     }

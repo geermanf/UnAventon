@@ -7,7 +7,7 @@
             <br />
             <app-buscador></app-buscador>
         </div>
-        
+
     </div>
 </div>
 <div class="main">
@@ -78,61 +78,53 @@
 
     <div class="section section-grey text-center">
         <div class="container">
-            <h2 class="title">Ultimos viajes</h2>
             <div class="row">
-                <div class="col-md-3">
-                    <app-contenedorViaje></app-contenedorViaje>
+                <div class="col-md-8 ml-auto mr-auto">
+
+                    <h2 class="title">Ultimos viajes</h2>
                 </div>
-                <div class="col-md-3">
-                    <app-contenedorViaje></app-contenedorViaje>
+
+            </div>
+            <div class="row">
+                <div class="col-md-3" *ngIf="viajes.length >= 1">
+                    <app-contenedorviaje [viaje]="viajes[0]"></app-contenedorviaje>
                 </div>
-                <div class="col-md-3">
-                    <app-contenedorViaje></app-contenedorViaje>
+                <div class="col-md-3" *ngIf="viajes.length >= 2">
+                    <app-contenedorviaje [viaje]="viajes[1]"></app-contenedorviaje>
                 </div>
-                <div class="col-md-3">
-                    <app-contenedorViaje></app-contenedorViaje>
+                <div class="col-md-3" *ngIf="viajes.length >= 3">
+                    <app-contenedorviaje [viaje]="viajes[2]"></app-contenedorviaje>
+                </div>
+                <div class="col-md-3" *ngIf="viajes.length >= 4">
+                    <app-contenedorviaje [viaje]="viajes[3]"></app-contenedorviaje>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto">
+
+                    <button class="btn btn-round btn-rosa" routerLink="/verViajes" routerLinkActive="active">Ver mas</button>
+                </div>
+
+            </div>
+
         </div>
     </div>
     <div class="section section-pink">
         <div class="container">
             <div class="row ">
-                <div class="col-md-4"><p style="font-size: 2vw;"> Ahorras dinero <br> y haces amigos </p></div>
-                <div class="col-md-4"><p style="font-size: 2vw;">Se mejora la calidad<br> del viaje</p></div>
-                <div class="col-md-4"><p style="font-size: 2vw;">Se reduce el tráfico<br>y la contaminación <br>ambiental</p></div>
-                <!-- <div class="col-md-8 mr-auto ml-auto">
-                    <h2 class="text-center">Keep in touch?</h2>
-                    <form class="contact-form">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Name</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="nc-icon nc-single-02"></i>
-                                    </span>
-                                    <input type="text" class="form-control" placeholder="Name">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label>Email</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="nc-icon nc-email-85"></i>
-                                    </span>
-                                    <input type="text" class="form-control" placeholder="Email">
-                                </div>
-                            </div>
-                        </div>
-                        <label>Message</label>
-                        <textarea class="form-control" rows="4" placeholder="Tell us your thoughts and feelings..."></textarea>
-                        <div class="row">
-                            <div class="col-md-4 mr-auto ml-auto">
-                                <button class="btn btn-danger btn-lg btn-fill">Send Message</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>-->
+                <div class="col-md-4">
+                    <p style="font-size: 2vw;"> Ahorras dinero
+                        <br> y haces amigos </p>
+                </div>
+                <div class="col-md-4">
+                    <p style="font-size: 2vw;">Se mejora la calidad
+                        <br> del viaje</p>
+                </div>
+                <div class="col-md-4">
+                    <p style="font-size: 2vw;">Se reduce el tráfico
+                        <br>y la contaminación
+                        <br>ambiental</p>
+                </div>
             </div>
         </div>
 
