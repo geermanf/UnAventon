@@ -18,26 +18,30 @@ namespace unAventonApi.Controllers
         private readonly IUserRepository userRepository;
         private readonly IVehiculoRepository vehiculoRepository;
         private readonly ITipoViajeRepository tipoViajeRepository;
+        private readonly IDiaDeViajeRepository diaDeViajeRepository;
 
         public ViajeController(IViajeRepository genericRepo, IPostulantesRepository postulantesRepository, IViajerosRepository viajerosRepository,
-        IUserRepository userRepository, IVehiculoRepository vehiculoRepository, ITipoViajeRepository tipoViajeRepository) : base(genericRepo)
+        IUserRepository userRepository, IVehiculoRepository vehiculoRepository, ITipoViajeRepository tipoViajeRepository, IDiaDeViajeRepository diaDeViajeRepository) : base(genericRepo)
         {
             this.postulantesRepository = postulantesRepository;
             this.viajerosRepository = viajerosRepository;
             this.userRepository = userRepository;
             this.vehiculoRepository = vehiculoRepository;
             this.tipoViajeRepository = tipoViajeRepository;
+            this.diaDeViajeRepository = diaDeViajeRepository;
         }
 
         [HttpPost("Crear")]
-        public IActionResult Crear(ViajeDTO viajeDTO)
+        public IActionResult Crear([FromBody]ViajeDTO viajeDTO)
         {
-            var viaje = new Viaje() {
+            var viaje = new Viaje()
+            {
                 Origen = viajeDTO.Origen,
                 Destino = viajeDTO.Destino,
                 Duracion = viajeDTO.Duracion,
                 Costo = viajeDTO.Costo,
-                FechaPartida = viajeDTO.FechaPartida
+                DiasDeViaje = viajeDTO.DiasDeViaje.Select(fecha => new DiaDeViaje() { fechaDeViaje = fecha }).ToList(),
+                HoraPartida = viajeDTO.HoraPartida
             };
             try
             {
@@ -47,8 +51,8 @@ namespace unAventonApi.Controllers
                 viaje.TipoViaje = this.tipoViajeRepository.GetById(viajeDTO.TipoViaje);
                 var nuevoViaje = this.genericRepo.Create(viaje).Result;
 
-                this.addPostulante(nuevoViaje.Id,user.Id);
-                this.addViajero(nuevoViaje.Id,user.Id);
+                this.addPostulante(nuevoViaje.Id, user.Id);
+                this.addViajero(nuevoViaje.Id, user.Id);
 
                 return Ok();
             }
@@ -70,7 +74,8 @@ namespace unAventonApi.Controllers
                 // this.postulantesRepository.Delete(idViajero, idViaje);
 
                 // var vj = this.viajerosRepository.Create(viajeros);
-                var vj = new Viajeros() {
+                var vj = new Viajeros()
+                {
                     User = user,
                     UserId = user.Id,
                     Viaje = viaje,
@@ -79,7 +84,8 @@ namespace unAventonApi.Controllers
                 viaje.Viajeros.Add(vj);
                 viaje.Postulantes.Remove(postulantes);
 
-                var vp = new ViajesPendientes() {
+                var vp = new ViajesPendientes()
+                {
                     User = user,
                     UserId = user.Id,
                     Viaje = viaje,
@@ -104,7 +110,8 @@ namespace unAventonApi.Controllers
             {
                 var user = this.userRepository.GetAllUserById(idPostulante);
                 var viaje = this.genericRepo.GetAllById(idViaje);
-                var postulantes = new Postulantes() {
+                var postulantes = new Postulantes()
+                {
                     User = user,
                     UserId = idPostulante,
                     Viaje = viaje,
@@ -112,7 +119,8 @@ namespace unAventonApi.Controllers
                 };
 
                 // var pst = this.postulantesRepository.Create(postulantes);
-                var pst = new Postulantes(){
+                var pst = new Postulantes()
+                {
                     User = user,
                     UserId = user.Id,
                     Viaje = viaje,
@@ -133,8 +141,10 @@ namespace unAventonApi.Controllers
         {
             try
             {
-                this.viajerosRepository.Delete(idViajero, idViaje);
-
+                var viaje = this.genericRepo.GetAllById(idViaje);
+                var viajero = viaje.Viajeros.First(p => p.ViajeId == idViaje && p.UserId == idViajero);
+                viaje.Viajeros.Remove(viajero);
+                this.genericRepo.Update(viaje.Id, viaje);
                 return Ok();
             }
             catch (Exception)
@@ -148,7 +158,10 @@ namespace unAventonApi.Controllers
         {
             try
             {
-                this.viajerosRepository.Delete(idPostulante, idViaje);
+                var viaje = this.genericRepo.GetAllById(idViaje);
+                var postulantes = viaje.Postulantes.First(p => p.ViajeId == idViaje && p.UserId == idPostulante);
+                viaje.Postulantes.Remove(postulantes);
+                this.genericRepo.Update(viaje.Id, viaje);
                 return Ok();
             }
             catch (Exception)
@@ -166,7 +179,9 @@ namespace unAventonApi.Controllers
             {
                 response = this.postulantesRepository.GetByIdViaje(idViaje).ToList();
 
-                return Ok(response);
+                var postulantes = response.Select(r => r.User).ToList();
+
+                return Ok(postulantes);
             }
             catch (Exception)
             {
@@ -183,12 +198,51 @@ namespace unAventonApi.Controllers
             {
                 response = this.viajerosRepository.GetByIdViaje(idViaje).ToList();
 
+                var viajeros = response.Select(r => r.User).ToList();
+
+                return Ok(viajeros);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al listar");
+            }
+        }
+
+        [HttpGet("ListarViajes")]
+        public new IActionResult Get()
+        {
+            var response = new List<Object>();
+
+            try
+            {
+                response = this.genericRepo.GetAllNotIncludes().ToList();
+                response.Reverse();
                 return Ok(response);
             }
             catch (Exception)
             {
                 return BadRequest("Hubo un error al listar");
             }
+
+
+
+        }
+
+        [HttpGet("ListarId")]
+        public IActionResult GetByIdNotIncludes(int id)
+        {
+            try
+            {
+                var response = this.genericRepo.GetByIdNotIncludes(id);
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al listar");
+            }
+
+
+
         }
 
     }

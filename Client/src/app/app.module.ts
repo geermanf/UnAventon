@@ -10,9 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { DatePipe } from '@angular/common';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 // Import Services
 import { UserService } from './services/user.service';
+import { ViajeService } from './services/viaje.service';
 import { VehiculoService } from './services/vehiculo.service';
 import { TarjetaService } from './services/tarjeta.service';
 import { AuthGuard } from './guards/auth.guard';
@@ -28,7 +32,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { RegistrarseComponent } from './registrarse/registrarse.component';
 import { IniciarSesionModalComponent } from './iniciarSesion/iniciarSesionModal/iniciarSesionModal.component';
-import { ContenedorViajeComponent } from './viaje/contenedorViaje.component';
+import { ContenedorViajeComponent } from './viajes/contenedorViaje/contenedorViaje.component';
 import { BuscadorComponent } from './buscador/buscador.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { AlertasComponent } from './alertas/alertas.component';
@@ -41,6 +45,9 @@ import { ContenedorTarjetaComponent } from './perfil/contenedorTarjeta/contenedo
 import { FormularioVehiculosComponent } from './perfil/formularioVehiculos/formularioVehiculos.component';
 import { FormularioTarjetasComponent } from './perfil/formularioTarjetas/formularioTarjetas.component';
 import { EditarVehiculosComponent } from './perfil/editarVehiculos/editarVehiculos.component';
+import { CrearViajeComponent } from './crearViaje/crearViaje.component';
+import { VerViajesComponent } from './viajes/verViajes/verViajes.component';
+import { DetalleViajeComponent } from './viajes/detalleViaje/detalleViaje.component';
 
 
 
@@ -50,12 +57,14 @@ import { EditarVehiculosComponent } from './perfil/editarVehiculos/editarVehicul
     BrowserModule,
     BrowserAnimationsModule,
     NgbModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     FormsModule,
     RouterModule,
     AppRoutingModule,
     HttpClientModule,
     NgxSmartModalModule.forRoot(),
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    GooglePlaceModule
   ],
   declarations: [
     AppComponent,
@@ -77,7 +86,9 @@ import { EditarVehiculosComponent } from './perfil/editarVehiculos/editarVehicul
     FormularioVehiculosComponent,
     FormularioTarjetasComponent,
     EditarVehiculosComponent,
-
+    CrearViajeComponent,
+    VerViajesComponent,
+    DetalleViajeComponent
 ],
   exports: [
     ContenedorViajeComponent,
@@ -91,9 +102,11 @@ import { EditarVehiculosComponent } from './perfil/editarVehiculos/editarVehicul
     EditarVehiculosComponent
   ],
   providers: [
+    DatePipe,
     AuthGuard,
     AuthenticationService,
     UserService,
+    ViajeService,
     VehiculoService,
     TarjetaService,
     AlertasService,

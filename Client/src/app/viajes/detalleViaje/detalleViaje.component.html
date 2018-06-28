@@ -1,0 +1,220 @@
+<div class="wrapper">
+  <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('../assets/img/home.jpg'); margin:0;">
+    <div class="filter"></div>
+  </div>
+  <div class="section profile-content">
+    <div class="container">
+
+      <div class="trip-detail-component">
+        <div class="row form">
+
+          <div class="col-md-6 column" *ngIf="!verAcompaniantes && !verPostulantes">
+            <div class="owner">
+              <div class="avatar" style="margin: 0px;">
+                <div class="img-hover-content">
+                  <img src="{{viaje.creador.fotoPerfil}}" alt="" class="img-thumbnail img-responsive" (error)="img.src = '../assets/img/anonym-bw.png'"
+                    #img>
+                </div>
+              </div>
+              <div class="name">
+                <h4 class="title">
+                  {{viaje.creador.nombre}} {{viaje.creador.apellido}}
+                  <br />
+
+                </h4>
+
+                <div>
+                  <br /> {{viaje.descripcion}}
+                </div>
+
+                <div class="row" *ngIf="!esCreador && (!esPostulante) && (!esViajero) && (lugaresDisponibles > 0)" style="margin-top: 3em;">
+
+                  <div class="col-md-4 mr-auto ml-auto">
+                    <button type="submit" class="contact100-form-btn" style="margin-right: 2%" (click)="clickPostulante()">
+                      Solicitar lugar
+                    </button>
+                  </div>
+                </div>
+                <div class="row" *ngIf="!esCreador && esPostulante" style="margin-top: 3em;">
+                  <div class="col-md-4 mr-auto ml-auto">
+                    <button type="submit" class="contact100-form-btn" style="margin-right: 2%; width: 150px" (click)="clickCancelarPostulante()">
+                      Cancelar solicitud
+                    </button>
+                  </div>
+                </div>
+                <div class="row" *ngIf="!esCreador && esViajero" style="margin-top: 3em;">
+                  <div class="col-md-4 mr-auto ml-auto">
+                    <button type="submit" class="contact100-form-btn" style="margin-right: 2%" (click)="clickCancelarParticipacion()">
+                      Cancelar participación
+                    </button>
+                  </div>
+                </div>
+
+
+                <div class="row" *ngIf="esCreador" style="margin-top: 3em;">
+                  <div class="col-md-4 float-right">
+                    <button type="submit" class="contact100-form-btn" style="width: 150px" (click)="verPostulantes = true">
+                      Ver postulantes
+                    </button>
+                  </div>
+                  <div class="col-md-4">
+                    <button type="submit" class="contact100-form-btn" style="width: 150px" (click)="verAcompaniantes = true">
+                      Ver acompañantes
+                    </button>
+                  </div>
+                  <div class="col-md-4 float-left">
+                    <button type="submit" class="contact100-form-btn" style="width: 150px; background-color: #ee9d9e" disabled="true">
+                      Cancelar viaje
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 column" *ngIf="verPostulantes">
+            <span *ngFor="let postulante of postulantes">
+              <div class="row">
+                <div class="col-sm-2">
+                  <div class="avatar" style="margin: 0px;">
+                    <div class="img-hover-content">
+                      <img src="{{postulante.fotoPerfil}}" alt="" class="img-thumbnail img-responsive" (error)="img.src = '../assets/img/anonym-bw.png'"
+                        #img>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8 justify-content-center">
+                  <h3 class="text-center" style="margin-top:10%">
+                    {{postulante.nombre}} {{postulante.apellido}}
+                  </h3>
+                </div>
+                <div class="col-sm-2">
+                  <button type="submit" class="contact100-form-btn" style="margin-right: 2%;margin-top:25%" (click)="aceptarPostulante(postulante)">
+                    Aceptar
+                  </button>
+                </div>
+              </div>
+            </span>
+            <div class="row">
+              <div class="col-md-12 justify-content-center">
+                <h3 class="text-center" style="margin-top:10%" *ngIf="postulantes.length === 0">
+                  No hay postulantes
+                </h3>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="col-md-6 column" *ngIf="verAcompaniantes">
+            <span *ngFor="let viajero of viajeros">
+              <div class="row">
+                <div class="col-sm-2">
+                  <div class="avatar" style="margin: 0px;">
+                    <div class="img-hover-content">
+                      <img src="{{viajero.fotoPerfil}}" alt="" class="img-thumbnail img-responsive" (error)="img.src = '../assets/img/anonym-bw.png'"
+                        #img>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8 justify-content-center">
+                  <h3 class="text-center" style="margin-top:10%">
+                    {{viajero.nombre}} {{viajero.apellido}}
+                  </h3>
+                </div>
+                <div class="col-sm-2">
+                  <button type="submit" class="contact100-form-btn" style="margin-right: 2%;margin-top:25%" (click)="eliminarViajero(viajero)">
+                    Eliminar
+                  </button>
+                </div>
+              </div>
+            </span>
+            <div class="row">
+              <div class="col-md-12 justify-content-center">
+                <h3 class="text-center" style="margin-top:10%" *ngIf="viajeros.length === 0">
+                  No hay viajeros
+                </h3>
+              </div>
+            </div>
+
+          </div>
+
+
+
+          <div class="col-md-6 column">
+            <div class="trip_location">
+              <div class="row trip_location_from">
+                <div class="col-xs-4 text-right">
+                  <i aria-hidden="true" class="fa fa-map-marker"></i>
+                </div>
+                <div class="col-xs-20">
+                  <span class="trip_location_from_city">{{ciudadOrigen}}</span>
+                  <span class="trip_location_from_state-country">{{provinciaOrigen}}</span>
+                </div>
+              </div>
+              <div class="row trip_location_to">
+                <div class="col-xs-4 text-right">
+                  <i aria-hidden="true" class="fa fa-map-marker"></i>
+                </div>
+                <div class="col-xs-20">
+                  <span class="trip_location_from_city">{{ciudadDestino}}</span>
+                  <span class="trip_location_from_state-country">{{provinciaDestino}}</span>
+                </div>
+              </div>
+              <div class="col-xs-4 trip_location-dot-line">
+                <div></div>
+              </div>
+            </div>
+            <div class="row">
+              <time class="trip_datetime col-xs-24">
+                <div class="row">
+                  <div class="col-xs-8 trip_datetime_date">
+                    <div class="trip_datetime_date_day" *ngFor="let dia of viaje.diasDeViaje">
+                      {{dia | date:'dd-MM-yyyy' }}
+                    </div>
+                  </div>
+                  <div class="col-xs-10">
+                    <span class="trip_datetime_time" style="color:#f17376">{{viaje.horaPartida[0] + ':' + viaje.horaPartida[1]}} hs</span>
+                  </div>
+                </div>
+              </time>
+            </div>
+            <div class="row">
+              <div class="trip_seats-available col-xs-offset-4 col-sm-offset-4 col-xs-12">
+                <span class="trip_seats-available_value pull-left" style="color:#fb8e90">{{lugaresDisponibles}}</span>
+                <span class="trip_seats-available_label">Lugares
+                  <br>libres</span>
+              </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+              <div class="trip_seats-available col-xs-offset-4 col-sm-offset-4 col-xs-12">
+                <span class="trip_seats-available_value pull-left" style="color:#fb8e90">${{viaje.costo}}</span>
+                <span class="trip_seats-available_label">Costo
+                  <br>por lugar</span>
+
+              </div>
+
+            </div>
+
+            <div style="height: 3.5em;"></div>
+          </div>
+          <button type="submit" class="contact100-form-btn" style="width: 30px;width: 10px;margin:5%" *ngIf="verPostulantes == true"
+            (click)="verPostulantes = false">
+            Volver
+          </button>
+          <button type="submit" class="contact100-form-btn" style="width: 30px;width: 10px;margin:5%" *ngIf="verAcompaniantes == true"
+            (click)="verAcompaniantes = false">
+            Volver
+          </button>
+
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

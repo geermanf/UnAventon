@@ -28,7 +28,7 @@ namespace unAventonApi.Data
                     .Include(u => u.Tarjetas).ThenInclude(t => t.Tipo)
                     .Include(u => u.Vehiculos)
                     .Include(u => u.ViajesCreados)
-                    .Include(u => u.ViajesPendientes)
+                    .Include(u => u.ViajesPendientes).ThenInclude(t => t.Viaje).ThenInclude(v => v.DiasDeViaje)
                     .Include(u => u.ViajesRealizados)
                     .FirstOrDefault(x => x.Id == id);
             return user;

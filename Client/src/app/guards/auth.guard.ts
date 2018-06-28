@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 import { IfObservable } from 'rxjs/observable/IfObservable';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { CheckHorarioDTO } from '../models/CheckHorarioDTO';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -28,19 +29,30 @@ export class AuthGuard implements CanActivate {
         }
 
         // not logged in so redirect to login page with the return url
-        this.router.navigate(['/registrarse'], { queryParams: { access: 'notOk' } } );
+        this.router.navigate(['/registrarse'], { queryParams: { access: 'notOk' } });
         return false;
     }
 
     getUser() {
-            const user: User = JSON.parse(localStorage.getItem('currentUser'));
-            return this.userService.getById(user.id).map(
-                data => {
-                    return data;
-                },
-                error => {
-                    return error;
-                })
+        const user: User = JSON.parse(localStorage.getItem('currentUser'));
+        return this.userService.getById(user.id).map(
+            data => {
+                return data;
+            },
+            error => {
+                return error;
+            })
+    }
+
+    async userAutorizado(id: number) {
+        const cal = await this.userService.TieneCalificacionesPendientes(id).toPromise();
+        const cal2 = await this.userService.TienePagosPendientes(id).toPromise()
+        return cal && cal2;
+    }
+
+    async tieneHorariosDisponibles(dtoClass: CheckHorarioDTO, id: number) {
+        const ret = await this.userService.TieneHorarioLibre(dtoClass, id).toPromise();
+        return ret;
     }
 
     getCurrentUserId() {

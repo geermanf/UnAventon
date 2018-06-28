@@ -1,0 +1,129 @@
+<div class="wrapper">
+  <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('../assets/img/home.jpg');">
+    <div class="filter"></div>
+  </div>
+  <div class="section profile-content">
+    <div class="container">
+      <div class="owner">
+        <div class="name">
+          <h2>Crear viaje</h2>
+        </div>
+      </div>
+      <br />
+      <br />
+
+      <div class="nav-tabs-navigation">
+        <div class="nav-tabs-wrapper">
+          <form class="contact100-form validate-form flex-sb flex-w" name="form" (ngSubmit)="f.form.valid && placesAreValids() && costoValido() && register()"
+            #f="ngForm" novalidate>
+
+            <!-- -------------------- ORIGEN Y DESTINO -------------------- -->
+
+            <div class="wrap-input100 rs1 validate-input">
+              <input class="input100" ngx-google-places-autocomplete [options]='options' placeholder="" name="origen" #origen="ngx-places"
+                (onAddressChange)="origenChange($event)" [ngClass]="{ 'has-danger': f.submitted && viaje.origen === undefined }"
+              />
+              <span class="focus-input100"></span>
+              <span class="focus-input-label">Origen del viaje</span>
+            </div>
+
+            <div class="wrap-input100 rs1 validate-input">
+              <input class="input100" ngx-google-places-autocomplete [options]='options' placeholder="" name="destino" #destino="ngx-places"
+                (onAddressChange)="destinoChange($event)" required [ngClass]="{ 'has-danger': f.submitted && viaje.destino === undefined }"
+              />
+              <span class="focus-input100"></span>
+              <span class="focus-input-label">Destino del viaje</span>
+            </div>
+
+            <!-- -------------------- FIN ORIGEN Y DESTINO -------------------- -->
+            <!-- -------------------- COSTO Y DURACION -------------------- -->
+
+            <div class="wrap-input100 rs1 validate-input">
+              <input class="input100" type="number" min="0" name="costo" [(ngModel)]="viaje.costo" #costo="ngModel" [ngClass]="{ 'has-danger': f.submitted && (!costo.valid || !costoValido())}"
+                required>
+              <span class="focus-input100"></span>
+              <span class="focus-input-label">Costo del viaje por pasajero</span>
+            </div>
+
+            <div class="wrap-input100 rs1 validate-input">
+              <input class="input100" type="time" name="duracion" [(ngModel)]="viaje.duracion" #duracion="ngModel" [ngClass]="{ 'has-danger': f.submitted && !duracion.valid }"
+                required>
+              <span class="focus-input100"></span>
+              <span class="focus-input-label">Duracion del viaje</span>
+            </div>
+
+            <!-- -------------------- FIN COSTO Y DURACION -------------------- -->
+            
+            <!-- -------------------- VEHICULO Y PLAZAS -------------------- -->
+            <div class="wrap-input100 rs1 validate-input">
+              <select class="input100" name="vehiculo" [(ngModel)]="viaje.vehiculo" #vehiculo="ngModel" [ngClass]="{ 'has-danger': f.submitted && !vehiculo.valid }"
+                required (change)='actualizarPlazas()'>
+                <option *ngFor="let v of vehiculos" [ngValue]="v.id">{{v.marca +' '+ v.modelo}}</option>
+              </select>
+              <span class="focus-input100"></span>
+              <span class="focus-input-label">Seleccione el vehiculo a utilizar</span>
+            </div>
+
+            <div class="wrap-input100 rs1 validate-input">
+              <select class="input100" name="pla" [(ngModel)]="viaje.cantidadDePlazas" #pla="ngModel" [ngClass]="{ 'has-danger': f.submitted && !pla.valid }"
+                required>
+                <option *ngFor="let plaza of plazas">{{plaza}}</option>
+              </select>
+              <span class="focus-input100"></span>
+              <span class="focus-input-label">Seleccione la cantidad de plazas para el viaje</span>
+            </div>
+            <!-- -------------------- FIN VEHICULO Y PLAZAS -------------------- -->
+
+            <!-- -------------------- FECHA Y HORA -------------------- -->
+            <div class="wrap-input100 rs1 validate-input" *ngIf="mostrarRango()">
+              <input class="input100" bsDaterangepicker type="text" [minDate]="minDate" name="fechaPRange" [(ngModel)]="rangoDeFechas"
+                #fechaPRange="ngModel" [ngClass]="{ 'has-danger': f.submitted && (!fechaPRange.valid) }"
+                 [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-red' }" required>
+              <span class="focus-input100"></span>
+              <span class="focus-input-label">Fecha de partida</span>
+            </div>
+
+            <div class="wrap-input100 rs1 validate-input" *ngIf="!mostrarRango()">
+              <input class="input100" bsDatepicker type="text" [minDate]="minDate" name="fechaP" [(ngModel)]="viaje.diasDeViaje" #fechaP="ngModel"
+                [ngClass]="{ 'has-danger': f.submitted && (!fechaP.valid) }" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-red' }" required>
+              <span class="focus-input100"></span>
+              <span class="focus-input-label">Fecha de partida</span>
+            </div>
+
+            <div class="wrap-input100 rs1 validate-input">
+              <input class="input100" type="time" name="horaP" [(ngModel)]="viaje.horaPartida" #horaP="ngModel" [ngClass]="{ 'has-danger': f.submitted && !horaP.valid }"
+                min='00:00' max='23:59' required>
+              <span class="focus-input100"></span>
+              <span class="focus-input-label">Hora de partida</span>
+            </div>
+
+            <div class="form-check">
+              <label class="form-check-label">
+                <input [checked]="usarRango" class="form-check-input" type="checkbox" value="" (change)="usarRango = !usarRango">
+                Seleccionar un rango de fechas
+                <span class="form-check-sign"></span>
+              </label>
+            </div>
+            <!-- -------------------- FIN FECHA Y HORA -------------------- -->
+
+            <div class="form-control-feedback">
+              <div *ngIf="f.submitted && !f.form.valid">
+                Por favor, rellene todos los campos.
+              </div>
+
+              <div *ngIf="f.submitted && !costoValido() && costo.valid">
+                Por favor, ingrese un valor mayor o igual que 0.
+              </div>
+            </div>
+
+            <div class="container-contact100-form-btn">
+              <button type="submit" class="contact100-form-btn" style="margin-right: 2%">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

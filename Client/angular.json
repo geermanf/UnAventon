@@ -33,13 +33,13 @@
               "src/assets/css/style.scss",
               "src/assets/css/demo.css",
               "src/assets/css/nucleo-icons.css",
-              "src/assets/css/flaticon.css",
-              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
+              "src/assets/css/flaticon.css"
           ],
           "scripts": [
             "node_modules/jquery/dist/jquery.slim.min.js",
             "node_modules/popper.js/dist/umd/popper.js",
-            "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            "node_modules/bootstrap/dist/js/bootstrap.min.js",
+            "src/assets/js/jquery.min.js"
           ]
           },
           "configurations": {

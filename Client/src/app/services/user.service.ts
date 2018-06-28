@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { User } from '../models/User';
 import { Observable } from 'rxjs/Observable';
+import { CheckHorarioDTO } from '../models/CheckHorarioDTO';
 
 @Injectable()
 export class UserService {
@@ -32,8 +33,20 @@ export class UserService {
         return this.http.post<User>('http://localhost:5000/api/User/Borrar', id);
     }
 
+    TieneCalificacionesPendientes(id: number): Observable<boolean> {
+        return this.http.get<boolean>('http://localhost:5000/api/User/TieneCalificacionesPendientes?id=' + id);
+    }
+
+    TienePagosPendientes(id: number): Observable<boolean> {
+        return this.http.get<boolean>('http://localhost:5000/api/User/TienePagosPendientes?id=' + id);
+    }
+
     executeLogin(email: string, password: string): Observable<User> {
         return this.http.post<User>('http://localhost:5000/api/Authentificate', { email: email, password: password })
+    }
+
+    TieneHorarioLibre(dtoClass: CheckHorarioDTO, userId: number): Observable<boolean> {
+        return this.http.post<boolean>('http://localhost:5000/api/User/HorarioLibrePara?userId=' + userId, dtoClass);
     }
 
 }

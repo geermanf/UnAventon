@@ -35,7 +35,7 @@
         <div class="nav-tabs-wrapper">
           <tabset #perfilTabs [justified]="true">
 
-            <tab (select)="show($event)">
+            <tab>
               <ng-template tabHeading>
                 <span class="tab-link hover-rosa">Inicio</span>
               </ng-template>
@@ -67,7 +67,7 @@
 
             <!-- INICIO VEHICULOS -->
 
-            <tab (select)="show($event)">
+            <tab>
               <ng-template tabHeading>
                 <span class="tab-link hover-rosa">Mis vehiculos</span>
               </ng-template>
@@ -108,7 +108,7 @@
 
             <!-- INICIO TARJETAS -->
 
-            <tab (select)="show($event)">
+            <tab>
               <ng-template tabHeading>
                 <span class="tab-link hover-rosa">Mis tarjetas</span>
               </ng-template>
@@ -151,226 +151,6 @@
 
           </tabset>
 
-
-          <!-- <ngb-tabset [justify]="'center'">
-
-            <ngb-tab title="Mis Datos">
-              <ng-template ngbTabContent>
-
-                <h6>Tarjetas Registradas</h6>
-                <div class="row">
-                  <div class="col-md-4 col-sm-2 ml-auto mr-auto">
-                    <p>Número de Tarjeta: ********2345</p>
-                    <p>Fecha de Vencimiento:</p>
-                    <p>DNI titular:</p>
-                    <p>Nombre del titular:</p>
-                    <button type="button" class="btn btn-pink">Editar</button>
-                    <button type="button" class="btn btn-rellenopink">Borrar</button>
-                  </div>
-                  <div class="col-md-4 col-sm-2 ml-auto mr-auto">
-                    <p>Número de Tarjeta:</p>
-                    <p>Fecha de Vencimiento:</p>
-
-                    <p>DNI titular:</p>
-                    <p>Nombre del titular:</p>
-                    <button type="button" class="btn btn-pink">Editar</button>
-                    <button type="button" class="btn btn-rellenopink">Borrar</button>
-                  </div>
-                  <div class="col-md-4 col-sm-2 ml-auto mr-auto">
-                    <p>Número de Tarjeta:</p>
-                    <p>Fecha de Vencimiento:</p>
-
-                    <p>DNI titular:</p>
-                    <p>Nombre del titular:</p>
-                    <button type="button" class="btn btn-pink">Editar</button>
-                    <button type="button" class="btn btn-rellenopink">Borrar</button>
-                  </div>
-                </div>
-              </ng-template>
-            </ngb-tab>
-
-            <ngb-tab title="Mis vehículos">
-              <ng-template ngbTabContent>
-                <div class="row following" id="follows">
-                  <div class="col-md-6 ml-auto mr-auto">
-                    <ul class="list-unstyled follows">
-                      <li>
-                        <div class="row">
-                          <div class="col-md-2 col-sm-2 ml-auto mr-auto">
-                            <img src="../assets/img/faces/clem-onojeghuo-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                          </div>
-                          <div class="col-md-7 col-sm-4 ml-auto">
-                            <h6>Fiat
-                              <br/>
-                              <small></small>
-                            </h6>
-                            <p>Modelo:Uno.</p>
-                            <p>Cantidad de Plazas:4.</p>
-                            <p>Patente: ATQ 567.</p>
-                            <p>Color:Rojo.</p>
-                            <p>Tipo De Vehiculo: auto.</p>
-                          </div>
-                          <div class="col-md-3 col-sm-2 ml-auto mr-auto">
-                            <div>
-                              <button type="button" class="btn btn-pink">Editar</button>
-                            </div>
-                            <br>
-                            <div>
-                              <button type="button" class="btn btn-rellenopink">Borrar</button>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <hr />
-                      <li>
-                        <div class="row">
-                          <div class="col-md-2 col-sm-2 ml-auto mr-auto">
-                            <img src="../assets/img/faces/ayo-ogunseinde-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                          </div>
-                          <div class="col-md-7 col-sm-4 ml-auto">
-                            <h6>Ford
-                              <br />
-                              <small></small>
-                            </h6>
-                            <p>Modelo:Fiesta.</p>
-                            <p>Cantidad de Plazas:4.</p>
-                            <p>Patente: DVE 213.</p>
-                            <p>Color:Blanco.</p>
-                            <p>Tipo De Vehiculo: auto.</p>
-                          </div>
-                          <div class="col-md-3 col-sm-2 ml-auto mr-auto">
-                            <div>
-                              <button type="button" class="btn btn-pink">Editar </button>
-                            </div>
-                            <br>
-                            <div>
-                              <div>
-                                <button type="button" class="btn btn-rellenopink">Borrar</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </ng-template>
-            </ngb-tab>
-
-            <ngb-tab title="Mis Historial De Viajes">
-              <ng-template ngbTabContent>
-                <div class="row following" id="follows">
-                  <div class="col-md-6 ml-auto mr-auto">
-                    <ul class="list-unstyled follows">
-                      <li>
-                        <div class="row">
-                          <div class="col-md-7 col-sm-4 ml-auto">
-                            <h6>La Plata - Mar Del Plata
-                              <br/>
-                              <small></small>
-                            </h6>
-                            <p>fecha: 12/09/2017.</p>
-                            <p>Hora De Partida: 15:30 hs.</p>
-                            <p>Duración:5 hs.</p>
-                            <p>Tipo de Viaje: Placer.</p>
-                            <p>Costo Total:$ 359.</p>
-                          </div>
-                          <div class="col-md-3 col-sm-2 ml-auto mr-auto">
-                            <div class="form-check">
-                              <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" value="" checked="">
-                                <span class="form-check-sign"></span>
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <hr />
-                      <li>
-                        <div class="row">
-                          <div class="col-md-7 col-sm-4 ml-auto">
-                            <h6>La Plata - City Bell
-                              <br />
-                              <small></small>
-                            </h6>
-                            <p>fecha: 15/02/2018.</p>
-                            <p>Hora De Partida: 07:30 hs.</p>
-                            <p>Duración:00:30 hs.</p>
-                            <p>Tipo de Viaje: Diario.</p>
-                            <p>Costo Total:$ 20.</p>
-                          </div>
-                          <div class="col-md-3 col-sm-2 ml-auto mr-auto">
-                            <div class="form-check">
-                              <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" value="" checked="">
-                                <span class="form-check-sign"></span>
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </ng-template>
-            </ngb-tab>
-            <ngb-tab title="Mi reputación">
-              <ng-template ngbTabContent>
-                <div class="row following" id="follows">
-                  <div class="col-md-6 ml-auto mr-auto">
-                    <ul class="list-unstyled follows">
-                      <li>
-                        <div class="row">
-                          <h6>Mi puntuación como Conductor:</h6>
-                        </div>
-                        <div class="row">
-                          <h6>Mi puntuación como Acompañante:</h6>
-                        </div>
-                        <hr />
-                        <div class="row">
-                          <div class="col-md-2 col-sm-2 ml-auto mr-auto">
-                            <img src="../assets/img/faces/clem-onojeghuo-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                          </div>
-                          <div class="col-md-7 col-sm-4 ml-auto">
-                            <h6>Nombre de usuario
-                              <br/>
-                              <small></small>
-                            </h6>
-                            <p>Comentario:</p>
-                            <p>Puntaje:</p>
-                          </div>
-                          <div class="col-md-3 col-sm-2 ml-auto mr-auto">
-                            <h6>Puntaje como:</h6>
-                            <p>Conductor</p>
-                          </div>
-                        </div>
-                      </li>
-                      <hr />
-                      <li>
-                        <div class="row">
-                          <div class="col-md-2 col-sm-2 ml-auto mr-auto">
-                            <img src="../assets/img/faces/clem-onojeghuo-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                          </div>
-                          <div class="col-md-7 col-sm-4 ml-auto">
-                            <h6>Nombre de usuario
-                              <br/>
-                              <small></small>
-                            </h6>
-                            <p>Comentario:</p>
-                            <p>Puntaje:</p>
-                          </div>
-                          <div class="col-md-3 col-sm-2 ml-auto mr-auto">
-                            <h6>Puntaje como:</h6>
-                            <p>Acompañante</p>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </ng-template>
-            </ngb-tab>
-          </ngb-tabset> -->
         </div>
       </div>
     </div>

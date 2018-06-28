@@ -11,9 +11,12 @@ namespace unAventonApi.Controllers
     {
         public IUserRepository userRepository { get; }
 
-        public VehiculoController(IVehiculoRepository genericRepo, IUserRepository userRepository) : base(genericRepo)
+        private IViajeRepository viajeRepository;
+
+        public VehiculoController(IVehiculoRepository genericRepo, IUserRepository userRepository, IViajeRepository viajeRepository) : base(genericRepo)
         {
             this.userRepository = userRepository;
+            this.viajeRepository = viajeRepository;
         }
 
 [HttpPost("RegistrarEnUser")]
@@ -43,6 +46,20 @@ namespace unAventonApi.Controllers
             {
                 // return BuildApiResponse.BuildNotOk( "Hubo un error al registrar");
                 return BadRequest("Hubo un error al registrar");
+            }
+        }
+
+        [HttpGet("VehiculoLibre")]
+        public IActionResult CheckVehiculoNoEsUsado(int vehiculoId)
+        {
+            try
+            {
+                var viajes = this.viajeRepository.GetByVehiculoId(vehiculoId);
+                return Ok(viajes.Count == 0);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al checkear disponibilidad de vehiculo id: " + vehiculoId);
             }
         }
     }

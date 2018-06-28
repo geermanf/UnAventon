@@ -13,7 +13,9 @@ namespace unAventonApi.Data.Entities
         public TimeSpan Duracion { get; set; }
         public int TipoViaje { get; set; }
         public double Costo { get; set; }
-        public DateTime FechaPartida { get; set; }
+        public int CantidadDePlazas { get; set; }
+        public IList<DateTime> DiasDeViaje { get; set; }
+        public TimeSpan HoraPartida { get; set; }
         public int Vehiculo { get; set; }
         public int Creador { get; set; }
     }
