@@ -26,16 +26,25 @@ export class ContenedorVehiculoComponent implements OnInit {
     this.refresh.emit(null);
   }
 
-  retControlByEdit() {
-    this.edit.emit(this.vehiculo);
+  async retControlByEdit() {
+    if (await this.vehiculoService.VehiculoLibre(this.vehiculo.id)) {
+      this.edit.emit(this.vehiculo);
+    } else {
+      this.alertService.addAlert('danger', 'Lo sentimos, el vehiculo está registrado en viajes próximos. No es posible editarlo');
+    }
   }
 
 
-  abrirBorrarVehiculoModal(BorrarVehiculo) {
-    this.modalService.open(BorrarVehiculo);
+  async abrirBorrarVehiculoModal(BorrarVehiculo) {
+    if (await this.vehiculoService.VehiculoLibre(this.vehiculo.id)) {
+      this.modalService.open(BorrarVehiculo);
+    } else {
+      this.alertService.addAlert('danger', 'Lo sentimos, el vehiculo está registrado en viajes próximos. No es posible eliminarlo');
+    }
   }
 
   borrarVehiculo() {
+
     this.vehiculoService.delete(this.vehiculo.id)
       .subscribe(
         data => {
@@ -45,6 +54,7 @@ export class ContenedorVehiculoComponent implements OnInit {
         error => {
           this.alertService.addAlert('danger', 'Lo sentimos, no fue posible modificar tus datos');
         });
+
   }
 
 }

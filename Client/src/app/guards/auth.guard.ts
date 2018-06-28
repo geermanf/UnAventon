@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 import { IfObservable } from 'rxjs/observable/IfObservable';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { CheckHorarioDTO } from '../models/CheckHorarioDTO';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -46,8 +47,12 @@ export class AuthGuard implements CanActivate {
     async userAutorizado(id: number) {
         const cal = await this.userService.TieneCalificacionesPendientes(id).toPromise();
         const cal2 = await this.userService.TienePagosPendientes(id).toPromise()
-        debugger;
         return cal && cal2;
+    }
+
+    async tieneHorariosDisponibles(dtoClass: CheckHorarioDTO, id: number) {
+        const ret = await this.userService.TieneHorarioLibre(dtoClass, id).toPromise();
+        return ret;
     }
 
     getCurrentUserId() {

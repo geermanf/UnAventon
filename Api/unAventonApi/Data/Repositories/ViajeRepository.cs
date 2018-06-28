@@ -37,5 +37,11 @@ namespace unAventonApi.Data
                     .Include(v => v.Creador).AsNoTracking();
             return viajes;
         }
+
+        public List<Viaje> GetByVehiculoId(int vehiculoId)
+        {
+            var viajes = _dbContext.Viaje.Where(v => v.Vehiculo.Id == vehiculoId).AsNoTracking();
+            return viajes.ToList();
+        }
     }
 }

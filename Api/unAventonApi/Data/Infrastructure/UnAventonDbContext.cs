@@ -42,7 +42,6 @@
             modelBuilder.Entity<User>()
                 .HasAlternateKey(c => c.Email)
                 .HasName("Email");
-
             modelBuilder.Entity<Postulantes>()
                 .HasKey(t => new { t.UserId, t.ViajeId });
             modelBuilder.Entity<Postulantes>()

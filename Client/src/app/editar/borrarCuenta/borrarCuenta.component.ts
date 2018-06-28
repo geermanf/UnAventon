@@ -21,18 +21,18 @@ export class BorrarCuentaComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private alertService: AlertasService,
     private userService: UserService,
-    private modalService: NgbModal) {}
+    private modalService: NgbModal) { }
 
-    ngOnInit() {
-      this.usuario = this.authGuard.getUser().subscribe(
-                data => {
-                    this.usuario = data;
-                    return data;
-                },
-                error => {
-                    return error;
-                });
-    }
+  ngOnInit() {
+    this.usuario = this.authGuard.getUser().subscribe(
+      data => {
+        this.usuario = data;
+        return data;
+      },
+      error => {
+        return error;
+      });
+  }
 
   contraseniaCorrecta() {
     return (this.pwdViejo === this.usuario.password);
@@ -53,16 +53,21 @@ export class BorrarCuentaComponent implements OnInit {
     this.modalService.open(borrarCuentaModal);
   }
 
-  eliminarCuenta() {
-    this.userService.delete(this.usuario.id)
-      .subscribe(
-        data => {
-          this.authenticationService.logout();
-          this.router.navigate(['/home']);
-          this.alertService.addAlert('success', 'La cuenta fue eliminada con exito. Gracias por usar Un Aventón');
-        },
-        error => {
-          this.alertService.addAlert('danger', 'Lo sentimos, no fue posible eliminar la cuenta');
-        });
+  async eliminarCuenta() {
+    if (await this.authGuard.userAutorizado(this.usuario.id)) {  // usuarioAutorizadotieneHorariosDisponibles
+      this.userService.delete(this.usuario.id)
+        .subscribe(
+          data => {
+            this.authenticationService.logout();
+            this.router.navigate(['/home']);
+            this.alertService.addAlert('success', 'La cuenta fue eliminada con exito. Gracias por usar Un Aventón');
+          },
+          error => {
+            this.alertService.addAlert('danger', 'Lo sentimos, no fue posible eliminar la cuenta');
+          });
+    } else {
+      this.alertService.addAlert('danger',
+        'Lo sentimos, no estas autorizado para realizar esta operacion. Revisa tus pagos o puntuaciones pendientes');
+    }
   }
 }

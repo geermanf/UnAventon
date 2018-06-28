@@ -41,19 +41,24 @@ export class FormularioVehiculosComponent implements OnInit {
             });
     }
 
-    register() {
-        if (this.vehiculo.foto === undefined || this.vehiculo.foto === '') {
-            this.vehiculo.foto = '../assets/img/vehiculoNoDisponible.png';
-        }
-        this.vehiculoService.create(this.vehiculo, this.usuario.id)
-            .subscribe(
-                data => {
-                    this.alertService.addAlert('success', 'Tus datos se modificaron de manera satisfactoria!');
-                    this.releaseCtrl();
-                },
-                error => {
-                    this.alertService.addAlert('danger',
-                        'El vehiculo con patente ' + this.vehiculo.patente + 'ya está registrado en el sistema');
-                });
+    async register() {
+        const ret = await this.vehiculoService.ExisteVehiculo(this.vehiculo.patente, this.usuario.id).toPromise();
+        if (!ret) {
+            if (this.vehiculo.foto === undefined || this.vehiculo.foto === '') {
+                this.vehiculo.foto = '../assets/img/vehiculoNoDisponible.png';
+            }
+            this.vehiculoService.create(this.vehiculo, this.usuario.id)
+                .subscribe(
+                    data => {
+                        this.alertService.addAlert('success', 'Tus datos se modificaron de manera satisfactoria!');
+                        this.releaseCtrl();
+                    },
+                    error => {
+                        this.alertService.addAlert('danger',
+                            'El vehiculo con patente ' + this.vehiculo.patente + 'ya está registrado en el sistema');
+                    });
+          } else {
+            this.alertService.addAlert('danger', 'Ya tienes registrado este vehiculo');
+          }
     }
 }
