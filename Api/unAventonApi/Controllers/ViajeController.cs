@@ -41,7 +41,9 @@ namespace unAventonApi.Controllers
                 Duracion = viajeDTO.Duracion,
                 Costo = viajeDTO.Costo,
                 DiasDeViaje = viajeDTO.DiasDeViaje.Select(fecha => new DiaDeViaje() { fechaDeViaje = fecha }).ToList(),
-                HoraPartida = viajeDTO.HoraPartida
+                HoraPartida = viajeDTO.HoraPartida,
+                CantidadDePlazas = viajeDTO.CantidadDePlazas,
+                Descripcion = viajeDTO.Descripcion
             };
             try
             {
