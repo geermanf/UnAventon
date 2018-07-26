@@ -97,6 +97,12 @@
               <span class="focus-input-label">Hora de partida</span>
             </div>
 
+            <div class="wrap-input100 validate-input">
+              <input class="input100" type="textarea" name="descripcion" [(ngModel)]="viaje.descripcion" #descripcion="ngModel" [ngClass]="{ 'has-danger': f.submitted && !descripcion.valid }">
+              <span class="focus-input100"></span>
+              <span class="focus-input-label">Descripcion</span>
+            </div>
+
             <div class="form-check">
               <label class="form-check-label">
                 <input [checked]="usarRango" class="form-check-input" type="checkbox" value="" (change)="usarRango = !usarRango">

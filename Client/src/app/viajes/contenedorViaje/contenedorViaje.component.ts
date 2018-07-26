@@ -31,4 +31,6 @@ export class ContenedorViajeComponent implements OnInit {
     verViaje() {
         this.router.navigate(['/detalleViaje'], { queryParams: { id: this.viaje.id } });
     }
+
+
 }

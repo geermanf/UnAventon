@@ -20,7 +20,7 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent},
     { path: 'registrarse', component: RegistrarseComponent},
     { path: 'verViajes', component: VerViajesComponent},
-    { path: 'detalleViaje', component: DetalleViajeComponent},
+    { path: 'detalleViaje', component: DetalleViajeComponent, canActivate: [AuthGuard]},
 
     // USUARIOS LOGUEADOS
     { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard]},
