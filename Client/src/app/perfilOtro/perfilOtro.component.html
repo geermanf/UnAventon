@@ -1,0 +1,93 @@
+<!-- IMAGEN SUPERIOR -->
+
+<div class="wrapper">
+  <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('../assets/img/home.jpg');">
+    <div class="filter"></div>
+  </div>
+  <div class="section profile-content">
+    <div class="container">
+
+      <!-- FOTO Y NOMBRE -->
+
+      <div class="owner">
+        <div class="avatar ">
+          
+            <img src="{{usuario.fotoPerfil}}" alt="Circle Image" class="img-circle img-responsive" style="width: 20vw"
+              (error)="img.src = '../assets/img/anonym-bw.png'" #img>
+          
+        </div>
+        <div class="name">
+          <h4 class="title">
+            {{usuario.nombre}} {{usuario.apellido}}
+            <br />
+
+          </h4>
+        </div>
+      </div>
+
+      <!-- TABS -->
+
+
+      <div class="nav-tabs-navigation">
+        <div class="nav-tabs-wrapper">
+          <tabset #perfilTabs [justified]="true">
+
+            <tab>
+              <ng-template tabHeading>
+                <span class="tab-link hover-rosa">Datos</span>
+              </ng-template>
+
+              <p>
+                <span class="link-rosa">Fecha de nacimiento: </span>
+                <span>{{usuario.fechaDeNacimiento | date:'dd-MM-yyyy'}}</span>
+              </p>
+              <br>
+
+
+
+            </tab>
+
+            <!-- INICIO HISTORIAL -->
+
+            <tab>
+              <ng-template tabHeading>
+                <span class="tab-link hover-rosa">Historial De Viajes</span>
+              </ng-template>
+
+              <!-- TITULO HISTORIAL -->
+              <span class="title">
+                Mi historial de viajes
+              </span>
+
+              <!-- CUERPO HISTORIAL -->
+
+
+              <span *ngFor="let viaje of viajes">
+                <app-contenedorViajePerfil [viaje]="viaje" >
+                </app-contenedorViajePerfil>
+              </span>
+              <span *ngIf="viajes.length === 0">
+                <h4 class="rosa">No tienes viajes en tu historial.</h4>
+              </span>
+
+
+            </tab>
+
+            <!-- FIN HISTORIAL -->
+
+
+
+            <tab disabled="true">
+              <ng-template tabHeading>
+                <span class="tab-link hover-rosa disabled">Mi reputación</span>
+              </ng-template>
+
+            </tab>
+
+          </tabset>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

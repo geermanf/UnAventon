@@ -4,8 +4,8 @@
             <div class="panel-title card-trip_title row">
                 <div class="trip_driver_img_container">
                     <div class="trip_driver_img circle-box">
-                            <img src="{{viaje.creador.fotoPerfil}}" alt="Circle Image" class="img-circle img-no-padding img-responsive"
-                            (error)="img.src = '../assets/img/anonym-bw.png'" #img>
+                        <a routerLink="/verPerfilOtro" routerLinkActive="active" [queryParams]="{id: viaje.creador.id}"> <img src="{{viaje.creador.fotoPerfil}}" alt="Circle Image" class="img-circle img-no-padding img-responsive"
+                            (error)="img.src = '../assets/img/anonym-bw.png'" #img> </a>
                     </div>
                 </div>
                 <div class="trip_driver_details">

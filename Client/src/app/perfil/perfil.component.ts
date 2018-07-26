@@ -6,9 +6,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AlertasService } from '../alertas/alertas.service';
 import { VehiculoService } from '../services/vehiculo.service';
 import { TarjetaService } from '../services/tarjeta.service';
-import { Tarjeta } from '../models/tarjeta';
-import { Vehiculo } from '../models/vehiculo';
 import { TabsetComponent, TabDirective } from 'ngx-bootstrap/tabs';
+import { ViajeService } from '../services/viaje.service';
 
 @Component({
   selector: 'app-perfil',
@@ -25,12 +24,14 @@ export class PerfilComponent implements OnInit {
   mostrarFormularioVehiculos = false;
   mostrarFormularioTarjetas = false;
   mostrarFormularioEditarVehiculos = false;
+  viajes: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
     private vehiculoService: VehiculoService,
+    private viajeService: ViajeService,
     private tarjetaService: TarjetaService,
     private alertService: AlertasService,
     private modalService: NgbModal,
@@ -49,6 +50,7 @@ export class PerfilComponent implements OnInit {
         this.usuario = data;
         this.getVehiculos();
         this.getTarjetas();
+        this.getViajes();
         return data;
       },
       error => {
@@ -68,6 +70,12 @@ export class PerfilComponent implements OnInit {
       .subscribe();
   }
 
+  getViajes() {
+    this.viajes = [];
+    this.viajeService.getAll()
+      .map(res => Object.keys(res).map(index => this.viajes.push(res[index])))
+      .subscribe();
+  }
   getTarjetas() {
     this.tarjetas = [];
     this.tarjetaService.getByUserId(this.usuario.id)

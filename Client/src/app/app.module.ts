@@ -48,6 +48,8 @@ import { EditarVehiculosComponent } from './perfil/editarVehiculos/editarVehicul
 import { CrearViajeComponent } from './crearViaje/crearViaje.component';
 import { VerViajesComponent } from './viajes/verViajes/verViajes.component';
 import { DetalleViajeComponent } from './viajes/detalleViaje/detalleViaje.component';
+import {PerfilOtroComponent } from './perfilOtro/perfilOtro.component';
+import {ContenedorViajePerfilComponent } from './perfil/contenedorViaje/contenedorViajePerfil.component';
 
 
 
@@ -88,7 +90,9 @@ import { DetalleViajeComponent } from './viajes/detalleViaje/detalleViaje.compon
     EditarVehiculosComponent,
     CrearViajeComponent,
     VerViajesComponent,
-    DetalleViajeComponent
+    DetalleViajeComponent,
+    PerfilOtroComponent,
+    ContenedorViajePerfilComponent
 ],
   exports: [
     ContenedorViajeComponent,
@@ -99,7 +103,8 @@ import { DetalleViajeComponent } from './viajes/detalleViaje/detalleViaje.compon
     ContenedorVehiculoComponent,
     FormularioVehiculosComponent,
     FormularioTarjetasComponent,
-    EditarVehiculosComponent
+    EditarVehiculosComponent,
+    ContenedorViajePerfilComponent
   ],
   providers: [
     DatePipe,

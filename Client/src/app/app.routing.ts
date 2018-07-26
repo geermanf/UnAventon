@@ -11,7 +11,7 @@ import { EditarComponent } from './editar/editar.component';
 import { CrearViajeComponent } from './crearViaje/crearViaje.component';
 import { VerViajesComponent } from './viajes/verViajes/verViajes.component';
 import { DetalleViajeComponent } from './viajes/detalleViaje/detalleViaje.component';
-
+import {PerfilOtroComponent } from './perfilOtro/perfilOtro.component';
 
 
 const routes: Routes = [
@@ -20,12 +20,13 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent},
     { path: 'registrarse', component: RegistrarseComponent},
     { path: 'verViajes', component: VerViajesComponent},
-    { path: 'detalleViaje', component: DetalleViajeComponent, canActivate: [AuthGuard]},
-
+    { path: 'verPerfilOtro', component: PerfilOtroComponent},
     // USUARIOS LOGUEADOS
     { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard]},
     { path: 'editar', component: EditarComponent, canActivate: [AuthGuard]},
     { path: 'crearViaje', component: CrearViajeComponent, canActivate: [AuthGuard]},
+    { path: 'detalleViaje', component: DetalleViajeComponent, canActivate: [AuthGuard]},
+
 
 
     // INCORRECTO O VACIO

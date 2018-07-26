@@ -12,13 +12,13 @@
             <div class="owner">
               <div class="avatar" style="margin: 0px;">
                 <div class="img-hover-content">
-                  <img src="{{viaje.creador.fotoPerfil}}" alt="" class="img-thumbnail img-responsive" (error)="img.src = '../assets/img/anonym-bw.png'"
-                    #img>
+                  <a routerLink="/verPerfilOtro" routerLinkActive="active" [queryParams]="{id: viaje.creador.id}"> <img src="{{viaje.creador.fotoPerfil}}" alt="" class="img-thumbnail img-responsive" (error)="img.src = '../assets/img/anonym-bw.png'"
+                    #img></a>
                 </div>
               </div>
               <div class="name">
                 <h4 class="title">
-                  {{viaje.creador.nombre}} {{viaje.creador.apellido}}
+                  <a routerLink="/verPerfilOtro" routerLinkActive="active" [queryParams]="{id: viaje.creador.id}">{{viaje.creador.nombre}} {{viaje.creador.apellido}}</a>
                   <br />
 
                 </h4>

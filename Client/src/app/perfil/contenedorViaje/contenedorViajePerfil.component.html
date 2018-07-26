@@ -1,0 +1,26 @@
+
+<div class="col-md-12 ml-auto mr-auto">
+  <div class="row">
+    <div class="col-md-2">
+      <div *ngFor="let dia of viaje.diasDeViaje">
+        {{dia | date:'dd-MM-yyyy' }}
+      </div>
+      <span style="color:#f17376">{{horaPartidaToShow[0] + ':' + horaPartidaToShow[1]}} hs</span>
+    </div>
+    <div class="col-md-6">
+      <div class="rosa" >Origen: {{viaje.origen}}</div>
+      <div class="rosa">Destino: {{viaje.destino}}</div>
+    </div>
+    <div class="col-md-2">
+      <p>Conductor:</p>
+      <p> <a routerLink="/verPerfilOtro" routerLinkActive="active" [queryParams]="{id: viaje.creador.id}">{{viaje.creador.nombre}} {{ viaje.creador.apellido}}</a></p>
+    </div>
+    <div class="col-md-2">
+      <a routerLink="/detalleViaje" routerLinkActive="active" [queryParams]="{id: viaje.id}"><button class="btn btn-round btn-rosa" > Ver Viaje</button></a>
+    </div>
+  </div>
+</div>
+<div class="cont-line">
+  <span class="line"></span>
+</div>
+

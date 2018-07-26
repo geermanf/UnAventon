@@ -58,12 +58,33 @@
               </ng-template>
 
             </tab>
-            <tab disabled="true">
+            <!-- INICIO HISTORIAL -->
+
+            <tab>
               <ng-template tabHeading>
-                <span class="tab-link hover-rosa disabled">Historial de viajes</span>
+                <span class="tab-link hover-rosa">Historial De Viajes</span>
               </ng-template>
 
+              <!-- TITULO HISTORIAL -->
+              <span class="title">
+                Mi historial de viajes
+              </span>
+
+              <!-- CUERPO HISTORIAL -->
+
+
+              <span *ngFor="let viaje of viajes">
+                <app-contenedorViajePerfil [viaje]="viaje" >
+                </app-contenedorViajePerfil>
+              </span>
+              <span *ngIf="viajes.length === 0">
+                <h4 class="rosa">No tienes viajes en tu historial.</h4>
+              </span>
+
+
             </tab>
+
+            <!-- FIN HISTORIAL -->
 
             <!-- INICIO VEHICULOS -->
 

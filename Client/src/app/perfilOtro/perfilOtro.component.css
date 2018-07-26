@@ -1,0 +1,75 @@
+.btn-pink{
+    background-color: white;
+    border-color: #f17376;
+    color: #f17376;
+}
+.btn-pink:hover{
+    background-color: #f17376;
+    border-color: #f17376;
+    color: white;
+}
+.btn-rellenopink{
+    background-color: #f17376;
+    color: white;
+    border-color: white;
+}
+.btn-rellenopink:hover{
+    background-color: white;
+    color: #f17376;
+    border-color: white;
+}
+
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #f17376;
+    cursor: pointer;
+  }
+
+  .middle a{
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #f17376;
+    cursor: pointer;
+  }
+
+ 
+
+  .hidden {
+    opacity: 0;
+  }
+
+  .title {
+    width: 100%;
+    display: block;
+    font-size: 30px;
+    color: #333333;
+    line-height: 1.2;
+    text-align: center;
+    padding-bottom: 43px;
+  }
+
+  .tab-link.hover-rosa:hover:not(.disabled) {
+    color: #f17376 !important;
+    font-weight: 400;
+  }
+
+  .tab-link.disabled{
+    color: #c9c9c9;
+  }
+
+ .link-rosa, .rosa {
+    color: #f17376;
+  }
+  .btn.btn-link.link-rosa:hover {
+    color: #f04649;
+  }
