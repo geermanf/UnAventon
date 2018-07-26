@@ -15,16 +15,17 @@ export class FormularioVehiculosComponent implements OnInit {
     usuario: any = {};
     @Output() releaseControl = new EventEmitter();
     idUserLogued: number;
+    patenteExiste = false;
 
     constructor(private router: Router,
-                private vehiculoService: VehiculoService,
-                private alertService: AlertasService,
-                public authGuard: AuthGuard) { }
+        private vehiculoService: VehiculoService,
+        private alertService: AlertasService,
+        public authGuard: AuthGuard) { }
 
     ngOnInit() {
         this.authGuard.getCurrentUserId().subscribe(data => this.idUserLogued = data);
         this.getUser();
-     }
+    }
 
     releaseCtrl() {
         this.releaseControl.emit('cerrar form');
@@ -57,9 +58,12 @@ export class FormularioVehiculosComponent implements OnInit {
                         this.alertService.addAlert('danger',
                             'El vehiculo con patente ' + this.vehiculo.patente + 'ya está registrado en el sistema');
                     });
-          } else {
+            this.patenteExiste = false;
+        } else {
             this.alertService.addAlert('danger', 'Ya tienes registrado este vehiculo');
-          }
+            this.patenteExiste = true;
+
+        }
     }
 
     plazas() {

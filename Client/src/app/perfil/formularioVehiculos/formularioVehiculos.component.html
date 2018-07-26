@@ -1,4 +1,4 @@
-<form class="contact100-form validate-form flex-sb flex-w" name="form" (ngSubmit)="f.form.valid && plazas() && register() && releaseCtrl()" #f="ngForm"
+<form class="contact100-form validate-form flex-sb flex-w" name="form" (ngSubmit)="f.form.valid && plazas() && register()" #f="ngForm"
     novalidate>
 
     <div class="wrap-input100 rs1 validate-input">
@@ -29,7 +29,7 @@
 
     <div class="wrap-input100 rs1 validate-input">
         <input class="input100" type="text" name="patente" placeholder="Patente" [(ngModel)]="vehiculo.patente" #patente="ngModel"
-            [ngClass]="{ 'has-danger': f.submitted && !patente.valid}" required>
+            [ngClass]="{ 'has-danger': f.submitted && !patente.valid || patenteExiste}" required>
         <span class="focus-input100"></span>
     </div>
 

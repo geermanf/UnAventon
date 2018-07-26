@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
         this.subscription = authGuard.authenticated$.subscribe(
             data => {
                 if (this.authGuard.isLogued()) {
-                this.getUser();
+                    this.getUser();
                 }
             });
         this.sidebarVisible = false;
@@ -68,7 +68,7 @@ export class NavbarComponent implements OnInit {
         this.alertService.addAlert('info', 'Se cerró sesion en Un Aventón, nos vemos pronto!');
     }
 
-                    // FUNCIONALIDAD DE SHOW/HIDE
+    // FUNCIONALIDAD DE SHOW/HIDE
     sidebarOpen() {
         const toggleButton = this.toggleButton;
         const html = document.getElementsByTagName('html')[0];
@@ -94,4 +94,13 @@ export class NavbarComponent implements OnInit {
             this.sidebarClose();
         }
     };
+    async usuarioAutorizado() {
+        debugger;
+        return (await this.authGuard.userAutorizado(this.usuario.id));
+    }
+    mostrarAlertaNoAutorizado() {
+        this.alertService.addAlert('danger',
+            'Lo sentimos, no estas autorizado para realizar esta operacion. Revisa tus pagos o puntuaciones pendientes');
+    }
 }
+
