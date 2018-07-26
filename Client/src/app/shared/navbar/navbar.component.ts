@@ -94,13 +94,16 @@ export class NavbarComponent implements OnInit {
             this.sidebarClose();
         }
     };
-    async usuarioAutorizado() {
-        debugger;
-        return (await this.authGuard.userAutorizado(this.usuario.id));
+    async crearViaje() {
+        if (await this.authGuard.userAutorizado(this.usuario.id)) {
+            this.router.navigate(['/crearViaje']);
+        } else {
+            this.alertService.addAlert('danger',
+            'Lo sentimos, no estas autorizado para realizar esta operacion. Revisa tus pagos o puntuaciones pendientes');
+        }
     }
     mostrarAlertaNoAutorizado() {
-        this.alertService.addAlert('danger',
-            'Lo sentimos, no estas autorizado para realizar esta operacion. Revisa tus pagos o puntuaciones pendientes');
+
     }
 }
 

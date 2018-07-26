@@ -18,13 +18,8 @@
                         Home
                     </a>
                 </li>
-                <li class="nav-item" *ngIf="!usuarioAutorizado();">
-                    <a class="nav-link" (click)= "mostrarAlertaNoAutorizado()">
-                        Crear Viaje
-                    </a>
-                </li>
-                <li class="nav-item" *ngIf="usuarioAutorizado();">
-                    <a class="nav-link" routerLink="/crearViaje" routerLinkActive="active">
+                <li class="nav-item">
+                    <a class="nav-link" (click)= "crearViaje()">
                         Crear Viaje
                     </a>
                 </li>
