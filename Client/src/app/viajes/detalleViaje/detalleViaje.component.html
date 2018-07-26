@@ -131,7 +131,7 @@
             </span>
             <div class="row">
               <div class="col-md-12 justify-content-center">
-                <h3 class="text-center" style="margin-top:10%" *ngIf="viajeros.length === 0">
+                <h3 class="text-center" style="margin-top:10%" *ngIf="viajeros.length === 1">
                   No hay viajeros
                 </h3>
               </div>
@@ -174,7 +174,7 @@
                     </div>
                   </div>
                   <div class="col-xs-10">
-                    <span class="trip_datetime_time" style="color:#f17376">{{viaje.horaPartida[0] + ':' + viaje.horaPartida[1]}} hs</span>
+                    <span class="trip_datetime_time" style="color:#f17376">{{horaPartidaToShow[0] + ':' + horaPartidaToShow[1]}} hs</span>
                   </div>
                 </div>
               </time>

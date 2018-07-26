@@ -10,6 +10,7 @@ namespace unAventonApi.Data.Entities
     {
         public string Origen { get; set; }
         public string Destino { get; set; }
+        public string Descripcion { get; set; }
         public TimeSpan Duracion { get; set; }
         public int TipoViaje { get; set; }
         public double Costo { get; set; }

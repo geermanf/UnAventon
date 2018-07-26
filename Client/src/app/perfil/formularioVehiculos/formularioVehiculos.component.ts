@@ -61,4 +61,8 @@ export class FormularioVehiculosComponent implements OnInit {
             this.alertService.addAlert('danger', 'Ya tienes registrado este vehiculo');
           }
     }
+
+    plazas() {
+        return (this.vehiculo.cantidadPlazas > 0)
+    }
 }
