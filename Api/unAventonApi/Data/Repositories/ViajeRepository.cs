@@ -64,6 +64,29 @@ namespace unAventonApi.Data
             return viajes;
         }
 
+        public IQueryable<Object> GetRealizadosByUserId(int id)
+        {
+            var viajes = _dbContext.ViajesRealizados.Where(vr => vr.UserId == id)
+                    .Include(vr => vr.Viaje)
+                    .Select(vr => new
+                    {
+                        Origen = vr.Viaje.Origen,
+                        Destino = vr.Viaje.Destino,
+                        Duracion = vr.Viaje.Duracion,
+                        TipoViaje = vr.Viaje.TipoViaje.Descripcion,
+                        Costo = vr.Viaje.Costo,
+                        DiasDeViaje = vr.Viaje.DiasDeViaje.Select(dv => dv.fechaDeViaje),
+                        HoraPartida = vr.Viaje.HoraPartida,
+                        Vehiculo = vr.Viaje.Vehiculo,
+                        Creador = (new {Id = vr.Viaje.Creador.Id, Nombre = vr.Viaje.Creador.Nombre, Apellido = vr.Viaje.Creador.Apellido, FotoPerfil = vr.Viaje.Creador.FotoPerfil}),
+                        Viajeros = vr.Viaje.Viajeros.Select(v => new {Id = v.UserId, Nombre = v.User.Nombre, Apellido = v.User.Apellido, FotoPerfil = v.User.FotoPerfil}),
+                        CantidadDePlazas = vr.Viaje.CantidadDePlazas,
+                        Descripcion = vr.Viaje.Descripcion,
+                        Id = vr.Viaje.Id
+                    }).AsNoTracking();
+            return viajes;
+        }
+
         public Object GetByIdNotIncludes(int id)
         {
             var viajes = _dbContext.Viaje

@@ -53,4 +53,8 @@ export class ViajeService {
         return this.http.get<User>('http://localhost:5000/api/Viaje/ListarViajeros?idViaje=' + idViaje);
     }
 
+    getViajesRealizados(idUsuario: number): Observable<User> {
+        return this.http.get<User>('http://localhost:5000/api/Viaje/ListarViajesRealizados?idUsuario=' + idUsuario);
+    }
+
 }

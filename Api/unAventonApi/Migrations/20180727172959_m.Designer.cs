@@ -11,8 +11,8 @@ using unAventonApi.Data;
 namespace unAventonApi.Migrations
 {
     [DbContext(typeof(UnAventonDbContext))]
-    [Migration("20180625000123_migracion24-06")]
-    partial class migracion2406
+    [Migration("20180727172959_m")]
+    partial class m
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,6 +55,22 @@ namespace unAventonApi.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Calificacion");
+                });
+
+            modelBuilder.Entity("unAventonApi.Data.Entities.DiaDeViaje", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ViajeId");
+
+                    b.Property<DateTime>("fechaDeViaje");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ViajeId");
+
+                    b.ToTable("DiaDeViaje");
                 });
 
             modelBuilder.Entity("unAventonApi.Data.Entities.Rol", b =>
@@ -162,15 +178,17 @@ namespace unAventonApi.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("CantidadDePlazas");
+
                     b.Property<double>("Costo");
 
                     b.Property<int?>("CreadorId");
 
+                    b.Property<string>("Descripcion");
+
                     b.Property<string>("Destino");
 
                     b.Property<TimeSpan>("Duracion");
-
-                    b.Property<DateTime>("FechaPartida");
 
                     b.Property<TimeSpan>("HoraPartida");
 
@@ -286,6 +304,14 @@ namespace unAventonApi.Migrations
                     b.HasOne("unAventonApi.Data.User")
                         .WithMany("Calificaciones")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("unAventonApi.Data.Entities.DiaDeViaje", b =>
+                {
+                    b.HasOne("unAventonApi.Data.Entities.Viaje")
+                        .WithMany("DiasDeViaje")
+                        .HasForeignKey("ViajeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("unAventonApi.Data.Entities.TablasIntermedias.Postulantes", b =>
