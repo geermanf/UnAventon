@@ -132,12 +132,11 @@ export class DetalleViajeComponent implements OnInit {
     }
   }
 
-  aceptarPostulante(postulante) {
-
+  async aceptarPostulante(postulante) {
+    const disponible = await this.usuarioDisponible(postulante);
     if (this.lugaresDisponibles === 0) {
       this.alertService.addAlert('danger', 'Lo sentimos, no hay lugar en el viaje');
-    } else if (!this.usuarioDisponible(postulante)) {
-      debugger;
+    } else if (!disponible) {
       this.alertService.addAlert('danger', 'Lo sentimos, el usuario no tiene horarios disponibles para viajar');
     } else {
       this.viajeService.addViajero(this.viaje.id, postulante.id)
@@ -157,7 +156,6 @@ export class DetalleViajeComponent implements OnInit {
     checkHorario.duracion = this.viaje.duracion;
     checkHorario.horaPartida = this.viaje.horaPartida;
     checkHorario.diasDeViaje = this.viaje.diasDeViaje;
-    debugger;
     const response = await this.authGuard.tieneHorariosDisponibles(checkHorario, postulante.id);
     return response;
   }

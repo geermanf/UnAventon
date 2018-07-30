@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace unAventonApi.Migrations
 {
-    public partial class viajesTerminado : Migration
+    public partial class m : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -195,11 +195,13 @@ namespace unAventonApi.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CantidadDePlazas = table.Column<int>(nullable: false),
                     Costo = table.Column<double>(nullable: false),
                     CreadorId = table.Column<int>(nullable: true),
+                    Descripcion = table.Column<string>(nullable: true),
                     Destino = table.Column<string>(nullable: true),
                     Duracion = table.Column<TimeSpan>(nullable: false),
-                    FechaPartida = table.Column<DateTime>(nullable: false),
+                    HoraPartida = table.Column<TimeSpan>(nullable: false),
                     Origen = table.Column<string>(nullable: true),
                     TipoViajeId = table.Column<int>(nullable: true),
                     VehiculoId = table.Column<int>(nullable: true)
@@ -225,6 +227,26 @@ namespace unAventonApi.Migrations
                         principalTable: "Vehiculos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DiaDeViaje",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ViajeId = table.Column<int>(nullable: false),
+                    fechaDeViaje = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DiaDeViaje", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DiaDeViaje_Viaje_ViajeId",
+                        column: x => x.ViajeId,
+                        principalTable: "Viaje",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -339,6 +361,11 @@ namespace unAventonApi.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DiaDeViaje_ViajeId",
+                table: "DiaDeViaje",
+                column: "ViajeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Postulantes_ViajeId",
                 table: "Postulantes",
                 column: "ViajeId");
@@ -398,6 +425,9 @@ namespace unAventonApi.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Calificacion");
+
+            migrationBuilder.DropTable(
+                name: "DiaDeViaje");
 
             migrationBuilder.DropTable(
                 name: "Postulantes");

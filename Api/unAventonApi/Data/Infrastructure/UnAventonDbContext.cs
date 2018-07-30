@@ -22,6 +22,7 @@
         public DbSet<Banco> Banco { get; set; }
 
         public DbSet<Calificacion> Calificacion { get; set; }
+        public DbSet<Rol> Rol { get; set; }
 
         public DbSet<TipoCalificacion> TipoCalificacion { get; set; }
 
@@ -69,9 +70,6 @@
                 .HasOne(u => u.User)
                 .WithMany(vr => vr.ViajesRealizados)
                 .HasForeignKey(u => u.UserId);
-
-
-
         }
     }
 }
