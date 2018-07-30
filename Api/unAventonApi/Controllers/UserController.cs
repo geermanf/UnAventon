@@ -14,7 +14,7 @@ namespace unAventonApi.Controllers
         private readonly ITipoCalificacionRepository tipoCalificacionRepository;
         private readonly IRolRepository rolRepository;
 
-        public UserController(IUserRepository genericRepo, ITipoCalificacionRepository tipoCalificacionRepository, , IRolRepository rolRepository) : base(genericRepo)
+        public UserController(IUserRepository genericRepo, ITipoCalificacionRepository tipoCalificacionRepository, IRolRepository rolRepository) : base(genericRepo)
         {
             this.tipoCalificacionRepository = tipoCalificacionRepository;
             this.rolRepository = rolRepository;
@@ -172,6 +172,21 @@ namespace unAventonApi.Controllers
             try
             {
                 var response = this.genericRepo.GetAllUserById(id).Calificaciones.Where(c => c.Rol.Descripcion == "Viajero");
+
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al listar las calificaciones del usuario con id: " + id);
+            }
+        }
+
+        [HttpGet("ListarPuntuacionesPendientes")]
+        public IActionResult PuntuacionesPendientes(int id)
+        {
+            try
+            {
+                var response = this.genericRepo.GetAllUserById(id).Calificaciones.Where(c => c.Puntuacion.Descripcion == "Pendiente");
 
                 return Ok(response);
             }

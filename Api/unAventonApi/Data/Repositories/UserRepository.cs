@@ -32,6 +32,7 @@ namespace unAventonApi.Data
                     .Include(u => u.ViajesRealizados)
                     .Include(u => u.Calificaciones).ThenInclude(c => c.Rol)
                     .Include(u => u.Calificaciones).ThenInclude(c => c.Puntuacion)
+                    .Include(u => u.Calificaciones).ThenInclude(c => c.UsuarioPuntuador)
                     .FirstOrDefault(x => x.Id == id);
             return user;
         }

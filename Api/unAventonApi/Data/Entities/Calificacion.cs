@@ -8,6 +8,6 @@ namespace unAventonApi.Data.Entities
 
         public Rol Rol { get; set; }
 
-        public int idUsuarioPuntuador { get; set;}
+        public User UsuarioPuntuador { get; set;}
     }
 }
