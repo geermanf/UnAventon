@@ -12,8 +12,10 @@
             <div class="owner">
               <div class="avatar" style="margin: 0px;">
                 <div class="img-hover-content">
-                  <a routerLink="/verPerfilOtro" routerLinkActive="active" [queryParams]="{id: viaje.creador.id}"> <img src="{{viaje.creador.fotoPerfil}}" alt="" class="img-thumbnail img-responsive" (error)="img.src = '../assets/img/anonym-bw.png'"
-                    #img></a>
+                  <a routerLink="/verPerfilOtro" routerLinkActive="active" [queryParams]="{id: viaje.creador.id}">
+                    <img src="{{viaje.creador.fotoPerfil}}" alt="" class="img-thumbnail img-responsive" (error)="img.src = '../assets/img/anonym-bw.png'"
+                      #img>
+                  </a>
                 </div>
               </div>
               <div class="name">
@@ -67,6 +69,7 @@
                       Cancelar viaje
                     </button>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -200,6 +203,12 @@
 
             <div style="height: 3.5em;"></div>
           </div>
+
+          <div class="col-md-8" style="padding-left: 10%">
+            <h4>Ingrese su Pregunta</h4>
+            <br>
+            <textarea class="form-control" rows="4" placeholder="Ingrese su pregunta" ></textarea>
+          </div>
           <button type="submit" class="contact100-form-btn" style="width: 30px;width: 10px;margin:5%" *ngIf="verPostulantes == true"
             (click)="verPostulantes = false">
             Volver
@@ -216,5 +225,6 @@
 
       </div>
     </div>
+
   </div>
 </div>

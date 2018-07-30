@@ -12,6 +12,8 @@ import { CrearViajeComponent } from './crearViaje/crearViaje.component';
 import { VerViajesComponent } from './viajes/verViajes/verViajes.component';
 import { DetalleViajeComponent } from './viajes/detalleViaje/detalleViaje.component';
 import {PerfilOtroComponent } from './perfilOtro/perfilOtro.component';
+import {ModificarViajeComponent } from './modificarViaje/modificarViaje.component';
+import {PendientesComponent } from './pendientes/pendientes.component';
 
 
 const routes: Routes = [
@@ -26,7 +28,8 @@ const routes: Routes = [
     { path: 'editar', component: EditarComponent, canActivate: [AuthGuard]},
     { path: 'crearViaje', component: CrearViajeComponent, canActivate: [AuthGuard]},
     { path: 'detalleViaje', component: DetalleViajeComponent, canActivate: [AuthGuard]},
-
+    { path: 'modificarViaje', component: ModificarViajeComponent, canActivate: [AuthGuard]},
+    { path: 'pendientes', component: PendientesComponent, canActivate: [AuthGuard]},
 
 
     // INCORRECTO O VACIO

@@ -56,7 +56,7 @@
 
               <!-- TITULO HISTORIAL -->
               <span class="title">
-                Mi historial de viajes
+                Historial de viajes
               </span>
 
               <!-- CUERPO HISTORIAL -->
@@ -67,7 +67,7 @@
                 </app-contenedorViajePerfil>
               </span>
               <span *ngIf="viajes.length === 0">
-                <h4 class="rosa">No tienes viajes en tu historial.</h4>
+                <h4 class="rosa">No tienes viajes en su historial.</h4>
               </span>
 
 
@@ -77,12 +77,44 @@
 
 
 
-            <tab disabled="true">
-              <ng-template tabHeading>
-                <span class="tab-link hover-rosa disabled">Mi reputación</span>
-              </ng-template>
+           
+            <!-- INICIO REPUTACION -->
 
-            </tab>
+            <tab>
+                <ng-template tabHeading>
+                  <span class="tab-link hover-rosa">Reputación</span>
+                </ng-template>
+  
+                <!-- TITULO REPUTACION -->
+                <span class="title">
+                  Historial de puntuaciones
+                </span>
+  
+                <!-- CUERPO REPUTACION-->
+  
+                <span>
+                  <div class="row">
+                  <div class="col-md-3"><h6> Tiene una puntuación de</h6>
+                    <ngb-progressbar type="danger" [value]="70" [striped]="true">
+                      <i>7</i>
+                    </ngb-progressbar>
+                    <br>
+                  </div>
+                  <div class="col-md-8">
+                      <app-contenedorcomentario>
+                        </app-contenedorcomentario>
+                  </div>
+                  </div>
+                </span>
+               
+                <span >
+                  <h4 class="rosa">No tiene comentarios</h4>
+                </span>
+  
+  
+              </tab>
+  
+              <!-- FIN REPUTACION -->
 
           </tabset>
 
