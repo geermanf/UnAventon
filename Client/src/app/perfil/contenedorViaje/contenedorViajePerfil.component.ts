@@ -20,7 +20,6 @@ export class ContenedorViajePerfilComponent implements OnInit {
               private alertService: AlertasService) { }
 
   ngOnInit() {
-    debugger;
     this.horaPartidaToShow = this.viaje.horaPartida.split(':');
   }
 
