@@ -14,7 +14,9 @@ import { DetalleViajeComponent } from './viajes/detalleViaje/detalleViaje.compon
 import {PerfilOtroComponent } from './perfilOtro/perfilOtro.component';
 import {ModificarViajeComponent } from './modificarViaje/modificarViaje.component';
 import {PendientesComponent } from './pendientes/pendientes.component';
-
+import {SobreNosotrosComponent } from './sobreNosotros/sobreNosotros.component';
+import {ContactoAdminComponent } from './contactoAdmin/contactoAdmin.component';
+import {PregFrecuentesComponent} from './pregFrecuentes/pregFrecuentes.component';
 
 const routes: Routes = [
 
@@ -23,6 +25,9 @@ const routes: Routes = [
     { path: 'registrarse', component: RegistrarseComponent},
     { path: 'verViajes', component: VerViajesComponent},
     { path: 'verPerfilOtro', component: PerfilOtroComponent},
+    { path: 'sobreNosotros', component:SobreNosotrosComponent },
+    { path: 'contacto', component:ContactoAdminComponent },
+    { path: 'preguntas' , component:PregFrecuentesComponent},
     // USUARIOS LOGUEADOS
     { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard]},
     { path: 'editar', component: EditarComponent, canActivate: [AuthGuard]},

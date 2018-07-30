@@ -52,7 +52,10 @@ import {ContenedorViajePerfilComponent } from './perfil/contenedorViaje/contened
 import {ModificarViajeComponent } from './modificarViaje/modificarViaje.component';
 import {ContenedorComentarioComponent } from './perfil/contenedorComentario/contenedorComentario.component';
 import {PendientesComponent } from './pendientes/pendientes.component';
-
+import {SobreNosotrosComponent } from './sobreNosotros/sobreNosotros.component';
+import {ContactoAdminComponent } from './contactoAdmin/contactoAdmin.component';
+import {PregFrecuentesComponent} from './pregFrecuentes/pregFrecuentes.component';
+import {ContenedorPuntuacionComponent} from './pendientes/contenedorPuntuacion/contenedorPuntuacion.component';
 
 @NgModule({
   imports: [
@@ -95,7 +98,11 @@ import {PendientesComponent } from './pendientes/pendientes.component';
     ContenedorViajePerfilComponent,
     ModificarViajeComponent,
     ContenedorComentarioComponent,
-    PendientesComponent 
+    PendientesComponent,
+    SobreNosotrosComponent,
+    ContactoAdminComponent,
+    PregFrecuentesComponent,
+    ContenedorPuntuacionComponent
 ],
   exports: [
     ContenedorViajeComponent,
@@ -109,7 +116,10 @@ import {PendientesComponent } from './pendientes/pendientes.component';
     EditarVehiculosComponent,
     ContenedorViajePerfilComponent,
     ContenedorComentarioComponent,
-    PendientesComponent 
+    PendientesComponent,
+    SobreNosotrosComponent,
+    ContactoAdminComponent,
+    PregFrecuentesComponent
   ],
   providers: [
     DatePipe,
