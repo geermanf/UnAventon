@@ -12,8 +12,10 @@
             <div class="owner">
               <div class="avatar" style="margin: 0px;">
                 <div class="img-hover-content">
-                  <a routerLink="/verPerfilOtro" routerLinkActive="active" [queryParams]="{id: viaje.creador.id}"> <img src="{{viaje.creador.fotoPerfil}}" alt="" class="img-thumbnail img-responsive" (error)="img.src = '../assets/img/anonym-bw.png'"
-                    #img></a>
+                  <a routerLink="/verPerfilOtro" routerLinkActive="active" [queryParams]="{id: viaje.creador.id}">
+                    <img src="{{viaje.creador.fotoPerfil}}" alt="" class="img-thumbnail img-responsive" (error)="img.src = '../assets/img/anonym-bw.png'"
+                      #img>
+                  </a>
                 </div>
               </div>
               <div class="name">
@@ -52,21 +54,29 @@
 
 
                 <div class="row" *ngIf="esCreador" style="margin-top: 3em;">
-                  <div class="col-md-4 float-right">
-                    <button type="submit" class="contact100-form-btn" style="width: 150px" (click)="verPostulantes = true">
+                  <div class="col-md-3 float-right">
+                    <button type="submit" class="contact100-form-btn" style="width: 120px; font-size: 15px" (click)="verPostulantes = true">
                       Ver postulantes
                     </button>
                   </div>
-                  <div class="col-md-4">
-                    <button type="submit" class="contact100-form-btn" style="width: 150px" (click)="verAcompaniantes = true">
+                  <div class="col-md-3">
+                    <button type="submit" class="contact100-form-btn" style="width: 120px; font-size: 15px" (click)="verAcompaniantes = true">
                       Ver acompañantes
                     </button>
                   </div>
-                  <div class="col-md-4 float-left">
-                    <button type="submit" class="contact100-form-btn" style="width: 150px; background-color: #ee9d9e" disabled="true">
-                      Cancelar viaje
+                  <div class="col-md-3" *ngIf="!estadoModificar">
+                    <a routerLink="/modificarViaje" routerLinkActive="active" [queryParams]="{id: viaje.id}" data-toggle="tooltip" title="{{tooltipModificar}}">
+                      <button type="button" class="contact100-form-btn" style="width: 120px; font-size: 15px">
+                        Modificar
+                      </button>
+                    </a>
+                  </div>
+                  <div class="col-md-3 float-left">
+                    <button type="submit" class="contact100-form-btn" style="font-size: 15px; width: 120px; background-color: #ee9d9e" disabled="true">
+                      Cancelar
                     </button>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -200,11 +210,17 @@
 
             <div style="height: 3.5em;"></div>
           </div>
-          <button type="submit" class="contact100-form-btn" style="width: 30px;width: 10px;margin:5%" *ngIf="verPostulantes == true"
+
+          <div class="col-md-8" style="padding-left: 10%">
+            <h4>Ingrese su Pregunta</h4>
+            <br>
+            <textarea class="form-control" rows="4" placeholder="Ingrese su pregunta"></textarea>
+          </div>
+          <button type="submit" class="contact100-form-btn" style="width: 30px;width: 15px;margin:5%" *ngIf="verPostulantes == true"
             (click)="verPostulantes = false">
             Volver
           </button>
-          <button type="submit" class="contact100-form-btn" style="width: 30px;width: 10px;margin:5%" *ngIf="verAcompaniantes == true"
+          <button type="submit" class="contact100-form-btn" style="width: 30px;width: 15px;margin:5%" *ngIf="verAcompaniantes == true"
             (click)="verAcompaniantes = false">
             Volver
           </button>
@@ -216,5 +232,6 @@
 
       </div>
     </div>
+
   </div>
 </div>

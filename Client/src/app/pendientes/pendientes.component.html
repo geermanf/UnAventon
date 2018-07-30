@@ -1,0 +1,81 @@
+<!-- IMAGEN SUPERIOR -->
+
+<div class="wrapper">
+  <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('../assets/img/home.jpg');">
+    <div class="filter"></div>
+  </div>
+  <div class="section profile-content">
+    <div class="container">
+
+      <!-- FOTO Y NOMBRE -->
+
+      <div class="owner">
+        <div class="avatar ">
+
+          <img src="{{usuario.fotoPerfil}}" alt="Circle Image" class="img-circle img-responsive" style="width: 20vw; transition: .5s ease;"
+          (error)="img.src = '../assets/img/anonym-bw.png'" #img>
+
+        </div>
+        <div class="name">
+          <h4 class="title">
+            {{usuario.nombre}} {{usuario.apellido}}
+            <br />
+
+          </h4>
+          <h6>Pendientes</h6>
+        </div>
+      </div>
+
+      <!-- TABS -->
+
+
+      <div class="nav-tabs-navigation">
+        <div class="nav-tabs-wrapper">
+          <tabset [justified]="true">
+
+            <tab>
+              <ng-template tabHeading >
+                <span class="tab-link hover-rosa">Puntuaciones Pendientes</span>
+              </ng-template>
+
+            </tab>
+
+            <!-- INICIO PREG PENDIENTES -->
+
+            <tab>
+              <ng-template tabHeading>
+                <span class="tab-link hover-rosa">Preguntas Pendientes</span>
+              </ng-template>
+
+              <!-- TITULO PREGPENDIENTES -->
+             
+              <!-- CUERPO PREG PENDIENTES -->
+
+
+            </tab>
+
+            <!-- FIN PREG PENDIENTES -->
+
+            <!-- INICIO PAGOS PENDIENTES -->
+
+            <tab>
+              <ng-template tabHeading>
+                <span class="tab-link hover-rosa">Pagos pendientes</span>
+              </ng-template>
+
+              <!-- TITULO PAGOS PENDIENTES -->
+             
+
+              <!-- CUERPO PAGOS PENDIENTES-->
+
+            </tab>
+
+            <!-- FIN PAGOS PENDIENTES -->
+
+          </tabset>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

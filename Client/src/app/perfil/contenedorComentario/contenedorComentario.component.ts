@@ -6,11 +6,11 @@ import { Router } from '@angular/router';
 import { TarjetaService } from '../../services/tarjeta.service';
 
 @Component({
-  selector: 'app-contenedorViajePerfil',
-  templateUrl: './contenedorViajePerfil.component.html',
-  styleUrls: ['./contenedorViajePerfil.component.css', '../../../assets/css/modal.css']
+  selector: 'app-contenedorcomentario',
+  templateUrl: './contenedorComentario.component.html',
+  styleUrls: ['./contenedorComentario.component.css', '../../../assets/css/modal.css']
 })
-export class ContenedorViajePerfilComponent implements OnInit {
+export class ContenedorComentarioComponent implements OnInit {
   @Input() viaje: any;
   horaPartidaToShow: any;
 

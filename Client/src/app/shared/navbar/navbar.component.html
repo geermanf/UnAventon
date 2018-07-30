@@ -19,6 +19,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" routerLink="/sobreNosotros" routerLinkActive="active">
+                        Sobre Nosotros
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="!authGuard.isLogued();">
                     <a class="nav-link" (click)= "crearViaje()">
                         Crear Viaje
                     </a>
@@ -46,9 +51,9 @@
                             <a class="dropdown-item" routerLink="/editar" routerLinkActive="active"  [queryParams]="{tabId:'1'}">Cambiar Contraseña</a>
                             <a class="dropdown-item" routerLink="/perfil" routerLinkActive="active"  [queryParams]="{tabId:'3'}">Vehiculos</a>
                             <a class="dropdown-item" routerLink="/perfil" routerLinkActive="active" [queryParams]="{tabId:'4'}">Tarjetas</a>
-                            <!-- <a class="dropdown-item">Puntuaciones Pendientes</a>
-                            <a class="dropdown-item">Preguntas Pendientes</a>
-                            <a class="dropdown-item">Pagos Pendientes</a> -->
+                            <a class="dropdown-item" routerLink="/pendientes" routerLinkActive="active">Puntuaciones Pendientes</a>
+                            <a class="dropdown-item" routerLink="/pendientes" routerLinkActive="active">Preguntas Pendientes</a>
+                            <a class="dropdown-item" routerLink="/pendientes" routerLinkActive="active">Pagos Pendientes</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" (click)="logoutModal(CerrarSesionModal)">Cerrar sesion</a>
                             <!-- <a class="dropdown-item" (click)="eliminarCuentaModal(borrarCuentaModal)">Eliminar cuenta</a> -->

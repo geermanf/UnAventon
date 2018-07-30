@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
@@ -50,9 +49,13 @@ import { VerViajesComponent } from './viajes/verViajes/verViajes.component';
 import { DetalleViajeComponent } from './viajes/detalleViaje/detalleViaje.component';
 import {PerfilOtroComponent } from './perfilOtro/perfilOtro.component';
 import {ContenedorViajePerfilComponent } from './perfil/contenedorViaje/contenedorViajePerfil.component';
-
-
-
+import {ModificarViajeComponent } from './modificarViaje/modificarViaje.component';
+import {ContenedorComentarioComponent } from './perfil/contenedorComentario/contenedorComentario.component';
+import {PendientesComponent } from './pendientes/pendientes.component';
+import {SobreNosotrosComponent } from './sobreNosotros/sobreNosotros.component';
+import {ContactoAdminComponent } from './contactoAdmin/contactoAdmin.component';
+import {PregFrecuentesComponent} from './pregFrecuentes/pregFrecuentes.component';
+import {ContenedorPuntuacionComponent} from './pendientes/contenedorPuntuacion/contenedorPuntuacion.component';
 
 @NgModule({
   imports: [
@@ -92,7 +95,14 @@ import {ContenedorViajePerfilComponent } from './perfil/contenedorViaje/contened
     VerViajesComponent,
     DetalleViajeComponent,
     PerfilOtroComponent,
-    ContenedorViajePerfilComponent
+    ContenedorViajePerfilComponent,
+    ModificarViajeComponent,
+    ContenedorComentarioComponent,
+    PendientesComponent,
+    SobreNosotrosComponent,
+    ContactoAdminComponent,
+    PregFrecuentesComponent,
+    ContenedorPuntuacionComponent
 ],
   exports: [
     ContenedorViajeComponent,
@@ -104,7 +114,12 @@ import {ContenedorViajePerfilComponent } from './perfil/contenedorViaje/contened
     FormularioVehiculosComponent,
     FormularioTarjetasComponent,
     EditarVehiculosComponent,
-    ContenedorViajePerfilComponent
+    ContenedorViajePerfilComponent,
+    ContenedorComentarioComponent,
+    PendientesComponent,
+    SobreNosotrosComponent,
+    ContactoAdminComponent,
+    PregFrecuentesComponent
   ],
   providers: [
     DatePipe,

@@ -74,7 +74,7 @@
 
 
               <span *ngFor="let viaje of viajes">
-                <app-contenedorViajePerfil [viaje]="viaje" >
+                <app-contenedorViajePerfil [viaje]="viaje">
                 </app-contenedorViajePerfil>
               </span>
               <span *ngIf="viajes.length === 0">
@@ -163,12 +163,44 @@
 
             <!-- FIN TARJETAS -->
 
-            <tab disabled="true">
+
+            <!-- INICIO REPUTACION -->
+
+            <tab>
               <ng-template tabHeading>
-                <span class="tab-link hover-rosa disabled">Mi reputación</span>
+                <span class="tab-link hover-rosa">Mi Reputación</span>
               </ng-template>
 
+              <!-- TITULO REPUTACION -->
+              <span class="title">
+                Mi historial de puntuaciones
+              </span>
+
+              <!-- CUERPO REPUTACION-->
+
+              <span>
+                <div class="row">
+                <div class="col-md-3"><h6> Tiene una puntuación de</h6>
+                  <ngb-progressbar type="danger" [value]="70" [striped]="true">
+                    <i>7</i>
+                  </ngb-progressbar>
+                  <br>
+                </div>
+                <div class="col-md-8">
+                    <app-contenedorcomentario>
+                      </app-contenedorcomentario>
+                </div>
+                </div>
+              </span>
+             
+              <span >
+                <h4 class="rosa">No tienes comentarios</h4>
+              </span>
+
+
             </tab>
+
+            <!-- FIN REPUTACION -->
 
           </tabset>
 

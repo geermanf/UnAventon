@@ -102,8 +102,5 @@ export class NavbarComponent implements OnInit {
             'Lo sentimos, no estas autorizado para realizar esta operacion. Revisa tus pagos o puntuaciones pendientes');
         }
     }
-    mostrarAlertaNoAutorizado() {
-
-    }
 }
 

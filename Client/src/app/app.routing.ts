@@ -12,7 +12,11 @@ import { CrearViajeComponent } from './crearViaje/crearViaje.component';
 import { VerViajesComponent } from './viajes/verViajes/verViajes.component';
 import { DetalleViajeComponent } from './viajes/detalleViaje/detalleViaje.component';
 import {PerfilOtroComponent } from './perfilOtro/perfilOtro.component';
-
+import {ModificarViajeComponent } from './modificarViaje/modificarViaje.component';
+import {PendientesComponent } from './pendientes/pendientes.component';
+import {SobreNosotrosComponent } from './sobreNosotros/sobreNosotros.component';
+import {ContactoAdminComponent } from './contactoAdmin/contactoAdmin.component';
+import {PregFrecuentesComponent} from './pregFrecuentes/pregFrecuentes.component';
 
 const routes: Routes = [
 
@@ -21,12 +25,16 @@ const routes: Routes = [
     { path: 'registrarse', component: RegistrarseComponent},
     { path: 'verViajes', component: VerViajesComponent},
     { path: 'verPerfilOtro', component: PerfilOtroComponent},
+    { path: 'sobreNosotros', component:SobreNosotrosComponent },
+    { path: 'contacto', component:ContactoAdminComponent },
+    { path: 'preguntas' , component:PregFrecuentesComponent},
     // USUARIOS LOGUEADOS
     { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard]},
     { path: 'editar', component: EditarComponent, canActivate: [AuthGuard]},
     { path: 'crearViaje', component: CrearViajeComponent, canActivate: [AuthGuard]},
     { path: 'detalleViaje', component: DetalleViajeComponent, canActivate: [AuthGuard]},
-
+    { path: 'modificarViaje', component: ModificarViajeComponent, canActivate: [AuthGuard]},
+    { path: 'pendientes', component: PendientesComponent, canActivate: [AuthGuard]},
 
 
     // INCORRECTO O VACIO
