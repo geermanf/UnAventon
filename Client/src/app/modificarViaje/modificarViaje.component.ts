@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -34,16 +34,18 @@ export class ModificarViajeComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService,
     private vehiculoService: VehiculoService,
     private viajeService: ViajeService,
     private alertService: AlertasService,
     public authGuard: AuthGuard) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.getUsuario();
     this.minDate = new Date();
     this.minDate.setDate(this.minDate.getDate() + 1);
+    const id = this.route.snapshot.queryParams['id'];
+    await this.viajeService.getById(parseInt(id, 10)).map(res => this.viaje = res)
+    .subscribe();
   }
 
   getUsuario() {

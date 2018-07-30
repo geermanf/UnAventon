@@ -12,13 +12,13 @@
       <div class="owner">
         <div class="avatar ">
 
-          <img src="" alt="Circle Image" class="img-circle img-responsive" style="width: 20vw" (error)="img.src = '../assets/img/anonym-bw.png'"
-            #img>
+          <img src="{{usuario.fotoPerfil}}" alt="Circle Image" class="img-circle img-responsive" style="width: 20vw; transition: .5s ease;"
+          (error)="img.src = '../assets/img/anonym-bw.png'" #img>
 
         </div>
         <div class="name">
           <h4 class="title">
-            Nombre usuario
+            {{usuario.nombre}} {{usuario.apellido}}
             <br />
 
           </h4>
@@ -31,10 +31,10 @@
 
       <div class="nav-tabs-navigation">
         <div class="nav-tabs-wrapper">
-          <tabset>
+          <tabset [justified]="true">
 
             <tab>
-              <ng-template tabHeading>
+              <ng-template tabHeading >
                 <span class="tab-link hover-rosa">Puntuaciones Pendientes</span>
               </ng-template>
 
