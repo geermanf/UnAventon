@@ -7,5 +7,7 @@ namespace unAventonApi.Data.Entities
         public TipoCalificacion Puntuacion { get; set; }
 
         public Rol Rol { get; set; }
+
+        public int idUsuarioPuntuador { get; set;}
     }
 }

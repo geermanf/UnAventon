@@ -1,6 +1,6 @@
 namespace unAventonApi.Data.Entities
 {
-    public class TipoCalificacion
+    public class TipoCalificacion : IEntity
     {
         public int Id { get; set; }
 

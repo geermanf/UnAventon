@@ -72,7 +72,7 @@ export class PerfilComponent implements OnInit {
 
   getViajes() {
     this.viajes = [];
-    this.viajeService.getAll()
+    this.viajeService.getViajesRealizados(this.usuario.id)
       .map(res => Object.keys(res).map(index => this.viajes.push(res[index])))
       .subscribe();
   }

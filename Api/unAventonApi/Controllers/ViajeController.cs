@@ -145,7 +145,10 @@ namespace unAventonApi.Controllers
             {
                 var viaje = this.genericRepo.GetAllById(idViaje);
                 var viajero = viaje.Viajeros.First(p => p.ViajeId == idViaje && p.UserId == idViajero);
+                var user = this.userRepository.GetAllUserById(idViajero);
                 viaje.Viajeros.Remove(viajero);
+                var vp = user.ViajesPendientes.First(v => v.ViajeId == viaje.Id);
+                user.ViajesPendientes.Remove(vp);
                 this.genericRepo.Update(viaje.Id, viaje);
                 return Ok();
             }
@@ -228,6 +231,22 @@ namespace unAventonApi.Controllers
 
 
 
+        }
+
+        [HttpGet("ListarViajesRealizados")]
+        public new IActionResult GetViajesRealizados(int idUsuario)
+        {
+            var response = new List<Object>();
+
+            try
+            {
+                response = this.genericRepo.GetRealizadosByUserId(idUsuario).ToList();
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al listar los viajes realizados");
+            }
         }
 
         [HttpGet("ListarId")]
