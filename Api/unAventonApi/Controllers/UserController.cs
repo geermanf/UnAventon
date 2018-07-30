@@ -11,8 +11,14 @@ namespace unAventonApi.Controllers
     [Route("api/[controller]")]
     public class UserController : GenericController<IUserRepository, User>
     {
-        public UserController(IUserRepository genericRepo) : base(genericRepo)
+        private readonly ITipoCalificacionRepository tipoCalificacionRepository;
+        private readonly IRolRepository rolRepository;
+
+        public UserController(IUserRepository genericRepo, ITipoCalificacionRepository tipoCalificacionRepository, , IRolRepository rolRepository) : base(genericRepo)
         {
+            this.tipoCalificacionRepository = tipoCalificacionRepository;
+            this.rolRepository = rolRepository;
+
         }
 
         [HttpPost("ListarPorEmail")]
@@ -142,6 +148,59 @@ namespace unAventonApi.Controllers
             catch (Exception)
             {
                 return BadRequest("Hubo un error al obtener validar horarios del usuario id: " + userId);
+            }
+        }
+
+        [HttpGet("ListarReputacionConductor")]
+        public IActionResult GetReputacionConductor(int id)
+        {
+            try
+            {
+                var response = this.genericRepo.GetAllUserById(id).Calificaciones.Where(c => c.Rol.Descripcion == "Conductor");
+
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al listar con id: " + id);
+            }
+        }
+
+        [HttpGet("ListarReputacionViajero")]
+        public IActionResult GetReputacionViajero(int id)
+        {
+            try
+            {
+                var response = this.genericRepo.GetAllUserById(id).Calificaciones.Where(c => c.Rol.Descripcion == "Viajero");
+
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al listar las calificaciones del usuario con id: " + id);
+            }
+        }
+
+        [HttpPost("Puntuar")]
+        public IActionResult Puntuar([FromBody] PuntuarDTO puntuarDTO, [FromQuery]int userId)
+        {
+            try
+            {
+                var user = this.genericRepo.GetAllUserById(userId);
+                var calificacion = new Data.Entities.Calificacion(){
+                    Comentario = puntuarDTO.Comentario,
+                    Rol = rolRepository.GetById(puntuarDTO.IdRol),
+                    Puntuacion = tipoCalificacionRepository.GetById(puntuarDTO.IdPuntuacion),
+                };
+                user.Calificaciones.Add(calificacion);
+
+                this.genericRepo.Update(userId, user);
+
+                return Ok(true);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al calificar al usuario con id: " + userId);
             }
         }
     }
