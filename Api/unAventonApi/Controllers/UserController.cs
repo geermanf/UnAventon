@@ -156,7 +156,7 @@ namespace unAventonApi.Controllers
         {
             try
             {
-                var response = this.genericRepo.GetAllUserById(id).Calificaciones.Where(c => c.Rol.Descripcion == "Conductor");
+                var response = this.genericRepo.GetAllUserById(id).CalificacionesRecibidas.Where(c => c.Rol.Descripcion == "Conductor").ToList();
 
                 return Ok(response);
             }
@@ -171,7 +171,7 @@ namespace unAventonApi.Controllers
         {
             try
             {
-                var response = this.genericRepo.GetAllUserById(id).Calificaciones.Where(c => c.Rol.Descripcion == "Viajero");
+                var response = this.genericRepo.GetAllUserById(id).CalificacionesRecibidas.Where(c => c.Rol.Descripcion == "Viajero").ToList();
 
                 return Ok(response);
             }
@@ -186,7 +186,7 @@ namespace unAventonApi.Controllers
         {
             try
             {
-                var response = this.genericRepo.GetAllUserById(id).Calificaciones.Where(c => c.Puntuacion.Descripcion == "Pendiente");
+                var response = this.genericRepo.GetAllUserById(id).CalificacionesBrindadas.Where(c => c.Puntuacion.Descripcion == "Pendiente").ToList();
 
                 return Ok(response);
             }
@@ -197,7 +197,7 @@ namespace unAventonApi.Controllers
         }
 
         [HttpPost("Puntuar")]
-        public IActionResult Puntuar([FromBody] PuntuarDTO puntuarDTO, [FromQuery]int userId)
+        public IActionResult Puntuar([FromBody]PuntuarDTO puntuarDTO, [FromQuery]int userId)
         {
             try
             {
@@ -206,9 +206,11 @@ namespace unAventonApi.Controllers
                     Comentario = puntuarDTO.Comentario,
                     Rol = rolRepository.GetById(puntuarDTO.IdRol),
                     Puntuacion = tipoCalificacionRepository.GetById(puntuarDTO.IdPuntuacion),
+                    UsuarioPuntuador = genericRepo.GetAllUserById(puntuarDTO.IdUsuarioPuntuador)
                 };
-                user.Calificaciones.Add(calificacion);
-
+                user.CalificacionesRecibidas.Add(calificacion);
+                var calificacionPendiente = calificacion.UsuarioPuntuador.CalificacionesBrindadas.First(c => c.Id == puntuarDTO.IdPendiente);
+                calificacion.UsuarioPuntuador.CalificacionesBrindadas.Remove(calificacionPendiente);
                 this.genericRepo.Update(userId, user);
 
                 return Ok(true);

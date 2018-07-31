@@ -70,6 +70,16 @@
                 .HasOne(u => u.User)
                 .WithMany(vr => vr.ViajesRealizados)
                 .HasForeignKey(u => u.UserId);
+            
+            modelBuilder.Entity<Calificacion>()
+                .HasOne(c => c.UsuarioPuntuador)
+                .WithMany(e => e.CalificacionesBrindadas)
+                .IsRequired();
+
+            modelBuilder.Entity<Calificacion>()
+                .HasOne(c => c.UsuarioCalificado)
+                .WithMany(e => e.CalificacionesRecibidas)
+                .IsRequired();
         }
     }
 }
