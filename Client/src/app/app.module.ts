@@ -56,6 +56,9 @@ import {SobreNosotrosComponent } from './sobreNosotros/sobreNosotros.component';
 import {ContactoAdminComponent } from './contactoAdmin/contactoAdmin.component';
 import {PregFrecuentesComponent} from './pregFrecuentes/pregFrecuentes.component';
 import {ContenedorPuntuacionComponent} from './pendientes/contenedorPuntuacion/contenedorPuntuacion.component';
+import {ContenedorPreguntaComponent} from './pendientes/contenedorPregunta/contenedorPregunta.component';
+import {ContenedorPagoComponent} from './pendientes/contenedorPago/contenedorPago.component';
+import {ContenedorReputacionComponent } from './perfil/contenedorReputacion/contenedorReputacion.component';
 
 @NgModule({
   imports: [
@@ -102,7 +105,10 @@ import {ContenedorPuntuacionComponent} from './pendientes/contenedorPuntuacion/c
     SobreNosotrosComponent,
     ContactoAdminComponent,
     PregFrecuentesComponent,
-    ContenedorPuntuacionComponent
+    ContenedorPuntuacionComponent,
+    ContenedorPreguntaComponent,
+    ContenedorPagoComponent,
+    ContenedorReputacionComponent
 ],
   exports: [
     ContenedorViajeComponent,
@@ -119,7 +125,10 @@ import {ContenedorPuntuacionComponent} from './pendientes/contenedorPuntuacion/c
     PendientesComponent,
     SobreNosotrosComponent,
     ContactoAdminComponent,
-    PregFrecuentesComponent
+    PregFrecuentesComponent,
+    ContenedorPreguntaComponent,
+    ContenedorPagoComponent,
+    ContenedorReputacionComponent
   ],
   providers: [
     DatePipe,

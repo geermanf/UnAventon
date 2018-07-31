@@ -5,3 +5,7 @@
 .btn.btn-link.link-rosa:hover {
     color: #f04649 !important;
   }
+.btn-rosa{
+  background-color: #f17376;
+  color:white;
+}

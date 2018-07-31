@@ -28,6 +28,7 @@ export class DetalleViajeComponent implements OnInit {
   verPostulantes = false;
   horaPartidaToShow: any;
   estadoModificar: boolean;
+  duracion: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private viajeService: ViajeService,
     private authGuard: AuthGuard, private alertService: AlertasService) { }
@@ -67,6 +68,7 @@ export class DetalleViajeComponent implements OnInit {
     this.provinciaOrigen = this.viaje.origen.split(',')[1];
     this.horaPartidaToShow = this.viaje.horaPartida.split(':');
     this.lugaresDisponibles = this.viaje.cantidadDePlazas - this.viaje.viajeros.length + 1;
+    this.duracion = this.viaje.duracion;
 
     this.evaluarEstadoModificar();
   }

@@ -1,6 +1,13 @@
 <div class="wrapper">
   <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('../assets/img/home.jpg');">
     <div class="filter"></div>
+    <div class="container">
+      <div class="motto text-center">
+        <br>
+        <app-buscador></app-buscador>
+      </div>
+
+    </div>
   </div>
   <div class="section profile-content">
     <div class="container">
@@ -11,14 +18,13 @@
       </div>
       <br />
       <br />
-
       <div class="nav-tabs-navigation">
         <div class="nav-tabs-wrapper">
           <div class="row">
-              <div class="col-md-3" *ngFor="let viaje of viajes">
-                <app-contenedorviaje [viaje]="viaje">
-                </app-contenedorviaje>
-              </div>
+            <div class="col-md-3" *ngFor="let viaje of viajes">
+              <app-contenedorviaje [viaje]="viaje">
+              </app-contenedorviaje>
+            </div>
           </div>
         </div>
       </div>

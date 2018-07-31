@@ -13,7 +13,7 @@
         <div class="avatar ">
 
           <img src="{{usuario.fotoPerfil}}" alt="Circle Image" class="img-circle img-responsive" style="width: 20vw; transition: .5s ease;"
-          (error)="img.src = '../assets/img/anonym-bw.png'" #img>
+            (error)="img.src = '../assets/img/anonym-bw.png'" #img>
 
         </div>
         <div class="name">
@@ -32,44 +32,56 @@
       <div class="nav-tabs-navigation">
         <div class="nav-tabs-wrapper">
           <tabset [justified]="true">
-
+            <!--INICIO PUNTUACIONES PENDIENTES-->
             <tab>
-              <ng-template tabHeading >
+              <ng-template tabHeading>
                 <span class="tab-link hover-rosa">Puntuaciones Pendientes</span>
               </ng-template>
-
+              <!-- TITULO PUNTUACIONES PENDIENTES -->
+              <span class="title">
+                Puntuaciones Pendientes
+              </span>
+              <!-- CUERPO PUNTUACIONES PENDIENTES -->
+              <span>
+                <app-contenedorPuntuacion>
+                </app-contenedorPuntuacion>
+              </span>
+              <span>
+                <h4 class="rosa">No tienes puntuaciones pendientes.</h4>
+              </span>
             </tab>
-
             <!-- INICIO PREG PENDIENTES -->
-
             <tab>
               <ng-template tabHeading>
                 <span class="tab-link hover-rosa">Preguntas Pendientes</span>
               </ng-template>
-
               <!-- TITULO PREGPENDIENTES -->
-             
+              <span class="title">
+                Preguntas Pendientes
+              </span>
               <!-- CUERPO PREG PENDIENTES -->
-
-
+              <span>
+                <app-contenedorPregunta>
+                </app-contenedorPregunta>
+              </span>
             </tab>
-
             <!-- FIN PREG PENDIENTES -->
 
             <!-- INICIO PAGOS PENDIENTES -->
-
             <tab>
               <ng-template tabHeading>
                 <span class="tab-link hover-rosa">Pagos pendientes</span>
               </ng-template>
-
               <!-- TITULO PAGOS PENDIENTES -->
-             
-
+              <span class="title">
+                Pagos Pendientes
+              </span>
               <!-- CUERPO PAGOS PENDIENTES-->
-
+              <span>
+                <app-contenedorPago>
+                </app-contenedorPago>
+              </span>
             </tab>
-
             <!-- FIN PAGOS PENDIENTES -->
 
           </tabset>

@@ -1,9 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Vehiculo } from '../../models/vehiculo';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AlertasService } from '../../alertas/alertas.service';
-import { Router } from '@angular/router';
-import { TarjetaService } from '../../services/tarjeta.service';
+
 
 @Component({
   selector: 'app-contenedorPuntuacion',
@@ -13,11 +10,14 @@ import { TarjetaService } from '../../services/tarjeta.service';
 export class ContenedorPuntuacionComponent implements OnInit {
  
 
-  constructor() { }
+  constructor(
+    private modalService: NgbModal,
+  ) { }
 
   ngOnInit() {
    
   }
-
- 
+  abrirModalPuntuar(puntuar) {
+    this.modalService.open(puntuar);
+  }
 }

@@ -51,6 +51,15 @@
                     </button>
                   </div>
                 </div>
+                <div class="row">
+                  <h4>Ingrese su Pregunta</h4>
+                  <br>
+                  <div class="col-md-12">
+                    <textarea class="form-control" rows="2" placeholder="Ingrese su pregunta"></textarea>
+                    <button type="button" class="btn btn-rosa btn-round">Enviar</button>
+                  </div>
+                </div>
+
 
 
                 <div class="row" *ngIf="esCreador" style="margin-top: 3em;">
@@ -200,6 +209,15 @@
             <br>
             <div class="row">
               <div class="trip_seats-available col-xs-offset-4 col-sm-offset-4 col-xs-12">
+                <span class="trip_seats-available_value pull-left" style="color:#fb8e90">{{duracion}}</span>
+                <span class="trip_seats-available_label">Duracion
+                </span>
+              </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+              <div class="trip_seats-available col-xs-offset-4 col-sm-offset-4 col-xs-12">
                 <span class="trip_seats-available_value pull-left" style="color:#fb8e90">${{viaje.costo}}</span>
                 <span class="trip_seats-available_label">Costo
                   <br>por lugar</span>
@@ -211,11 +229,6 @@
             <div style="height: 3.5em;"></div>
           </div>
 
-          <div class="col-md-8" style="padding-left: 10%">
-            <h4>Ingrese su Pregunta</h4>
-            <br>
-            <textarea class="form-control" rows="4" placeholder="Ingrese su pregunta"></textarea>
-          </div>
           <button type="submit" class="contact100-form-btn" style="width: 30px;width: 15px;margin:5%" *ngIf="verPostulantes == true"
             (click)="verPostulantes = false">
             Volver
