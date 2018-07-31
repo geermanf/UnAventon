@@ -102,7 +102,8 @@ namespace unAventonApi.Migrations
                     Comentario = table.Column<string>(nullable: true),
                     PuntuacionId = table.Column<int>(nullable: true),
                     RolId = table.Column<int>(nullable: true),
-                    UserId = table.Column<int>(nullable: true)
+                    UsuarioCalificadoId = table.Column<int>(nullable: false),
+                    UsuarioPuntuadorId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -120,11 +121,17 @@ namespace unAventonApi.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Calificacion_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Calificacion_Users_UsuarioCalificadoId",
+                        column: x => x.UsuarioCalificadoId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Calificacion_Users_UsuarioPuntuadorId",
+                        column: x => x.UsuarioPuntuadorId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -356,9 +363,14 @@ namespace unAventonApi.Migrations
                 column: "RolId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Calificacion_UserId",
+                name: "IX_Calificacion_UsuarioCalificadoId",
                 table: "Calificacion",
-                column: "UserId");
+                column: "UsuarioCalificadoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Calificacion_UsuarioPuntuadorId",
+                table: "Calificacion",
+                column: "UsuarioPuntuadorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DiaDeViaje_ViajeId",

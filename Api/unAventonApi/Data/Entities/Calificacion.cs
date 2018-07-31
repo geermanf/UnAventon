@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace unAventonApi.Data.Entities
 {
     public class Calificacion
@@ -8,6 +10,8 @@ namespace unAventonApi.Data.Entities
 
         public Rol Rol { get; set; }
 
-        public User UsuarioPuntuador { get; set;}
+        public User UsuarioPuntuador { get; set; }
+
+        public User UsuarioCalificado { get; set; }
     }
 }

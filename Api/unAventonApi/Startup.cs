@@ -16,6 +16,7 @@ using unAventonApi.Services.Interfaces;
 using unAventonApi.Data.Repositories;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace unAventonApi
 {
@@ -67,7 +68,9 @@ namespace unAventonApi
             // services.AddDbContext<CodingBlastDbContext>(options =>
             //         options.UseInMemoryDatabase("prueba"));
             SetRepositories(services);
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });;
 
         }
 

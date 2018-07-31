@@ -43,7 +43,11 @@ namespace unAventonApi.Migrations
 
                     b.Property<int?>("RolId");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int?>("UsuarioCalificadoId")
+                        .IsRequired();
+
+                    b.Property<int?>("UsuarioPuntuadorId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -51,7 +55,9 @@ namespace unAventonApi.Migrations
 
                     b.HasIndex("RolId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UsuarioCalificadoId");
+
+                    b.HasIndex("UsuarioPuntuadorId");
 
                     b.ToTable("Calificacion");
                 });
@@ -300,9 +306,15 @@ namespace unAventonApi.Migrations
                         .WithMany()
                         .HasForeignKey("RolId");
 
-                    b.HasOne("unAventonApi.Data.User")
-                        .WithMany("Calificaciones")
-                        .HasForeignKey("UserId");
+                    b.HasOne("unAventonApi.Data.User", "UsuarioCalificado")
+                        .WithMany("CalificacionesRecibidas")
+                        .HasForeignKey("UsuarioCalificadoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("unAventonApi.Data.User", "UsuarioPuntuador")
+                        .WithMany("CalificacionesBrindadas")
+                        .HasForeignKey("UsuarioPuntuadorId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("unAventonApi.Data.Entities.DiaDeViaje", b =>

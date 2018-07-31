@@ -7,5 +7,9 @@ namespace unAventonApi.Data.DTOEntities
         public int IdPuntuacion { get; set; }
 
         public string Comentario { get; set; }
+        
+        public int IdUsuarioPuntuador { get; set; }
+
+        public int IdPendiente { get; set; }
     }
 }
