@@ -111,9 +111,10 @@ namespace unAventonApi.Controllers
         {
             try
             {
-                var user = this.genericRepo.GetAllUserById(id);
+                var calificacionesPendientes = this.genericRepo.GetAllUserById(id).CalificacionesBrindadas.Where(c => c.Puntuacion.Descripcion == "Pendiente").ToList();
+                
 
-                if (user.Id != 3)
+                if (calificacionesPendientes.Any())
                     return Ok(true);
                 else
                     return Ok(false);
@@ -206,7 +207,8 @@ namespace unAventonApi.Controllers
                     Comentario = puntuarDTO.Comentario,
                     Rol = rolRepository.GetById(puntuarDTO.IdRol),
                     Puntuacion = tipoCalificacionRepository.GetById(puntuarDTO.IdPuntuacion),
-                    UsuarioPuntuador = genericRepo.GetAllUserById(puntuarDTO.IdUsuarioPuntuador)
+                    UsuarioPuntuador = genericRepo.GetAllUserById(puntuarDTO.IdUsuarioPuntuador),
+                    Valor = puntuarDTO.Valor
                 };
                 user.CalificacionesRecibidas.Add(calificacion);
                 var calificacionPendiente = calificacion.UsuarioPuntuador.CalificacionesBrindadas.First(c => c.Id == puntuarDTO.IdPendiente);
