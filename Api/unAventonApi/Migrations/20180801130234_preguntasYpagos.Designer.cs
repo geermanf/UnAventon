@@ -11,9 +11,10 @@ using unAventonApi.Data;
 namespace unAventonApi.Migrations
 {
     [DbContext(typeof(UnAventonDbContext))]
-    partial class UnAventonDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180801130234_preguntasYpagos")]
+    partial class preguntasYpagos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,6 +254,8 @@ namespace unAventonApi.Migrations
 
                     b.Property<int?>("UserId");
 
+                    b.Property<int?>("UserId1");
+
                     b.Property<int?>("ViajeId");
 
                     b.HasKey("Id");
@@ -260,6 +263,8 @@ namespace unAventonApi.Migrations
                     b.HasIndex("TarjetaId");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
 
                     b.HasIndex("ViajeId");
 
@@ -462,8 +467,12 @@ namespace unAventonApi.Migrations
                         .HasForeignKey("TarjetaId");
 
                     b.HasOne("unAventonApi.Data.User")
-                        .WithMany("Pagos")
+                        .WithMany("PagosPendientes")
                         .HasForeignKey("UserId");
+
+                    b.HasOne("unAventonApi.Data.User")
+                        .WithMany("PagosRealizados")
+                        .HasForeignKey("UserId1");
 
                     b.HasOne("unAventonApi.Data.Entities.Viaje", "Viaje")
                         .WithMany()

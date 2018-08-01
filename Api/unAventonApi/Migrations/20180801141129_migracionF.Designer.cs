@@ -11,9 +11,10 @@ using unAventonApi.Data;
 namespace unAventonApi.Migrations
 {
     [DbContext(typeof(UnAventonDbContext))]
-    partial class UnAventonDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180801141129_migracionF")]
+    partial class migracionF
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

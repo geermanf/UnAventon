@@ -23,5 +23,6 @@ namespace unAventonApi.Data.Entities
         public User Creador { get; set; }
         [Key]
         public int Id { get; set; }
+        public IList<Pregunta> Preguntas { get; set; }
     }
 }

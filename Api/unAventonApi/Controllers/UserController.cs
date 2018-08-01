@@ -13,11 +13,16 @@ namespace unAventonApi.Controllers
     {
         private readonly ITipoCalificacionRepository tipoCalificacionRepository;
         private readonly IRolRepository rolRepository;
+        private readonly IViajeRepository viajeRepo;
+        private readonly ITarjetaRepository tarjetaRepo;
 
-        public UserController(IUserRepository genericRepo, ITipoCalificacionRepository tipoCalificacionRepository, IRolRepository rolRepository) : base(genericRepo)
+        public UserController(IUserRepository genericRepo, ITipoCalificacionRepository tipoCalificacionRepository, IRolRepository rolRepository,
+                            IViajeRepository viajeRepo, ITarjetaRepository tarjetaRepo) : base(genericRepo)
         {
             this.tipoCalificacionRepository = tipoCalificacionRepository;
             this.rolRepository = rolRepository;
+            this.viajeRepo = viajeRepo;
+            this.tarjetaRepo = tarjetaRepo;
 
         }
 
@@ -93,9 +98,10 @@ namespace unAventonApi.Controllers
         {
             try
             {
-                var user = this.genericRepo.GetAllUserById(id);
+                var pagosPendientes = this.genericRepo.GetAllUserById(id).Pagos.Where(c => c.FechaDePago == null).ToList();
+                
 
-                if (user.Id != 1)
+                if (pagosPendientes.Any())
                     return Ok(true);
                 else
                     return Ok(false);
@@ -220,6 +226,77 @@ namespace unAventonApi.Controllers
             catch (Exception)
             {
                 return BadRequest("Hubo un error al calificar al usuario con id: " + userId);
+            }
+        }
+
+        [HttpGet("ListarPagosPendientes")]
+        public IActionResult PagosPendientes(int id)
+        {
+            try
+            {
+                var response = this.genericRepo.GetAllUserById(id).Pagos.Where(c => c.FechaDePago == null).ToList();
+
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al listar los pagos del usuario con id: " + id);
+            }
+        }
+
+        [HttpPost("PagarViaje")]
+        public IActionResult PagarViaje(PagoDTO pagoDto)
+        {
+            try
+            {
+                var usuario = this.genericRepo.GetAllUserById(pagoDto.IdUser);
+                var pago = usuario.Pagos.Where(c => c.FechaDePago == null).ToList().Find(p => p.Id == pagoDto.IdPago);
+                pago.FechaDePago = DateTime.Now;
+                pago.Tarjeta = this.tarjetaRepo.GetById(pagoDto.IdTarjeta);
+
+                this.genericRepo.Update(pagoDto.IdUser, usuario);
+
+
+                return Ok(true);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al intentar realizar el pago con id: " + pagoDto.IdPago);
+            }
+        }
+
+        [HttpGet("ListarPreguntasPendientes")]
+        public IActionResult PreguntasPendientes(int id)
+        {
+            try
+            {
+                var viajes = this.viajeRepo.GetAll().Where(v => v.Creador.Id == id).ToList();
+                var response = viajes.Select(v => v.Preguntas.Where(p => p.Respuesta == null).ToList()).SelectMany( i => i ).ToList();
+
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al listar las preguntas del usuario con id: " + id);
+            }
+        }
+
+        [HttpPost("ResponderPregunta")]
+        public IActionResult ResponderPregunta(ResponderPreguntaDTO responderPreguntaDTO)
+        {
+            try
+            {
+                var viaje = this.viajeRepo.GetAllById(responderPreguntaDTO.IdViaje);
+                var pregunta = viaje.Preguntas.ToList().Find(p => p.Id == responderPreguntaDTO.IdPregunta);
+                pregunta.Respuesta = responderPreguntaDTO.Respuesta;
+
+                this.viajeRepo.Update(viaje.Id, viaje);
+
+                return Ok(true);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al responder la pregunta con id: " + responderPreguntaDTO.IdPregunta);
             }
         }
     }
