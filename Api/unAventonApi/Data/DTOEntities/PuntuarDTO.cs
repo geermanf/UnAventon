@@ -11,5 +11,7 @@ namespace unAventonApi.Data.DTOEntities
         public int IdUsuarioPuntuador { get; set; }
 
         public int IdPendiente { get; set; }
+
+        public int Valor { get; set; }
     }
 }

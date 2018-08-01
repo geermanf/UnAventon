@@ -13,5 +13,7 @@ namespace unAventonApi.Data.Entities
         public User UsuarioPuntuador { get; set; }
 
         public User UsuarioCalificado { get; set; }
+
+        public int Valor { get; set; }
     }
 }

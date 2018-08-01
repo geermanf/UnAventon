@@ -24,6 +24,7 @@ namespace unAventonApi.Data
                     .Include(v => v.Postulantes).ThenInclude(p => p.User)
                     .Include(v => v.Viajeros).ThenInclude(p => p.User)
                     .Include(v => v.Creador)
+                    .Include(v => v.Preguntas).ThenInclude(p => p.Usuario)
                     .FirstOrDefault(x => x.Id == id);
             return viaje;
         }
@@ -35,6 +36,7 @@ namespace unAventonApi.Data
                     .Include(v => v.Vehiculo)
                     .Include(v => v.Postulantes).ThenInclude(p => p.User)
                     .Include(v => v.Viajeros).ThenInclude(p => p.User)
+                    .Include(v => v.Preguntas).ThenInclude(p => p.Usuario)
                     .Include(v => v.Creador).AsNoTracking();
             return viajes;
         }

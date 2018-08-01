@@ -11,9 +11,10 @@ using unAventonApi.Data;
 namespace unAventonApi.Migrations
 {
     [DbContext(typeof(UnAventonDbContext))]
-    partial class UnAventonDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180731185258_m2")]
+    partial class m2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,30 +79,6 @@ namespace unAventonApi.Migrations
                     b.HasIndex("ViajeId");
 
                     b.ToTable("DiaDeViaje");
-                });
-
-            modelBuilder.Entity("unAventonApi.Data.Entities.Pregunta", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Enunciado");
-
-                    b.Property<DateTime>("FechaDeEmision");
-
-                    b.Property<string>("Respuesta");
-
-                    b.Property<int?>("UsuarioId");
-
-                    b.Property<int?>("ViajeId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.HasIndex("ViajeId");
-
-                    b.ToTable("Pregunta");
                 });
 
             modelBuilder.Entity("unAventonApi.Data.Entities.Rol", b =>
@@ -240,32 +217,6 @@ namespace unAventonApi.Migrations
                     b.ToTable("Viaje");
                 });
 
-            modelBuilder.Entity("unAventonApi.Data.Pago", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime?>("FechaDePago");
-
-                    b.Property<int>("Monto");
-
-                    b.Property<int?>("TarjetaId");
-
-                    b.Property<int?>("UserId");
-
-                    b.Property<int?>("ViajeId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TarjetaId");
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("ViajeId");
-
-                    b.ToTable("Pago");
-                });
-
             modelBuilder.Entity("unAventonApi.Data.Tarjeta", b =>
                 {
                     b.Property<int>("Id")
@@ -377,17 +328,6 @@ namespace unAventonApi.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("unAventonApi.Data.Entities.Pregunta", b =>
-                {
-                    b.HasOne("unAventonApi.Data.User", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId");
-
-                    b.HasOne("unAventonApi.Data.Entities.Viaje")
-                        .WithMany("Preguntas")
-                        .HasForeignKey("ViajeId");
-                });
-
             modelBuilder.Entity("unAventonApi.Data.Entities.TablasIntermedias.Postulantes", b =>
                 {
                     b.HasOne("unAventonApi.Data.User", "User")
@@ -453,21 +393,6 @@ namespace unAventonApi.Migrations
                     b.HasOne("unAventonApi.Data.Vehiculo", "Vehiculo")
                         .WithMany()
                         .HasForeignKey("VehiculoId");
-                });
-
-            modelBuilder.Entity("unAventonApi.Data.Pago", b =>
-                {
-                    b.HasOne("unAventonApi.Data.Tarjeta", "Tarjeta")
-                        .WithMany()
-                        .HasForeignKey("TarjetaId");
-
-                    b.HasOne("unAventonApi.Data.User")
-                        .WithMany("Pagos")
-                        .HasForeignKey("UserId");
-
-                    b.HasOne("unAventonApi.Data.Entities.Viaje", "Viaje")
-                        .WithMany()
-                        .HasForeignKey("ViajeId");
                 });
 
             modelBuilder.Entity("unAventonApi.Data.Tarjeta", b =>
