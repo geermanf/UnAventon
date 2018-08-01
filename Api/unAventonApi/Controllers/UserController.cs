@@ -245,7 +245,7 @@ namespace unAventonApi.Controllers
         }
 
         [HttpPost("PagarViaje")]
-        public IActionResult PagarViaje(PagoDTO pagoDto)
+        public IActionResult PagarViaje([FromBody]PagoDTO pagoDto)
         {
             try
             {
@@ -282,7 +282,7 @@ namespace unAventonApi.Controllers
         }
 
         [HttpPost("ResponderPregunta")]
-        public IActionResult ResponderPregunta(ResponderPreguntaDTO responderPreguntaDTO)
+        public IActionResult ResponderPregunta([FromBody]ResponderPreguntaDTO responderPreguntaDTO)
         {
             try
             {
