@@ -17,12 +17,18 @@ export class ViajeService {
         return this.http.get<Viaje>('http://localhost:5000/api/Viaje/ListarId?id=' + id);
     }
 
+    getAllById(id: number): Observable<Viaje> {
+        return this.http.get<Viaje>('http://localhost:5000/api/Viaje/ListarViajeCompleto?id=' + id);
+    }
+
     create(viaje: Viaje): Observable<Viaje> {
+        debugger;
         return this.http.post<Viaje>('http://localhost:5000/api/Viaje/Crear', viaje);
     }
 
     update(viaje: Viaje): Observable<Viaje> {
-        return this.http.post<Viaje>('http://localhost:5000/api/Viaje/Modificar', viaje);
+        debugger;
+        return this.http.post<Viaje>('http://localhost:5000/api/Viaje/Update', viaje);
     }
 
     delete(id: number): Observable<Viaje> {

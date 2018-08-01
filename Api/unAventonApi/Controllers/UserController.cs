@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using unAventonApi.Controllers.Base;
 using unAventonApi.Data;
 using unAventonApi.Data.DTOEntities;
+using unAventonApi.Data.Entities;
 
 namespace unAventonApi.Controllers
 {
@@ -101,7 +102,7 @@ namespace unAventonApi.Controllers
                 var pagosPendientes = this.genericRepo.GetAllUserById(id).Pagos.Where(c => c.FechaDePago == null).ToList();
                 
 
-                if (pagosPendientes.Any())
+                if (!pagosPendientes.Any())
                     return Ok(true);
                 else
                     return Ok(false);
@@ -120,7 +121,7 @@ namespace unAventonApi.Controllers
                 var calificacionesPendientes = this.genericRepo.GetAllUserById(id).CalificacionesBrindadas.Where(c => c.Puntuacion.Descripcion == "Pendiente").ToList();
                 
 
-                if (calificacionesPendientes.Any())
+                if (!calificacionesPendientes.Any())
                     return Ok(true);
                 else
                     return Ok(false);
@@ -297,6 +298,29 @@ namespace unAventonApi.Controllers
             catch (Exception)
             {
                 return BadRequest("Hubo un error al responder la pregunta con id: " + responderPreguntaDTO.IdPregunta);
+            }
+        }
+
+        [HttpPost("GenerarPregunta")]
+        public IActionResult GenerarPregunta([FromBody]AltaPreguntaDTO altaPreguntaDTO)
+        {
+            try
+            {
+                var viaje = this.viajeRepo.GetAllById(altaPreguntaDTO.IdViaje);
+                var pregunta = new Pregunta() {
+                    Enunciado = altaPreguntaDTO.Enunciado,
+                    Usuario = this.genericRepo.GetById(altaPreguntaDTO.IdUsuario),
+                    FechaDeEmision = DateTime.Now
+                };
+                viaje.Preguntas.Add(pregunta);
+                
+                this.viajeRepo.Update(viaje.Id, viaje);
+
+                return Ok(true);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al responder la pregunta del usuario con id: " + altaPreguntaDTO.IdUsuario);
             }
         }
     }

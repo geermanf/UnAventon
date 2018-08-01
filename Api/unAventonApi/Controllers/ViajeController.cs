@@ -64,6 +64,21 @@ namespace unAventonApi.Controllers
             }
         }
 
+        [HttpPost("Update")]
+        public IActionResult Update([FromBody]Viaje viaje)
+        {
+
+            try
+            {
+                this.genericRepo.Update(viaje.Id, viaje);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al modificar");
+            }
+        }
+
         [HttpGet("AgregarViajero")]
         public IActionResult addViajero(int idViaje, int idViajero)
         {
@@ -262,8 +277,21 @@ namespace unAventonApi.Controllers
                 return BadRequest("Hubo un error al listar");
             }
 
+        }
 
-
+        [HttpGet("ListarViajeCompleto")]
+        public IActionResult GetAllById(int id)
+        {
+            try
+            {
+                var response = this.genericRepo.GetAllById(id);
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al listar");
+            }
+            
         }
 
     }

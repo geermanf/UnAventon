@@ -14,8 +14,8 @@
 
       <div class="nav-tabs-navigation">
         <div class="nav-tabs-wrapper">
-          <form class="contact100-form validate-form flex-sb flex-w" name="form" (ngSubmit)="f.form.valid && placesAreValids() && costoValido() && register()"
-            #f="ngForm" novalidate>
+          <form class="contact100-form validate-form flex-sb flex-w" #f="ngForm" name="form" (ngSubmit)="f.form.valid && placesAreValids() && costoValido() && register()"
+             novalidate>
 
             <!-- -------------------- ORIGEN Y DESTINO -------------------- -->
 
@@ -58,7 +58,7 @@
             <div class="wrap-input100 rs1 validate-input">
               <select class="input100" name="vehiculo" [(ngModel)]="viaje.vehiculo" #vehiculo="ngModel" [ngClass]="{ 'has-danger': f.submitted && !vehiculo.valid }"
                 required (change)='actualizarPlazas()'>
-                <option *ngFor="let v of vehiculos" [ngValue]="v.id">{{v.marca +' '+ v.modelo}}</option>
+                <option *ngFor="let v of vehiculos" [ngValue]="v.id" [selected]="viaje.vehiculo">{{v.marca +' '+ v.modelo}}</option>
               </select>
               <span class="focus-input100"></span>
               <span class="focus-input-label">Seleccione el vehiculo a utilizar</span>
@@ -75,7 +75,7 @@
             <!-- -------------------- FIN VEHICULO Y PLAZAS -------------------- -->
 
             <!-- -------------------- FECHA Y HORA -------------------- -->
-            <div class="wrap-input100 rs1 validate-input" *ngIf="mostrarRango()">
+            <!-- <div class="wrap-input100 rs1 validate-input" *ngIf="mostrarRango()">
               <input class="input100" bsDaterangepicker type="text" [minDate]="minDate" name="fechaPRange" [(ngModel)]="rangoDeFechas"
                 #fechaPRange="ngModel" [ngClass]="{ 'has-danger': f.submitted && (!fechaPRange.valid) }"
                  [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-red' }" required>
@@ -95,7 +95,7 @@
                 min='00:00' max='23:59' required>
               <span class="focus-input100"></span>
               <span class="focus-input-label">Hora de partida</span>
-            </div>
+            </div> -->
 
             <div class="wrap-input100 validate-input">
               <input class="input100" type="textarea" name="descripcion" [(ngModel)]="viaje.descripcion" #descripcion="ngModel" [ngClass]="{ 'has-danger': f.submitted && !descripcion.valid }">
@@ -103,13 +103,13 @@
               <span class="focus-input-label">Descripcion</span>
             </div>
 
-            <div class="form-check">
+            <!-- <div class="form-check">
               <label class="form-check-label">
                 <input [checked]="usarRango" class="form-check-input" type="checkbox" value="" (change)="usarRango = !usarRango">
                 Seleccionar un rango de fechas
                 <span class="form-check-sign"></span>
               </label>
-            </div>
+            </div> -->
             <!-- -------------------- FIN FECHA Y HORA -------------------- -->
 
             <div class="form-control-feedback">
