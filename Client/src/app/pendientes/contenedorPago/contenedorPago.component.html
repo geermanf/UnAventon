@@ -2,15 +2,16 @@
   <div class="row">
     <div class="col-md-2">
       <div>
-        Dia y hora de viaje
+        <span *ngIf="pago.viaje.diasDeViaje.length === 1">{{pago.viaje.diasDeViaje[0].fechaDeViaje | date:'dd-MM-yyyy'}}</span>
+        <span *ngIf="pago.viaje.diasDeViaje.length > 1">{{pago.viaje.diasDeViaje[0].fechaDeViaje | date:'dd-MM-yyyy' + ' al ' + pago.viaje.diasDeViaje[pago.viaje.diasDeViaje.length-1].fechaDeViaje | date:'dd-MM-yyyy'}}</span>
       </div>
     </div>
     <div class="col-md-6">
-      <div class="rosa"> origen</div>
-      <div class="rosa">destino</div>
+      <div class="rosa">{{pago.viaje.origen}}</div>
+      <div class="rosa">{{pago.viaje.destino}}</div>
     </div>
     <div class="col-md-2">
-      <p>monto a pagar</p>
+      <p>${{pago.monto}}</p>
     </div>
     <div class="col-md-2">
       <div class="middle" (click)="abrirModalPagar(pagar)">
@@ -25,35 +26,36 @@
 
 <!--Modal Puntuar-->
 <ng-template #pagar let-c="close" let-d="dismiss">
-  <form class="contact100-form validate-form flex-sb flex-w" name="form" (ngSubmit)="f.form.valid && c('Close click')" #f="ngForm"
-    novalidate>
-    <div class="modal-header">
-      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <p>Seleccione su tarjeta</p>
-      <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !tarjeta.valid }">        
-        <div class="wrap-input100 rs1 validate-input">
-          <select class="input100" name="tarjeta"  [ngClass]="{ 'has-danger': f.submitted && !tarjeta.valid }"
-            required >
-            <option>tarjeta 1</option>
-            <option>tarjeta 2</option>
-          </select>
-          <span class="focus-input100"></span>
-          
-        </div>
-        <span>Ingrese su código de seguridad:</span>
-        <input class="form-control" type="password" name="urlFoto" placeholder="Ingrese su código de seguridad" [(ngModel)]="urlFoto" #urlFotoId="ngModel"
-          required>
-        <span class="focus-input100"></span>
+    <div class="container">
+        <form class="contact100-form validate-form flex-sb flex-w" name="form" (ngSubmit)="f.form.valid && c('Close click')" #f="ngForm"
+          novalidate>
+          <div class="modal-header">
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Seleccione una tarjeta</p>
+            <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !tarjeta.valid }">
+                <select class="form-control" name="tarjeta" [(ngModel)]="pago.tarjeta" #tarjeta="ngModel" [ngClass]="{ 'has-danger': f.submitted && !tarjeta.valid }"
+                required>
+                <option *ngFor="let t of tarjetas" [ngValue]="t.id">Terminada en {{ultimosCuatroNumeros(t)}}</option>
+              </select>
+              <div *ngIf="f.submitted && !tarjeta.valid && tarjetas.length > 0" class="form-control-feedback">Seleccione una tarjeta</div>
+              <div *ngIf="f.submitted && !tarjeta.valid && tarjetas.length === 0" class="form-control-feedback">No tiene tarjetas registradas, ingrese una en su perfil</div>
+            </div>
+            <br>
+            <span>Ingrese el codigo de seguridad:</span>
+            <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !codigo.valid }">
+              <input class="form-control" type="number" name="codigo" placeholder="Ingrese el codigo de seguridad" [(ngModel)]="codigoIngresado"
+                #codigo="ngModel" maxlength="4" required>
+                <div *ngIf="f.submitted && !codigo.valid" class="form-control-feedback">Ingrese su codigo de seguridad</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-rosa" (click)="pagarViaje()">Enviar</button>
+            <button type="button" class="btn btn-default" (click)="c('Close click')">Cancelar</button>
+          </div>
+        </form>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button type="submit" class="btn btn-rosa" (click)="cambiarFoto()">Aceptar</button>
-      <button type="button" class="btn btn-default" (click)="c('Close click')">Cancelar</button>
-    </div>
-  </form>
-
 </ng-template>

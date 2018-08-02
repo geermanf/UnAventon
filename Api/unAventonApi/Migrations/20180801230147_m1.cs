@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace unAventonApi.Migrations
 {
-    public partial class m : Migration
+    public partial class m1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -103,7 +103,8 @@ namespace unAventonApi.Migrations
                     PuntuacionId = table.Column<int>(nullable: true),
                     RolId = table.Column<int>(nullable: true),
                     UsuarioCalificadoId = table.Column<int>(nullable: false),
-                    UsuarioPuntuadorId = table.Column<int>(nullable: false)
+                    UsuarioPuntuadorId = table.Column<int>(nullable: false),
+                    Valor = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -257,6 +258,41 @@ namespace unAventonApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Pago",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    FechaDePago = table.Column<DateTime>(nullable: true),
+                    Monto = table.Column<int>(nullable: false),
+                    TarjetaId = table.Column<int>(nullable: true),
+                    UserId = table.Column<int>(nullable: true),
+                    ViajeId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pago", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pago_Tarjetas_TarjetaId",
+                        column: x => x.TarjetaId,
+                        principalTable: "Tarjetas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Pago_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Pago_Viaje_ViajeId",
+                        column: x => x.ViajeId,
+                        principalTable: "Viaje",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Postulantes",
                 columns: table => new
                 {
@@ -278,6 +314,35 @@ namespace unAventonApi.Migrations
                         principalTable: "Viaje",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pregunta",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Enunciado = table.Column<string>(nullable: true),
+                    FechaDeEmision = table.Column<DateTime>(nullable: false),
+                    Respuesta = table.Column<string>(nullable: true),
+                    UsuarioId = table.Column<int>(nullable: true),
+                    ViajeId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pregunta", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pregunta_Users_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Pregunta_Viaje_ViajeId",
+                        column: x => x.ViajeId,
+                        principalTable: "Viaje",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -378,8 +443,33 @@ namespace unAventonApi.Migrations
                 column: "ViajeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Pago_TarjetaId",
+                table: "Pago",
+                column: "TarjetaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pago_UserId",
+                table: "Pago",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pago_ViajeId",
+                table: "Pago",
+                column: "ViajeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Postulantes_ViajeId",
                 table: "Postulantes",
+                column: "ViajeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pregunta_UsuarioId",
+                table: "Pregunta",
+                column: "UsuarioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pregunta_ViajeId",
+                table: "Pregunta",
                 column: "ViajeId");
 
             migrationBuilder.CreateIndex(
@@ -442,10 +532,13 @@ namespace unAventonApi.Migrations
                 name: "DiaDeViaje");
 
             migrationBuilder.DropTable(
+                name: "Pago");
+
+            migrationBuilder.DropTable(
                 name: "Postulantes");
 
             migrationBuilder.DropTable(
-                name: "Tarjetas");
+                name: "Pregunta");
 
             migrationBuilder.DropTable(
                 name: "Viajeros");
@@ -463,13 +556,16 @@ namespace unAventonApi.Migrations
                 name: "Rol");
 
             migrationBuilder.DropTable(
+                name: "Tarjetas");
+
+            migrationBuilder.DropTable(
+                name: "Viaje");
+
+            migrationBuilder.DropTable(
                 name: "Banco");
 
             migrationBuilder.DropTable(
                 name: "TipoTarjeta");
-
-            migrationBuilder.DropTable(
-                name: "Viaje");
 
             migrationBuilder.DropTable(
                 name: "TipoViaje");

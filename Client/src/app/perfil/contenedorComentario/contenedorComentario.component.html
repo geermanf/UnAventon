@@ -2,19 +2,20 @@
   <div class="row">
     <div class="col-md-2">
       <div>
-        <img src="" alt="Circle Image" class="img-circle img-responsive" style="width: 20vw; transition: .5s ease;" (error)="img.src = '../assets/img/anonym-bw.png'"
+        <img src="{{calificacion.usuarioPuntuador.fotoPerfil}}" alt="" class="img-thumbnail img-responsive" style="width: 5vw" (error)="img.src = '../assets/img/anonym-bw.png'"
           #img>
       </div>
     </div>
     <div class="col-md-2">
-      Usuario:
+      <div class="rosa" style="margin-top:15%">{{calificacion.usuarioPuntuador.nombre}} {{calificacion.usuarioPuntuador.apellido}}</div>
     </div>
     <div class="col-md-6">
-      Puntaje: Neutro, Positivo o Negativo
+        <div style="margin-top:4%;">{{calificacion.comentario}}</div>
     </div>
     <div class="col-md-2">
-      <p>Comentario:</p>
-
+      <div [ngClass]="{ 'text-info': calificacion.puntuacion.descripcion === 'Penalizacion', 'text-danger': calificacion.puntuacion.descripcion === 'Negativa'
+                      , 'text-success': calificacion.puntuacion.descripcion === 'Positiva', 'text-primary': calificacion.puntuacion.descripcion === 'Neutra' }" 
+        style="margin-top:15%">{{calificacion.puntuacion.descripcion}}</div>
     </div>
 
   </div>

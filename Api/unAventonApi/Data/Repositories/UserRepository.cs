@@ -37,7 +37,7 @@ namespace unAventonApi.Data
                     .Include(u => u.CalificacionesBrindadas).ThenInclude(c => c.Puntuacion)
                     .Include(u => u.CalificacionesBrindadas).ThenInclude(c => c.UsuarioCalificado)
                     .Include(u => u.Pagos).ThenInclude(p => p.Tarjeta)
-                    .Include(u => u.Pagos).ThenInclude(p => p.Viaje)
+                    .Include(u => u.Pagos).ThenInclude(p => p.Viaje).ThenInclude(v => v.DiasDeViaje)
                     .FirstOrDefault(x => x.Id == id);
             return user;
         }

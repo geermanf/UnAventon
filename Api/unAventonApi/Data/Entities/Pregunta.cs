@@ -13,5 +13,7 @@ namespace unAventonApi.Data.Entities
         public DateTime FechaDeEmision { get; set; }
 
         public User Usuario { get; set; }
+
+        public Viaje Viaje { get; set; }
     }
 }

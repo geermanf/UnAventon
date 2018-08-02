@@ -9,3 +9,16 @@
   background-color: #f17376;
   color:white;
 }
+.line{ 
+  display:block;
+  border:none;
+  color:white;
+  height:1px;
+  background:#f17376;
+  background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#f17376), to(#fff));
+}
+
+div.cont-line{
+  margin-top:2em;
+  margin-bottom:2em;
+}

@@ -31,24 +31,24 @@
 
       <div class="nav-tabs-navigation">
         <div class="nav-tabs-wrapper">
-          <tabset [justified]="true">
+          <tabset #pTabs [justified]="true">
             <!--INICIO PUNTUACIONES PENDIENTES-->
             <tab>
               <ng-template tabHeading>
-                <span class="tab-link hover-rosa">Puntuaciones Pendientes</span>
+                <span class="tab-link hover-rosa">Calificaciones Pendientes</span>
               </ng-template>
               <!-- TITULO PUNTUACIONES PENDIENTES -->
               <span class="title">
-                Puntuaciones Pendientes
+                Calificaciones Pendientes
               </span>
               <!-- CUERPO PUNTUACIONES PENDIENTES -->
-              <span>
-                <app-contenedorPuntuacion>
-                </app-contenedorPuntuacion>
-              </span>
-              <span>
-                <h4 class="rosa">No tienes puntuaciones pendientes.</h4>
-              </span>
+              <span *ngFor="let calificacion of calificacionesPendientes">
+                  <app-contenedorPuntuacion [calificacion]="calificacion" (refresh)="getCalificacionesPendientes()">
+                  </app-contenedorPuntuacion>
+                </span>
+                <span *ngIf="calificacionesPendientes.length === 0">
+                  <h4 class="rosa">No tienes calificaciones pendientes.</h4>
+                </span>
             </tab>
             <!-- INICIO PREG PENDIENTES -->
             <tab>
@@ -60,10 +60,13 @@
                 Preguntas Pendientes
               </span>
               <!-- CUERPO PREG PENDIENTES -->
-              <span>
-                <app-contenedorPregunta>
-                </app-contenedorPregunta>
-              </span>
+              <span *ngFor="let pregunta of preguntasPendientes">
+                  <app-contenedorPregunta [pregunta]="pregunta" [mostrarViaje]="true" (refresh)="getPreguntasPendientes()">
+                  </app-contenedorPregunta>
+                </span>
+                <span *ngIf="preguntasPendientes.length === 0">
+                  <h4 class="rosa">No tienes preguntas pendientes.</h4>
+                </span>
             </tab>
             <!-- FIN PREG PENDIENTES -->
 
@@ -77,10 +80,13 @@
                 Pagos Pendientes
               </span>
               <!-- CUERPO PAGOS PENDIENTES-->
-              <span>
-                <app-contenedorPago>
-                </app-contenedorPago>
-              </span>
+              <span *ngFor="let pago of pagosPendientes">
+                  <app-contenedorPago [pago]="pago" (refresh)="getPagosPendientes()">
+                  </app-contenedorPago>
+                </span>
+                <span *ngIf="pagosPendientes.length === 0">
+                  <h4 class="rosa">No tienes pagos pendientes.</h4>
+                </span>
             </tab>
             <!-- FIN PAGOS PENDIENTES -->
 

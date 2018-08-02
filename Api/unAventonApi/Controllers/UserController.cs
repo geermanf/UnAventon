@@ -218,8 +218,10 @@ namespace unAventonApi.Controllers
                     Valor = puntuarDTO.Valor
                 };
                 user.CalificacionesRecibidas.Add(calificacion);
-                var calificacionPendiente = calificacion.UsuarioPuntuador.CalificacionesBrindadas.First(c => c.Id == puntuarDTO.IdPendiente);
-                calificacion.UsuarioPuntuador.CalificacionesBrindadas.Remove(calificacionPendiente);
+                if (puntuarDTO.IdPendiente != 0) {
+                    var calificacionPendiente = calificacion.UsuarioPuntuador.CalificacionesBrindadas.First(c => c.Id == puntuarDTO.IdPendiente);
+                    calificacion.UsuarioPuntuador.CalificacionesBrindadas.Remove(calificacionPendiente);
+                }
                 this.genericRepo.Update(userId, user);
 
                 return Ok(true);

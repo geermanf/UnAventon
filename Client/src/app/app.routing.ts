@@ -10,6 +10,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { EditarComponent } from './editar/editar.component';
 import { CrearViajeComponent } from './crearViaje/crearViaje.component';
 import { VerViajesComponent } from './viajes/verViajes/verViajes.component';
+import { VerViajes2Component } from './viajes/verViajes2/verViajes2.component';
 import { DetalleViajeComponent } from './viajes/detalleViaje/detalleViaje.component';
 import {PerfilOtroComponent } from './perfilOtro/perfilOtro.component';
 import {ModificarViajeComponent } from './modificarViaje/modificarViaje.component';
@@ -24,10 +25,11 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent},
     { path: 'registrarse', component: RegistrarseComponent},
     { path: 'verViajes', component: VerViajesComponent},
+    { path: 'verViajes2', component: VerViajes2Component},
     { path: 'verPerfilOtro', component: PerfilOtroComponent},
-    { path: 'sobreNosotros', component:SobreNosotrosComponent },
-    { path: 'contacto', component:ContactoAdminComponent },
-    { path: 'preguntas' , component:PregFrecuentesComponent},
+    { path: 'sobreNosotros', component: SobreNosotrosComponent },
+    { path: 'contacto', component: ContactoAdminComponent },
+    { path: 'preguntas' , component: PregFrecuentesComponent},
     // USUARIOS LOGUEADOS
     { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard]},
     { path: 'editar', component: EditarComponent, canActivate: [AuthGuard]},

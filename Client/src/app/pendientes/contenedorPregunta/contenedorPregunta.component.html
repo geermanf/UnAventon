@@ -1,30 +1,50 @@
-
-  <div class="row">
-    <div class="col-md-2 ">
-      Usuario
-    </div>
-    <div class="col-md-2">
-      Origen-Destino
-    </div>
-    <div class="col-md-2">
-      Hora Partida
-    </div> 
-    <br> 
+<div class="row">
+  <div class="col-md-2 ">
+    <a routerLink="/verPerfilOtro" routerLinkActive="active" [queryParams]="{id: pregunta.usuario.id}" class="link-rosa">{{pregunta.usuario.nombre}} {{pregunta.usuario.apellido}}</a>
   </div>
-  <div class="row">
-    <div class="icon">    
-      <i class="nc-icon nc-chat-33 icon-rosa"></i> ¿Se puede escuchar música durante el viaje ? <br>
+  <div class="col-md-2">
+    {{pregunta.fechaDeEmision | date:'dd-MM-yyyy'}}
+  </div>
+  <div class="col-md-6" *ngIf="mostrarViaje">
+    <a routerLink="/detalleViaje" routerLinkActive="active" [queryParams]="{ id: pregunta.viaje.id }" class="link-rosa">{{pregunta.viaje.origen}} -> {{pregunta.viaje.destino}}</a>
+  </div>
+  <br>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-4">
+    <div class="icon">
+      <i class="nc-icon nc-chat-33 icon-rosa"></i>
+      <span style="font-size: 18px">{{pregunta.enunciado}}</span>
     </div>
   </div>
+</div>
+<br>
+<div *ngIf="pregunta.respuesta === null && usuario.id === pregunta.viaje.creador.id">
+<form name="form" #f="ngForm" (ngSubmit)="f.form.valid && responder()">
   <div class="row">
     <div class="col-md-8">
-      <textarea class="form-control" rows="2" cols="4" placeholder="Ingrese su pregunta"></textarea>
+      <div class="form-group" rows="2" cols="4" [ngClass]="{ 'has-danger': f.submitted && (!respuesta.valid)}">
+        <textarea name="respuesta" class="form-control" [(ngModel)]="pregunta.respuesta" #respuesta="ngModel" required></textarea>
+        <div *ngIf="f.submitted && !respuesta.valid" class="form-control-feedback" placeholder="Ingrese una respuesta">Ingrese una respuesta</div>
+      </div>
     </div>
     <div class="col-md-2">
       <button class="btn btn-round btn-rosa"> Responder</button>
     </div>
   </div>
-
+</form>
+</div>
+<div *ngIf="pregunta.respuesta != undefined">
+    <div class="row">
+        <div class="col-md-4">
+          <div class="icon">
+            <i class="nc-icon nc-chat-33 icon-rosa"></i>
+            <span style="font-size: 18px" class="rosa">{{pregunta.respuesta}}</span>
+          </div>
+        </div>
+      </div>
+</div>
 <div class="cont-line">
   <span class="line"></span>
 </div>

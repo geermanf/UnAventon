@@ -21,7 +21,7 @@
 
             <div class="wrap-input100 rs1 validate-input">
               <input class="input100" ngx-google-places-autocomplete [options]='options' placeholder=""  name="origen" #origen="ngx-places"
-                (onAddressChange)="origenChange($event)" [ngClass]="{ 'has-danger': f.submitted && viaje.origen === undefined }"
+                (onAddressChange)="origenChange($event)" [(ngModel)]="orig" [ngClass]="{ 'has-danger': f.submitted && viaje.origen === undefined }"
               />
               <span class="focus-input100"></span>
              <span class="focus-input-label">Origen del Viaje</span>
@@ -29,7 +29,7 @@
 
             <div class="wrap-input100 rs1 validate-input">
               <input class="input100" ngx-google-places-autocomplete [options]='options' placeholder="" name="destino" #destino="ngx-places"
-                (onAddressChange)="destinoChange($event)" required [ngClass]="{ 'has-danger': f.submitted && viaje.destino === undefined }"
+                (onAddressChange)="destinoChange($event)" [(ngModel)]="dest" required [ngClass]="{ 'has-danger': f.submitted && viaje.destino === undefined }"
               />
               <span class="focus-input100"></span>
               <span class="focus-input-label">Destino del viaje</span>

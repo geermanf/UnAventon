@@ -39,3 +39,10 @@ b {
 a {
     cursor: pointer;
 }
+
+.link-rosa, .rosa {
+    color: #f17376;
+  }
+  .btn.btn-link.link-rosa:hover {
+    color: #f04649;
+  }

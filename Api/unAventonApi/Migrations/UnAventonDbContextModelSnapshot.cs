@@ -383,7 +383,7 @@ namespace unAventonApi.Migrations
                         .WithMany()
                         .HasForeignKey("UsuarioId");
 
-                    b.HasOne("unAventonApi.Data.Entities.Viaje")
+                    b.HasOne("unAventonApi.Data.Entities.Viaje", "Viaje")
                         .WithMany("Preguntas")
                         .HasForeignKey("ViajeId");
                 });

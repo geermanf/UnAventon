@@ -51,16 +51,6 @@
                     </button>
                   </div>
                 </div>
-                <div class="row">
-                  <h4>Ingrese su Pregunta</h4>
-                  <br>
-                  <div class="col-md-12">
-                    <textarea class="form-control" rows="2" placeholder="Ingrese su pregunta"></textarea>
-                    <button type="button" class="btn btn-rosa btn-round">Enviar</button>
-                  </div>
-                </div>
-
-
 
                 <div class="row" *ngIf="esCreador" style="margin-top: 3em;">
                   <div class="col-md-3 float-right">
@@ -74,15 +64,20 @@
                     </button>
                   </div>
                   <div class="col-md-3" *ngIf="!estadoModificar">
-                    <a routerLink="/modificarViaje" routerLinkActive="active" [queryParams]="{id: viaje.id}" data-toggle="tooltip" title="{{tooltipModificar}}">
+                    <a routerLink="/modificarViaje" routerLinkActive="active" [queryParams]="{id: viaje.id}">
                       <button type="button" class="contact100-form-btn" style="width: 120px; font-size: 15px">
                         Modificar
                       </button>
                     </a>
                   </div>
-                  <div class="col-md-3 float-left">
-                    <button type="submit" class="contact100-form-btn" style="font-size: 15px; width: 120px; background-color: #ee9d9e" disabled="true">
+                  <div class="col-md-3 float-left" *ngIf="!cancelando">
+                    <button type="submit" class="contact100-form-btn" style="font-size: 15px; width: 120px" (click)="cancelarViaje()">
                       Cancelar
+                    </button>
+                  </div>
+                  <div class="col-md-3 " *ngIf="cancelando">
+                    <button type="submit" class="contact100-form-btn" style="font-size: 15px; width: 120px; background-color: #18920d" (click)="okCancelar()">
+                      Si, cancelar
                     </button>
                   </div>
 
@@ -196,6 +191,11 @@
                     <span class="trip_datetime_time" style="color:#f17376">{{horaPartidaToShow[0] + ':' + horaPartidaToShow[1]}} hs</span>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-xs-10 trip_datetime_date">
+                    <span class="trip_datetime_date_day">Duracion: {{duracion}}hs</span>
+                  </div>
+                </div>
               </time>
             </div>
             <div class="row">
@@ -203,15 +203,6 @@
                 <span class="trip_seats-available_value pull-left" style="color:#fb8e90">{{lugaresDisponibles}}</span>
                 <span class="trip_seats-available_label">Lugares
                   <br>libres</span>
-              </div>
-            </div>
-            <br>
-            <br>
-            <div class="row">
-              <div class="trip_seats-available col-xs-offset-4 col-sm-offset-4 col-xs-12">
-                <span class="trip_seats-available_value pull-left" style="color:#fb8e90">{{duracion}}</span>
-                <span class="trip_seats-available_label">Duracion
-                </span>
               </div>
             </div>
             <br>
@@ -240,11 +231,31 @@
 
         </div>
 
-
-
-
+        <div class="row">
+          <div class="col-md-8">
+            <form name="form" #form="ngForm" (ngSubmit)="form.valid && generarPregunta()">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group" rows="2" cols="4">
+                    <textarea name="preg" class="form-control" [(ngModel)]="nuevaPregunta" #preg="ngModel" placeholder="Ingrese una pregunta"
+                      required></textarea>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <button class="btn btn-round btn-rosa">Enviar</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="cont-line">
+          <span class="line"></span>
+        </div>
+        <span *ngFor="let pregunta of preguntas">
+          <app-contenedorPregunta [pregunta]="pregunta" [mostrarViaje]="false" (refresh)="getDatos()">
+          </app-contenedorPregunta>
+        </span>
       </div>
-    </div>
 
+    </div>
   </div>
-</div>

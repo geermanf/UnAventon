@@ -10,6 +10,7 @@ import * as moment from 'moment';
 import * as dateHelper from '../../assets/js/dateHelper';
 import { ViajeService } from '../services/viaje.service';
 import { CheckHorarioDTO } from '../models/CheckHorarioDTO';
+import { ViajeDto } from '../models/viajeDto';
 
 @Component({
   selector: 'app-modificarviaje',
@@ -30,6 +31,8 @@ export class ModificarViajeComponent implements OnInit {
   plazas: number[]
   usarRango: false;
   rangoDeFechas: any[];
+  orig: any;
+  dest: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,7 +51,7 @@ export class ModificarViajeComponent implements OnInit {
   getViaje() {
     const id = this.route.snapshot.queryParams['id'];
     this.viajeService.getAllById(parseInt(id, 10)).map(res => this.viaje = res)
-    .subscribe(data => this.getVehiculos())
+    .subscribe(data => {this.getVehiculos(); this.orig = data.origen; this.dest = data.destino})
   }
 
   getUsuario() {
@@ -113,25 +116,25 @@ export class ModificarViajeComponent implements OnInit {
   }
 
   async register() {
-    // const fechaInicio = this.rangoDeFechas !== undefined ? this.rangoDeFechas[0] : this.viaje.diasDeViaje;
-    // const fechaFin = this.rangoDeFechas !== undefined ? this.rangoDeFechas[1] : this.viaje.diasDeViaje;
+    const viajeDto = new ViajeDto()
+      viajeDto.origen = this.viaje.origen;
+      viajeDto.destino = this.viaje.destino;
+      viajeDto.descripcion = this.viaje.descripcion;
+      viajeDto.duracion = this.viaje.duracion;
+      viajeDto.idViaje = this.viaje.id;
+      viajeDto.costo = this.viaje.costo;
+      viajeDto.vehiculo = this.viaje.vehiculo.id;
+      viajeDto.cantidadDePlazas = this.viaje.cantidadDePlazas;
 
-    // const checkHorario = new CheckHorarioDTO();
-    // checkHorario.duracion = this.viaje.duracion;
-    // checkHorario.horaPartida = this.viaje.horaPartida;
-    // checkHorario.diasDeViaje = dateHelper.getDates(fechaInicio, fechaFin);
-    // const response = await this.authGuard.tieneHorariosDisponibles(checkHorario, this.usuario.id);
       if (await this.authGuard.userAutorizado(this.usuario.id)) {  // usuarioAutorizado
-        // this.viaje.diasDeViaje = dateHelper.getDates(fechaInicio, fechaFin);
-        this.viaje.creador = this.usuario.id;
-        this.viajeService.update(this.viaje)
+        this.viajeService.update(viajeDto)
           .subscribe(
             data => {
-              this.alertService.addAlert('success', 'El viaje se creó correctamente');
-              this.router.navigate(['/home']);
+              this.alertService.addAlert('success', 'El viaje se modificó correctamente');
+              this.router.navigate(['/detalleViaje'], { queryParams: { id: viajeDto.idViaje } });
             },
             error => {
-              this.alertService.addAlert('danger', 'Lo sentimos, hubo un problema al crear tu viaje, itentalo nuevamente');
+              this.alertService.addAlert('danger', 'Lo sentimos, hubo un problema al modificar tu viaje, itentalo nuevamente');
             });
       } else {
         this.alertService.addAlert('danger',

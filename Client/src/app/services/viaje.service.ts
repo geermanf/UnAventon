@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { Viaje } from '../models/Viaje';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../models/User';
+import { ViajeDto } from '../models/viajeDto';
+import { Pregunta } from '../models/pregunta';
+import { FiltrosDto } from '../models/filtrosDto';
 
 @Injectable()
 export class ViajeService {
@@ -11,6 +14,10 @@ export class ViajeService {
 
     getAll(): Observable<Viaje> {
         return this.http.get<Viaje>('http://localhost:5000/api/Viaje/ListarViajes');
+    }
+
+    getAllProximos(): Observable<Viaje> {
+        return this.http.get<Viaje>('http://localhost:5000/api/Viaje/ListarViajesProximos');
     }
 
     getById(id: number): Observable<Viaje> {
@@ -22,17 +29,15 @@ export class ViajeService {
     }
 
     create(viaje: Viaje): Observable<Viaje> {
-        debugger;
         return this.http.post<Viaje>('http://localhost:5000/api/Viaje/Crear', viaje);
     }
 
-    update(viaje: Viaje): Observable<Viaje> {
-        debugger;
+    update(viaje: ViajeDto): Observable<Viaje> {
         return this.http.post<Viaje>('http://localhost:5000/api/Viaje/Update', viaje);
     }
 
     delete(id: number): Observable<Viaje> {
-        return this.http.post<Viaje>('http://localhost:5000/api/Viaje/Borrar', id);
+        return this.http.post<Viaje>('http://localhost:5000/api/Viaje/Delete', id);
     }
 
     addPostulantes(idViaje: number, idPostulante: number): Observable<any> {
@@ -61,6 +66,14 @@ export class ViajeService {
 
     getViajesRealizados(idUsuario: number): Observable<User> {
         return this.http.get<User>('http://localhost:5000/api/Viaje/ListarViajesRealizados?idUsuario=' + idUsuario);
+    }
+
+    listarPreguntas(id: number): Observable<Pregunta> {
+        return this.http.get<Pregunta>('http://localhost:5000/api/Viaje/ListarPreguntas?id=' + id);
+    }
+
+    filtrarViajes(dto: FiltrosDto): Observable<Viaje> {
+        return this.http.post<Viaje>('http://localhost:5000/api/Viaje/FiltrarViajes', dto);
     }
 
 }

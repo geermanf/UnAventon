@@ -14,19 +14,24 @@
       <p>Por favor completa el siguiente formulario para contactarte con nosotros. Te responderemos a la brevedad.
         <br>
       </p>
-     <form>
+      <form name="form" #f="ngForm"
+      (ngSubmit)="f.form.valid && send()">
         <div class="col-md-6">
-            <div class="form-group">
-              <label>Ingrese su email:</label>
-              <input type="text" class="form-control" placeholder="Ingrese su email">
+
+          <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && (!email.valid)}">
+                <label for="email">Email:</label>
+                <input type="email" name="email" class="form-control" [(ngModel)]="mail" #email="ngModel" required />
+                <div *ngIf="f.submitted && !email.valid" class="form-control-feedback">Ingrese su email</div>
             </div>
-            <div class="form-group">
-                <label>Ingrese su consulta:</label>
-                <textarea class="form-control" rows="4" placeholder="Ingrese su consulta"></textarea>
+            <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && (!descripcion.valid)}">
+                <label>Consulta:</label>
+                <textarea  name="descripcion" class="form-control" [(ngModel)]="desc" #descripcion="ngModel" required></textarea>
+                <div *ngIf="f.submitted && !descripcion.valid" class="form-control-feedback">Ingrese una consulta</div>
             </div>
             <div class="form-group">
                 <button class="btn btn-round btn-rosa" >Enviar</button>
             </div>
+
         </div>
      </form>
       <div class="nav-tabs-navigation">
