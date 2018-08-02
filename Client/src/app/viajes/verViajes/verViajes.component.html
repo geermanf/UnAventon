@@ -4,7 +4,41 @@
     <div class="container">
       <div class="motto text-center">
         <br>
-        <app-buscador></app-buscador>
+        <form name="form" (ngSubmit)="f.form.valid && buscar()"
+#f="ngForm" novalidate>
+
+    <div class="header-up-bg form-group">
+        <div class="row">
+            <div class="col-md-3">
+
+                <input class="form-control" ngx-google-places-autocomplete [(ngModel)]="origenSeleccionado" [options]='options' placeholder="Origen" name="origen" #origen="ngx-places"
+                    (onAddressChange)="origenChange($event)" [ngClass]="{ 'has-danger': origenSeleccionado === '' }"/>
+
+            </div>
+
+            <div class="col-md-1">
+                    <img src="//jumpin.com.ar/public_html/images/swap.png" style="width:30px;height:30px;">
+            </div>
+
+            <div class="col-md-3">
+
+                <input class="form-control" ngx-google-places-autocomplete [(ngModel)]="destinoSeleccionado" [options]='options' placeholder="Destino" name="destino" #destino="ngx-places"
+                    (onAddressChange)="destinoChange($event)"/>
+
+            </div>
+            <div class="col-md-3">
+
+                <input class="form-control" bsDatepicker type="text" name="fecha" [(ngModel)]="FechaSeleccionada" #fecha="ngModel"
+                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-red' }">
+                
+
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-danger btn-round btn-pink" type="submit">Buscar</button>
+            </div>
+        </div>
+    </div>
+</form>
       </div>
 
     </div>
@@ -21,9 +55,14 @@
       <div class="nav-tabs-navigation">
         <div class="nav-tabs-wrapper">
           <div class="row">
-            <div class="col-md-3" *ngFor="let viaje of viajes">
+            <div class="col-md-3" *ngFor="let viaje of viajesFiltrados">
               <app-contenedorviaje [viaje]="viaje">
               </app-contenedorviaje>
+            </div>
+
+            <div *ngIf="viajesFiltrados.length === 0">
+              <h2 class="text-danger">Lo sentimos, no encontramos resultados para tu busqueda</h2>
+              <img style="width: 250px" src="../assets/img/busquedaError.png">
             </div>
           </div>
         </div>

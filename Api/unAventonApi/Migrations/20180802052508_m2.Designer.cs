@@ -11,8 +11,8 @@ using unAventonApi.Data;
 namespace unAventonApi.Migrations
 {
     [DbContext(typeof(UnAventonDbContext))]
-    [Migration("20180801131217_pagosFix")]
-    partial class pagosFix
+    [Migration("20180802052508_m2")]
+    partial class m2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -384,7 +384,7 @@ namespace unAventonApi.Migrations
                         .WithMany()
                         .HasForeignKey("UsuarioId");
 
-                    b.HasOne("unAventonApi.Data.Entities.Viaje")
+                    b.HasOne("unAventonApi.Data.Entities.Viaje", "Viaje")
                         .WithMany("Preguntas")
                         .HasForeignKey("ViajeId");
                 });

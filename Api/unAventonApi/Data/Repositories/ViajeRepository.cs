@@ -25,6 +25,8 @@ namespace unAventonApi.Data
                     .Include(v => v.Viajeros).ThenInclude(p => p.User)
                     .Include(v => v.Creador)
                     .Include(v => v.Preguntas).ThenInclude(p => p.Usuario)
+                    .Include(v => v.Preguntas).ThenInclude(p => p.Viaje)
+                    .Include(v => v.DiasDeViaje)
                     .FirstOrDefault(x => x.Id == id);
             return viaje;
         }
@@ -37,6 +39,7 @@ namespace unAventonApi.Data
                     .Include(v => v.Postulantes).ThenInclude(p => p.User)
                     .Include(v => v.Viajeros).ThenInclude(p => p.User)
                     .Include(v => v.Preguntas).ThenInclude(p => p.Usuario)
+                    .Include(v => v.Preguntas).ThenInclude(p => p.Viaje)
                     .Include(v => v.Creador).AsNoTracking();
             return viajes;
         }
@@ -47,6 +50,32 @@ namespace unAventonApi.Data
                     .Include(v => v.TipoViaje)
                     .Include(v => v.Vehiculo)
                     .Include(v => v.Creador)
+                    .Select(viaje => new
+                    {
+                        Origen = viaje.Origen,
+                        Destino = viaje.Destino,
+                        Duracion = viaje.Duracion,
+                        TipoViaje = viaje.TipoViaje.Descripcion,
+                        Costo = viaje.Costo,
+                        DiasDeViaje = viaje.DiasDeViaje.Select(dv => dv.fechaDeViaje),
+                        HoraPartida = viaje.HoraPartida,
+                        Vehiculo = viaje.Vehiculo,
+                        Creador = (new {Id = viaje.Creador.Id, Nombre = viaje.Creador.Nombre, Apellido = viaje.Creador.Apellido, FotoPerfil = viaje.Creador.FotoPerfil}),
+                        Viajeros = viaje.Viajeros.Select(v => new {Id = v.UserId, Nombre = v.User.Nombre, Apellido = v.User.Apellido, FotoPerfil = v.User.FotoPerfil}),
+                        CantidadDePlazas = viaje.CantidadDePlazas,
+                        Descripcion = viaje.Descripcion,
+                        Id = viaje.Id
+                    }).AsNoTracking();
+            return viajes;
+        }
+
+        public IQueryable<Object> GetAllProximosNotIncludes()
+        {
+            var viajes = _dbContext.Viaje
+                    .Include(v => v.TipoViaje)
+                    .Include(v => v.Vehiculo)
+                    .Include(v => v.Creador)
+                    .Where(v => v.DiasDeViaje.All( dv => dv.fechaDeViaje > DateTime.Today))
                     .Select(viaje => new
                     {
                         Origen = viaje.Origen,

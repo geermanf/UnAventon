@@ -11,8 +11,7 @@ import { TarjetaService } from '../../services/tarjeta.service';
   styleUrls: ['./contenedorComentario.component.css', '../../../assets/css/modal.css']
 })
 export class ContenedorComentarioComponent implements OnInit {
-  @Input() viaje: any;
-  horaPartidaToShow: any;
+  @Input() calificacion: any;
 
   constructor(private router: Router,
               private modalService: NgbModal,
@@ -20,8 +19,6 @@ export class ContenedorComentarioComponent implements OnInit {
               private alertService: AlertasService) { }
 
   ngOnInit() {
-    this.horaPartidaToShow = this.viaje.horaPartida.split(':');
+    
   }
-
- 
 }

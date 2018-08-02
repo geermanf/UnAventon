@@ -15,6 +15,8 @@ namespace unAventonApi.Data
 
         IQueryable<Object> GetAllNotIncludes();
 
+        IQueryable<Object> GetAllProximosNotIncludes();
+
         Object GetByIdNotIncludes(int id);
 
         IQueryable<Object> GetRealizadosByUserId(int id);

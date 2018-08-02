@@ -81,9 +81,6 @@ namespace unAventonApi.Controllers.Base
                 // return BuildApiResponse.BuildNotOk("Hubo un error al modificar");
                 return BadRequest("Hubo un error al modificar");
             }
-
-
-
         }
 
         // GET

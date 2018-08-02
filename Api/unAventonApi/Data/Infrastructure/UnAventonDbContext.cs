@@ -80,6 +80,10 @@
                 .HasOne(c => c.UsuarioCalificado)
                 .WithMany(e => e.CalificacionesRecibidas)
                 .IsRequired();
+
+            modelBuilder.Entity<Pregunta>()
+                .HasOne(c => c.Viaje)
+                .WithMany(e => e.Preguntas);
         }
     }
 }

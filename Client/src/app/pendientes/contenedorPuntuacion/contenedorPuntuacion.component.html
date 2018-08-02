@@ -2,20 +2,19 @@
   <div class="row">
     <div class="col-md-2">
       <div>
-        <img src="" alt="Circle Image" class="img-circle img-responsive" style="width: 20vw; transition: .5s ease;" (error)="img.src = '../assets/img/anonym-bw.png'"
+        <img src="{{calificacion.usuarioCalificado.fotoPerfil}}" alt="" class="img-thumbnail img-responsive" style="width: 5vw" (error)="img.src = '../assets/img/anonym-bw.png'"
           #img>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="rosa"> Nombre Usuario</div>
-      <div class="rosa">Apellido Usuario</div>
+    <div class="col-md-4">
+      <div class="rosa" style="margin-top:7%">{{calificacion.usuarioCalificado.nombre}} {{calificacion.usuarioCalificado.apellido}}</div>
     </div>
-    <div class="col-md-2">
-      <p>Rol a puntuar</p>
+    <div class="col-md-4">
+      <div style="margin-top:7%;">Rol de {{calificacion.rol.descripcion}}</div>
     </div>
     <div class="col-md-2">
       <div class="middle" (click)="abrirModalPuntuar(puntuar)">
-        <button class="btn btn-round btn-rosa"> Puntuar</button>
+        <button style="margin-top:3%;" class="btn btn-round btn-rosa"> Puntuar</button>
       </div>
     </div>
   </div>
@@ -26,46 +25,37 @@
 
 <!--Modal Puntuar-->
 <ng-template #puntuar let-c="close" let-d="dismiss">
-  <form class="contact100-form validate-form flex-sb flex-w" name="form" (ngSubmit)="f.form.valid && c('Close click')" #f="ngForm"
-    novalidate>
-    <div class="modal-header">
-      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <p>Seleccione su puntuación</p>
-      <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !urlFotoId.valid }">
-        <div>
-          <div class="form-check-radio">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked> Positivo
-              <span class="form-check-sign"></span>
-            </label>
-          </div>
-          <div class="form-check-radio">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"> Neutro
-              <span class="form-check-sign"></span>
-            </label>
-          </div>
-          <div class="form-check-radio">
-            <label class="form-check-label">
-              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3"> Negativo
-              <span class="form-check-sign"></span>
-            </label>
-          </div>
-        </div>
-        <span>Ingrese su comentario:</span>
-        <input class="form-control" type="text" name="urlFoto" placeholder="Ingrese el comentario" [(ngModel)]="urlFoto" #urlFotoId="ngModel"
-          required>
-        <span class="focus-input100"></span>
+  <div class="container">
+    <form class="contact100-form validate-form flex-sb flex-w" name="form" (ngSubmit)="f.form.valid && c('Close click')" #f="ngForm"
+      novalidate>
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button type="submit" class="btn btn-rosa" (click)="cambiarFoto()">Aceptar</button>
-      <button type="button" class="btn btn-default" (click)="c('Close click')">Cancelar</button>
-    </div>
-  </form>
-
+      <div class="modal-body">
+        <p>Seleccione su puntuación</p>
+        <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !cal.valid }">
+          <select class="form-control" name="cal" [(ngModel)]="calificacionSeleccionada" #cal="ngModel" [ngClass]="{ 'has-danger': f.submitted && !cal.valid }"
+            required>
+            <option>Positiva</option>
+            <option>Neutra</option>
+            <option>Negativa</option>
+          </select>
+          <div *ngIf="f.submitted && !cal.valid" class="form-control-feedback">Seleccione una calificacion</div>
+        </div>
+        <br>
+        <span>Ingrese un comentario:</span>
+        <div class="form-group" [ngClass]="{ 'has-danger': f.submitted && !comentario.valid }">
+          <input class="form-control" type="text" name="comentario" placeholder="Ingrese un comentario" [(ngModel)]="calificacion.comentario"
+            #comentario="ngModel" required>
+            <div *ngIf="f.submitted && !comentario.valid" class="form-control-feedback">Ingrese un comentario</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-rosa" (click)="calificar()">Enviar</button>
+        <button type="button" class="btn btn-default" (click)="c('Close click')">Cancelar</button>
+      </div>
+    </form>
+  </div>
 </ng-template>

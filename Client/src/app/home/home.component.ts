@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
         }
         cargarViajes() {
           this.viajes = [];
-          this.viajeService.getAll()
+          this.viajeService.getAllProximos()
             .map(res => Object.keys(res).map(index => this.viajes.push(res[index])))
             .subscribe();
         }

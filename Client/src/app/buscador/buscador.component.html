@@ -1,32 +1,35 @@
-<form name="home_search" id="home_search" method="post">
+<form name="form" (ngSubmit)="f.form.valid && buscar()"
+#f="ngForm" novalidate>
 
     <div class="header-up-bg form-group">
         <div class="row">
             <div class="col-md-3">
 
-                    <input class="form-control" placeholder="Origen" type="text">
+                <input class="form-control" ngx-google-places-autocomplete [options]='options' placeholder="Origen" name="origen" #origen="ngx-places"
+                    (onAddressChange)="origenChange($event)" [ngClass]="{ 'has-danger': origenSeleccionado === '' }"/>
 
             </div>
 
             <div class="col-md-1">
-                    <a href="javascript:void(0)">
-                        <img src="//jumpin.com.ar/public_html/images/swap.png" style="width:30px;height:30px;">
-                    </a>
-                </div>
+                    <img src="//jumpin.com.ar/public_html/images/swap.png" style="width:30px;height:30px;">
+            </div>
 
             <div class="col-md-3">
 
-                    <input class="form-control" placeholder="Destino" type="text">
+                <input class="form-control" ngx-google-places-autocomplete [options]='options' placeholder="Destino" name="destino" #destino="ngx-places"
+                    (onAddressChange)="destinoChange($event)"/>
 
             </div>
             <div class="col-md-3">
 
-                    <input class="form-control" placeholder="" type="date">
+                <input class="form-control" bsDatepicker type="text" name="fecha" [(ngModel)]="FechaSeleccionada" #fecha="ngModel"
+                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-red' }">
+                
 
             </div>
             <div class="col-md-2">
-                    <button class="btn btn-danger btn-round btn-pink" disabled="true">Buscar</button>
-                </div>
+                <button class="btn btn-danger btn-round btn-pink" type="submit">Buscar</button>
+            </div>
         </div>
     </div>
 </form>

@@ -5,6 +5,13 @@ import { User } from '../models/User';
 import { Observable } from 'rxjs/Observable';
 import { CheckHorarioDTO } from '../models/CheckHorarioDTO';
 import { Puntuacion } from '../models/puntuacion';
+import { Calificacion } from '../models/calificacion';
+import { PuntuacionDto } from '../models/puntuacionDto';
+import { Pago } from '../models/pago';
+import { PagoDto } from '../models/pagoDto';
+import { Pregunta } from '../models/pregunta';
+import { ResponderPreguntaDto } from '../models/ResponderPreguntaDto';
+import { AltaPreguntaDto } from '../models/AltaPreguntaDto';
 
 @Injectable()
 export class UserService {
@@ -50,20 +57,39 @@ export class UserService {
         return this.http.post<boolean>('http://localhost:5000/api/User/HorarioLibrePara?userId=' + userId, dtoClass);
     }
 
-    ListarReputacionConductor(id: number): Observable<Puntuacion> {
-        return this.http.get<Puntuacion>('http://localhost:5000/api/ListarReputacionConductor?id=' + id);
+    ListarReputacionConductor(id: number): Observable<Calificacion> {
+        return this.http.get<Calificacion>('http://localhost:5000/api/User/ListarReputacionConductor?id=' + id);
     }
 
-    ListarReputacionViajero(id: number): Observable<Puntuacion> {
-        return this.http.get<Puntuacion>('http://localhost:5000/api/ListarReputacionViajero?id=' + id);
+    ListarReputacionViajero(id: number): Observable<Calificacion> {
+        return this.http.get<Calificacion>('http://localhost:5000/api/User/ListarReputacionViajero?id=' + id);
     }
 
-    // Puntuar(puntuacionDTO: string, password: string): Observable<User> {
-    //     return this.http.post<User>('http://localhost:5000/api/Authentificate', { email: email, password: password })
-    // } TODO
-
-    ListarPuntuacionesPendientes(id: number): Observable<Puntuacion> {
-        return this.http.get<Puntuacion>('http://localhost:5000/api/ListarPuntuacionesPendientes?id=' + id);
+    Puntuar(puntuacionDTO: PuntuacionDto, userId: number): Observable<boolean> {
+        return this.http.post<boolean>('http://localhost:5000/api/User/Puntuar?userId=' + userId, puntuacionDTO);
     }
 
+    ListarPuntuacionesPendientes(id: number): Observable<Calificacion> {
+        return this.http.get<Calificacion>('http://localhost:5000/api/User/ListarPuntuacionesPendientes?id=' + id);
+    }
+
+    ListarPagosPendientes(id: number): Observable<Pago> {
+        return this.http.get<Pago>('http://localhost:5000/api/User/ListarPagosPendientes?id=' + id);
+    }
+
+    PagarViaje(dto: PagoDto): Observable<boolean> {
+        return this.http.post<boolean>('http://localhost:5000/api/User/PagarViaje', dto);
+    }
+
+    ListarPreguntasPendientes(id: number): Observable<Pregunta> {
+        return this.http.get<Pregunta>('http://localhost:5000/api/User/ListarPreguntasPendientes?id=' + id);
+    }
+
+    ResponderPregunta(dto: ResponderPreguntaDto): Observable<boolean> {
+        return this.http.post<boolean>('http://localhost:5000/api/User/ResponderPregunta', dto);
+    }
+
+    GenerarPregunta(dto: AltaPreguntaDto): Observable<boolean> {
+        return this.http.post<boolean>('http://localhost:5000/api/User/GenerarPregunta', dto);
+    }
 }

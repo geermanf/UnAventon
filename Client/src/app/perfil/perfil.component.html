@@ -52,12 +52,6 @@
 
 
             </tab>
-            <tab disabled="true">
-              <ng-template tabHeading>
-                <span class="tab-link hover-rosa disabled">Viajes activos</span>
-              </ng-template>
-
-            </tab>
             <!-- INICIO HISTORIAL -->
 
             <tab>
@@ -168,28 +162,47 @@
 
             <tab>
               <ng-template tabHeading>
-                <span class="tab-link hover-rosa">Mi Reputación</span>
+                <span class="tab-link hover-rosa">Mi reputación como viajero</span>
               </ng-template>
 
               <!-- TITULO REPUTACION -->
               <span class="title">
-                Mi historial de puntuaciones
+                Mi historial de calificaciones como viajero
               </span>
-
+              <app-contenedorReputacion [tipo]="'viajero'"></app-contenedorReputacion>
               <!-- CUERPO REPUTACION-->
-              <span>               
-                <app-contenedorReputacion>
-                </app-contenedorReputacion>
-                <div class="row">
-                  <div class="col-md-12 ml-auto mr-auto">
-                    <app-contenedorcomentario>
-                    </app-contenedorcomentario>
-                  </div>
-                </div>
+              <span *ngFor="let calificacion of calificacionesViajero">
+                <app-contenedorcomentario [calificacion]="calificacion">
+                </app-contenedorcomentario>
+              </span>
+              <span *ngIf="calificacionesViajero.length === 0">
+                <h4 class="rosa">No tienes calificaciones previas.</h4>
               </span>
 
-              <span>
-                <h4 class="rosa">No tienes comentarios</h4>
+
+            </tab>
+
+            <!-- FIN REPUTACION -->
+
+            <!-- INICIO REPUTACION -->
+
+            <tab>
+              <ng-template tabHeading>
+                <span class="tab-link hover-rosa">Mi reputación como conductor</span>
+              </ng-template>
+
+              <!-- TITULO REPUTACION -->
+              <span class="title">
+                Mi historial de calificaciones como conductor
+              </span>
+              <app-contenedorReputacion [tipo]="'conductor'"></app-contenedorReputacion>
+              <!-- CUERPO REPUTACION-->
+              <span *ngFor="let calificacion of calificacionesConductor">
+                <app-contenedorcomentario [calificacion]="calificacion">
+                </app-contenedorcomentario>
+              </span>
+              <span *ngIf="calificacionesConductor.length === 0">
+                <h4 class="rosa">No tienes calificaciones previas.</h4>
               </span>
 
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using unAventonApi.Controllers.Base;
 using unAventonApi.Data;
+using unAventonApi.Data.DTOEntities;
 using unAventonApi.Data.Entities;
 using unAventonApi.Data.Entities.TablasIntermedias;
 
@@ -61,6 +62,57 @@ namespace unAventonApi.Controllers
             catch (Exception)
             {
                 return BadRequest("Hubo un error al registrar el viaje");
+            }
+        }
+
+        [HttpPost("Update")]
+        public IActionResult Update([FromBody]ModificarViajeDTO viajeDto)
+        {
+
+            try
+            {
+                var viaje = this.genericRepo.GetAllById(viajeDto.IdViaje);
+
+                viaje.Origen = viajeDto.Origen;
+                viaje.Destino = viajeDto.Destino;
+                viaje.Descripcion = viajeDto.Descripcion;
+                viaje.Duracion = viajeDto.Duracion;
+                viaje.Costo = viajeDto.Costo;
+                viaje.Vehiculo = this.vehiculoRepository.GetById(viajeDto.Vehiculo);
+                viaje.CantidadDePlazas = viajeDto.CantidadDePlazas;
+
+                this.genericRepo.Update(viajeDto.IdViaje, viaje);
+                
+                return Ok(true);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al modificar");
+            }
+        }
+
+        [HttpPost("Delete")]
+        public IActionResult DeleteViaje([FromBody]int id)
+        {
+
+            try
+            {
+                var viaje = this.genericRepo.GetAllById(id);
+                viaje.DiasDeViaje.Clear();
+                viaje.Postulantes.Clear();
+                viaje.Viajeros.Clear();
+                viaje.Preguntas.Clear();
+
+                this.genericRepo.Update(viaje.Id, viaje);
+                this.genericRepo.Delete(id);
+
+                // return BuildApiResponse.BuildOk();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                // return BuildApiResponse.BuildNotOk("Hubo un error al modificar");
+                return BadRequest("Hubo un error al borrar con id: " + id);
             }
         }
 
@@ -228,9 +280,23 @@ namespace unAventonApi.Controllers
             {
                 return BadRequest("Hubo un error al listar");
             }
+        }
 
+        [HttpGet("ListarViajesProximos")]
+        public IActionResult ListarViajesProximos()
+        {
+            var response = new List<Object>();
 
-
+            try
+            {
+                response = this.genericRepo.GetAllProximosNotIncludes().ToList();
+                response.Reverse();
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al listar");
+            }
         }
 
         [HttpGet("ListarViajesRealizados")]
@@ -262,8 +328,54 @@ namespace unAventonApi.Controllers
                 return BadRequest("Hubo un error al listar");
             }
 
+        }
 
+        [HttpGet("ListarViajeCompleto")]
+        public IActionResult GetAllById(int id)
+        {
+            try
+            {
+                var response = this.genericRepo.GetAllById(id);
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al listar");
+            }
+            
+        }
 
+        [HttpGet("ListarPreguntas")]
+        public IActionResult ListarPreguntas(int id)
+        {
+            try
+            {
+                var response = this.genericRepo.GetAllById(id).Preguntas;
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al listar preguntas");
+            }
+            
+        }
+
+        [HttpPost("FiltrarViajes")]
+        public IActionResult FiltrarViajes([FromBody]FiltrosDto dto)
+        {
+            try
+            {
+                var response = this.genericRepo.GetAll().ToList();
+                if (dto.Origen != null) {response = response.Where(v => v.Origen == dto.Origen).ToList();}
+                if (dto.Destino != null) {response = response.Where(v => v.Destino == dto.Destino).ToList();}
+                if (dto.Fecha != null) {response = response.Where(v => v.DiasDeViaje.All(dv => dv.fechaDeViaje == dto.Fecha)).ToList();}
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Hubo un error al listar preguntas");
+            }
+            
         }
 
     }

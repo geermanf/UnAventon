@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertasService } from '../alertas/alertas.service';
+import { Router } from '../../../node_modules/@angular/router';
 
 
 @Component({
@@ -7,14 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contactoAdmin.component.css']
 })
 export class ContactoAdminComponent implements OnInit {
+  desc: any;
+  mail: any;
 
-
-  constructor() { }
+  constructor(private router: Router, private alertService: AlertasService) { }
 
   ngOnInit() {
-   
   }
 
- 
-
+  send() {
+    this.router.navigate(['/home']);
+    this.alertService.addAlert('success', 'Su consulta fue enviada con exito');
+  }
 }

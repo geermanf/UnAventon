@@ -25,6 +25,12 @@ export class PerfilComponent implements OnInit {
   mostrarFormularioTarjetas = false;
   mostrarFormularioEditarVehiculos = false;
   viajes: any[] = [];
+  calificacionesViajero: any[] = [];
+  calificacionesConductor: any[] = [];
+  calificacionValorConductor: any = 0;
+  calificacionTipoConductor: any;
+  calificacionValorViajero: any = 0;
+  calificacionTipoViajero: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -51,6 +57,7 @@ export class PerfilComponent implements OnInit {
         this.getVehiculos();
         this.getTarjetas();
         this.getViajes();
+        this.getCalificaciones();
         return data;
       },
       error => {
@@ -61,6 +68,16 @@ export class PerfilComponent implements OnInit {
   returnToEdit(data) {
     this.vehiculoForEdit = data;
     this.mostrarFormularioEditarVehiculos = true;
+  }
+
+  getCalificaciones() {
+    this.userService.ListarReputacionViajero(this.usuario.id)
+      .map(res => Object.keys(res).map(index => this.calificacionesViajero.push(res[index])))
+      .subscribe();
+
+    this.userService.ListarReputacionConductor(this.usuario.id)
+      .map(res => Object.keys(res).map(index => this.calificacionesConductor.push(res[index])))
+      .subscribe();
   }
 
   getVehiculos() {

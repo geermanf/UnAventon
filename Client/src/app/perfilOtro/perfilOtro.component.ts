@@ -17,6 +17,8 @@ export class PerfilOtroComponent implements OnInit {
   urlFoto: any;
   usuario: any = {};
   viajes: any[] = [];
+  calificacionesViajero: any[] = [];
+  calificacionesConductor: any[] = [];
 
 
   constructor(
@@ -36,12 +38,24 @@ export class PerfilOtroComponent implements OnInit {
       data => {
         this.usuario = data;
         this.getViajes();
+        this.getCalificaciones();
         return data;
       },
       error => {
         return error;
       });
   }
+
+  getCalificaciones() {
+    this.userService.ListarReputacionViajero(this.usuario.id)
+      .map(res => Object.keys(res).map(index => this.calificacionesViajero.push(res[index])))
+      .subscribe();
+
+    this.userService.ListarReputacionConductor(this.usuario.id)
+      .map(res => Object.keys(res).map(index => this.calificacionesConductor.push(res[index])))
+      .subscribe();
+  }
+
   getViajes() {
     this.viajes = [];
     this.viajeService.getViajesRealizados(this.usuario.id)

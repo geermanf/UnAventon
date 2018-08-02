@@ -46,6 +46,7 @@ import { FormularioTarjetasComponent } from './perfil/formularioTarjetas/formula
 import { EditarVehiculosComponent } from './perfil/editarVehiculos/editarVehiculos.component';
 import { CrearViajeComponent } from './crearViaje/crearViaje.component';
 import { VerViajesComponent } from './viajes/verViajes/verViajes.component';
+import { VerViajes2Component } from './viajes/verViajes2/verViajes2.component';
 import { DetalleViajeComponent } from './viajes/detalleViaje/detalleViaje.component';
 import {PerfilOtroComponent } from './perfilOtro/perfilOtro.component';
 import {ContenedorViajePerfilComponent } from './perfil/contenedorViaje/contenedorViajePerfil.component';
@@ -96,6 +97,7 @@ import {ContenedorReputacionComponent } from './perfil/contenedorReputacion/cont
     EditarVehiculosComponent,
     CrearViajeComponent,
     VerViajesComponent,
+    VerViajes2Component,
     DetalleViajeComponent,
     PerfilOtroComponent,
     ContenedorViajePerfilComponent,
